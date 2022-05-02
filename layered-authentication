@@ -1,0 +1,296 @@
+{
+  "title": "Layered Authentication",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "b278569964b82fb1",
+      "text": "There are circumstances when having a built-in authentication scheme is not practical. For these we should enable a wiki site to be wrapped in a layer that protects the site."
+    },
+    {
+      "type": "paragraph",
+      "id": "7ee2c5d36f245814",
+      "text": "We acknowledge that we will never be able to provide support for every possible authentication scheme, or integration with corporate security solutions. So, we foresee that it will be necessary to accept the user's identity from an outer security layer."
+    },
+    {
+      "type": "paragraph",
+      "id": "46aadb42949f6ee3",
+      "text": "This layered approach will be provided by the use of a proxy, that handles all wiki requests ensuring that only authorized requests reach the wiki server."
+    },
+    {
+      "type": "paragraph",
+      "id": "d91c55e518ce015a",
+      "text": "While how to deploy this outer layer is outside our scope. But, a [[modular authentication]] plugin should be provided to demonstrate picking up the user's identity from this outer layer."
+    },
+    {
+      "type": "pagefold",
+      "id": "fb7c063b6714c640",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "a9f0128f7d37248b",
+      "text": "As a proof of concept, we experimented with this Caddyfile to test authentication in a local reverse proxy."
+    },
+    {
+      "type": "code",
+      "id": "3abf8d6b56eca48f",
+      "text": ":80,\n:443\ngzip\ntls self_signed\nbasicauth / {$ACCOUNT} {$PASSWORD}\nproxy / {$ORIGIN} {\n  transparent\n}\n"
+    },
+    {
+      "type": "paragraph",
+      "id": "4bbc5e2e4b57df44",
+      "text": "Here follows a docker composition which puts the Caddyfile above as a reverse proxy in one container in front of a separate container (also with caddy) acting as the protected origin server:"
+    },
+    {
+      "type": "code",
+      "id": "c94abedd1dd58f6f",
+      "text": "version: \"2.2\"\n\nservices:\n  proxy:\n    image: dobbs/proxy:latest\n    init: true\n    ports:\n      - \"2015:80\"\n      - \"2016:443\"\n    volumes:\n      - \"./Caddyfile:/etc/proxy/Caddyfile\"\n    environment:\n      ORIGIN: \"origin:2015\"\n  origin:\n    image: abiosoft/caddy:latest\n"
+    },
+    {
+      "type": "markdown",
+      "id": "4382589d40db1b79",
+      "text": "An experiment left as an exercise for the reader would put wiki in place of the `origin` in this composition.  In this case readers and authors would have to authenticate with the shared `$ACCOUNT` and `$PASSWORD`.  And the author would have to further authenticate with wiki by providing the friends secret, for example.  Not sure if the basicauth would prevent using other OAuth providers like Github or Twitter or Google."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Layered Authentication",
+        "story": []
+      },
+      "date": 1437731625809
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "b278569964b82fb1"
+      },
+      "id": "b278569964b82fb1",
+      "type": "add",
+      "date": 1437731654560
+    },
+    {
+      "type": "edit",
+      "id": "b278569964b82fb1",
+      "item": {
+        "type": "paragraph",
+        "id": "b278569964b82fb1",
+        "text": "There are circumstances when having a built-in authentication scheme is not practical. For these we should enable a wiki site to be wrapped in a layer that protects the site."
+      },
+      "date": 1437744844655
+    },
+    {
+      "type": "add",
+      "id": "7ee2c5d36f245814",
+      "item": {
+        "type": "paragraph",
+        "id": "7ee2c5d36f245814",
+        "text": "We acknoledge that "
+      },
+      "after": "b278569964b82fb1",
+      "date": 1437744930575
+    },
+    {
+      "type": "edit",
+      "id": "7ee2c5d36f245814",
+      "item": {
+        "type": "paragraph",
+        "id": "7ee2c5d36f245814",
+        "text": "We acknowledge that we will never be able to provide support for every possible authentication scheme, or integration with corporate security solutions. So, we foresee that it will be necessary to accept the user's identity from an outer security layer."
+      },
+      "date": 1437745308125
+    },
+    {
+      "type": "add",
+      "id": "46aadb42949f6ee3",
+      "item": {
+        "type": "paragraph",
+        "id": "46aadb42949f6ee3",
+        "text": "Typically this layered approach will be provided by the use of a "
+      },
+      "after": "7ee2c5d36f245814",
+      "date": 1437745357473
+    },
+    {
+      "type": "edit",
+      "id": "46aadb42949f6ee3",
+      "item": {
+        "type": "paragraph",
+        "id": "46aadb42949f6ee3",
+        "text": "This layered approach will be provided by the use of a proxy, that handles all wiki requests ensuring that only authorized requests reach the wiki server."
+      },
+      "date": 1437745681716
+    },
+    {
+      "type": "add",
+      "id": "d91c55e518ce015a",
+      "item": {
+        "type": "paragraph",
+        "id": "d91c55e518ce015a",
+        "text": "While how to deploy this outer layer is outside our scope. A security module that will demonstrate picking up the user's identity should be provided."
+      },
+      "after": "46aadb42949f6ee3",
+      "date": 1437745904133
+    },
+    {
+      "type": "edit",
+      "id": "d91c55e518ce015a",
+      "item": {
+        "type": "paragraph",
+        "id": "d91c55e518ce015a",
+        "text": "While how to deploy this outer layer is outside our scope. But, a [[modular authentication]] plugin should be provided to demonstrate picking up the user's identity from this outer layer."
+      },
+      "date": 1438275205761
+    },
+    {
+      "type": "fork",
+      "site": "goals.pod.rodwell.me"
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "fb7c063b6714c640"
+      },
+      "id": "fb7c063b6714c640",
+      "type": "add",
+      "after": "d91c55e518ce015a",
+      "date": 1511763541598
+    },
+    {
+      "type": "edit",
+      "id": "fb7c063b6714c640",
+      "item": {
+        "type": "pagefold",
+        "id": "fb7c063b6714c640",
+        "text": "."
+      },
+      "date": 1511764182319
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "a9f0128f7d37248b"
+      },
+      "id": "a9f0128f7d37248b",
+      "type": "add",
+      "after": "fb7c063b6714c640",
+      "date": 1511764184628
+    },
+    {
+      "type": "edit",
+      "id": "a9f0128f7d37248b",
+      "item": {
+        "type": "paragraph",
+        "id": "a9f0128f7d37248b",
+        "text": "As a proof of concept, we experimented with this Caddyfile to test authentication in a local reverse proxy."
+      },
+      "date": 1511764235483
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "3abf8d6b56eca48f"
+      },
+      "id": "3abf8d6b56eca48f",
+      "type": "add",
+      "after": "a9f0128f7d37248b",
+      "date": 1511764238527
+    },
+    {
+      "type": "edit",
+      "id": "3abf8d6b56eca48f",
+      "item": {
+        "type": "code",
+        "id": "3abf8d6b56eca48f",
+        "text": ":80,\n:443\ngzip\ntls self_signed\nbasicauth / {$ACCOUNT} {$PASSWORD}\nproxy / {$ORIGIN} {\n  transparent\n}\n"
+      },
+      "date": 1511764281228
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "4bbc5e2e4b57df44"
+      },
+      "id": "4bbc5e2e4b57df44",
+      "type": "add",
+      "after": "3abf8d6b56eca48f",
+      "date": 1512333267179
+    },
+    {
+      "type": "edit",
+      "id": "4bbc5e2e4b57df44",
+      "item": {
+        "type": "paragraph",
+        "id": "4bbc5e2e4b57df44",
+        "text": "Here follows a docker composition which puts the Caddyfile above as a reverse proxy in one container in front of a separate container (also with caddy) acting as the protected origin server:"
+      },
+      "date": 1512333365395
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "c94abedd1dd58f6f"
+      },
+      "id": "c94abedd1dd58f6f",
+      "type": "add",
+      "after": "4bbc5e2e4b57df44",
+      "date": 1512333369332
+    },
+    {
+      "type": "edit",
+      "id": "c94abedd1dd58f6f",
+      "item": {
+        "type": "code",
+        "id": "c94abedd1dd58f6f",
+        "text": "version: \"2.2\"\n\nservices:\n  proxy:\n    image: dobbs/proxy:latest\n    init: true\n    ports:\n      - \"2015:80\"\n      - \"2016:443\"\n    volumes:\n      - \"./etc-proxy:/etc/proxy\"\n    environment:\n      ORIGIN: \"origin:2015\"\n  origin:\n    image: abiosoft/caddy:latest\n"
+      },
+      "date": 1512333375223
+    },
+    {
+      "type": "edit",
+      "id": "c94abedd1dd58f6f",
+      "item": {
+        "type": "code",
+        "id": "c94abedd1dd58f6f",
+        "text": "version: \"2.2\"\n\nservices:\n  proxy:\n    image: dobbs/proxy:latest\n    init: true\n    ports:\n      - \"2015:80\"\n      - \"2016:443\"\n    volumes:\n      - \"./Caddyfile:/etc/proxy/Caddyfile\"\n    environment:\n      ORIGIN: \"origin:2015\"\n  origin:\n    image: abiosoft/caddy:latest\n"
+      },
+      "date": 1512333395521
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "278600cc793797fd"
+      },
+      "id": "278600cc793797fd",
+      "type": "add",
+      "after": "c94abedd1dd58f6f",
+      "date": 1512333477805
+    },
+    {
+      "type": "remove",
+      "id": "278600cc793797fd",
+      "date": 1512333502390
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "4382589d40db1b79"
+      },
+      "id": "4382589d40db1b79",
+      "type": "add",
+      "after": "c94abedd1dd58f6f",
+      "date": 1512333504587
+    },
+    {
+      "type": "edit",
+      "id": "4382589d40db1b79",
+      "item": {
+        "type": "markdown",
+        "id": "4382589d40db1b79",
+        "text": "An experiment left as an exercise for the reader would put wiki in place of the `origin` in this composition.  In this case readers and authors would have to authenticate with the shared `$ACCOUNT` and `$PASSWORD`.  And the author would have to further authenticate with wiki by providing the friends secret, for example.  Not sure if the basicauth would prevent using other OAuth providers like Github or Twitter or Google."
+      },
+      "date": 1512333723481
+    }
+  ]
+}

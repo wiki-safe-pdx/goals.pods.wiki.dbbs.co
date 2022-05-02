@@ -1,0 +1,668 @@
+{
+  "title": "Cryptographic Wiki",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "28a84df13b5e693a",
+      "text": "We consider cryptographic identity for authors of wiki."
+    },
+    {
+      "type": "markdown",
+      "id": "7edd8497d8cd9a94",
+      "text": "#  Motivation"
+    },
+    {
+      "type": "paragraph",
+      "id": "196eb675c64a7753",
+      "text": "DevOps is yak shaving a tree of dependencies and the leaf nodes in the tree are all secrets (or permissions granted to identities)."
+    },
+    {
+      "type": "paragraph",
+      "id": "637099da797cbc29",
+      "text": "Solving wiki identity and authorship would maybe simplify my wiki devops problems. Consider the many attempts: [[Wiki and Kubernetes]] and [[Clean Fast Install in Docker]] and [[Docker All the Things]] and [https://github.com/dobbs/container-terminal.git dobbs/container-terminal] and [https://github.com/dobbs/wiki-tls dobbs/wiki-tls] and [https://local-farm.wiki.dbbs.co local-farm.wiki.dbbs.co] and [https://github.com/dobbs/farm/tree/master/examples/k8s dobbs/farm/examples/k8s]"
+    },
+    {
+      "type": "markdown",
+      "id": "a0cc6315adf788ba",
+      "text": "# Proposals"
+    },
+    {
+      "type": "paragraph",
+      "id": "42aeec17ae6ae2cc",
+      "text": "Embrace crypto identity. The wiki flag communicates ownership. I should like the flag to include a public key."
+    },
+    {
+      "type": "paragraph",
+      "id": "52ecd3e4b33a4360",
+      "text": "[[Embrace Event Sourcing]]—The journal will be the authoritative datasource. The story will be a snapshot of a particular point in time."
+    },
+    {
+      "type": "paragraph",
+      "id": "d7f2944e72b6a7cc",
+      "text": "Separate author identity from site and from domain name."
+    },
+    {
+      "type": "paragraph",
+      "id": "507529e87f57bb91",
+      "text": "Edit events in the journal will be signed with the author identity."
+    },
+    {
+      "type": "paragraph",
+      "id": "102303511777428f",
+      "text": "Something a bit hand-wavy about authors in a community vouching for each other in a community. Some other notion about masons operating in secret under what they described as the tyranny of the Catholic Church. Maybe also how organized crime operates. See also [http://dobbse.net/thinair/2002/11/veterans-day.html Veteran's Day, POW communication systems, and Warfare]"
+    },
+    {
+      "type": "paragraph",
+      "id": "500f44488f70d0de",
+      "text": "Something about local wiki editing and publication. The moment of publication is when it becomes important to declare authorship."
+    },
+    {
+      "type": "paragraph",
+      "id": "de26a1b630fc98c2",
+      "text": "One role of the server is primarily a public file store with CORS and mime types. (The other roles of the server are to do with unattended operation.) The data itself could encodes authorship."
+    },
+    {
+      "type": "markdown",
+      "id": "680b43413810a91c",
+      "text": "# Tools"
+    },
+    {
+      "type": "paragraph",
+      "id": "88437bc32a45bcd5",
+      "text": "I am newly interested in my glitch-based experiments in [https://glitch.com/edit/#!/wiki-components wiki components]. Particularly after witnessing Ward introducing Thompson to javascript and web programming with a browser console. Ward reminisced about how thin the veil was between the code and the UI in Smalltalk 80. Web components are a web-native varient. Not as pure, but servicable."
+    },
+    {
+      "type": "paragraph",
+      "id": "caf53f102f44ad3b",
+      "text": "deno does not yet provide a crypto library. See [https://github.com/denoland/deno/issues/3098 issue #3098] and [https://github.com/denoland/deno/issues/1891 issue #1891]"
+    },
+    {
+      "type": "paragraph",
+      "id": "7ac0f8ae2c52652c",
+      "text": "Something of the following may be a serviceable starting point for experimenting."
+    },
+    {
+      "type": "paragraph",
+      "id": "e06503d3d1302dcb",
+      "text": "There is window.crypto.getRandomValues(). See [https://developer.mozilla.org/en-US/docs/Web/API/Window/crypto MDN]"
+    },
+    {
+      "type": "paragraph",
+      "id": "ab51901f7d801a97",
+      "text": "Someone has contributed an implementation of [https://deno.land/x/curve25519/mod.ts? curve25519]. See [https://en.wikipedia.org/wiki/Curve25519 wikipedia]"
+    },
+    {
+      "type": "paragraph",
+      "id": "8427b6cb334bc1e1",
+      "text": "libsodium in javascript. See [https://github.com/jedisct1/libsodium.js github], [https://stackoverflow.com/questions/51812991/simple-javascript-encryption-using-libsodium-js-in-this-sandbox-demo stackoverflow]."
+    },
+    {
+      "type": "paragraph",
+      "id": "586aaed63794351e",
+      "text": "sodiumoxide in rust (clever name) [https://github.com/sodiumoxide/sodiumoxide github]"
+    },
+    {
+      "type": "paragraph",
+      "id": "70ad61c53d94b00d",
+      "text": "wasm crypto [https://github.com/jedisct1/wasm-crypto github]"
+    },
+    {
+      "type": "paragraph",
+      "id": "817f08eb1bbaf9b1",
+      "text": "something also about connecting dots between these ideas and what Chris Gebhardt describes in [https://infocentral.com infocentral.com]"
+    },
+    {
+      "type": "paragraph",
+      "id": "ec6455f45f21527d",
+      "text": "Secure Scuttlebut (aka. SSB) may have solved similar problems: [http://conferences.sigcomm.org/acm-icn/2019/proceedings/slides/tschudin-icn2019-20190925.pdf pdf]"
+    },
+    {
+      "type": "paragraph",
+      "id": "4c2d226427dd62c2",
+      "text": "We also know DAT is pursuing similar goals to SSB, that Paul Frazee left SSB to join DAT community with Beaker Browser."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Cryptographic Wiki",
+        "story": []
+      },
+      "date": 1581311932422
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "28a84df13b5e693a"
+      },
+      "id": "28a84df13b5e693a",
+      "type": "add",
+      "date": 1581311936876
+    },
+    {
+      "type": "edit",
+      "id": "28a84df13b5e693a",
+      "item": {
+        "type": "paragraph",
+        "id": "28a84df13b5e693a",
+        "text": "We consider cryptographic identity for authors of wiki."
+      },
+      "date": 1581311985332
+    },
+    {
+      "type": "add",
+      "id": "196eb675c64a7753",
+      "item": {
+        "type": "paragraph",
+        "id": "196eb675c64a7753",
+        "text": "DevOps is yak shaving a tree of dependencies and the leaf nodes in the tree are all secrets (or permissions granted to identities)."
+      },
+      "after": "28a84df13b5e693a",
+      "date": 1581312044301
+    },
+    {
+      "type": "add",
+      "id": "637099da797cbc29",
+      "item": {
+        "type": "paragraph",
+        "id": "637099da797cbc29",
+        "text": "Solving wiki identity and authorship would maybe simplify my wiki devops problems. "
+      },
+      "after": "196eb675c64a7753",
+      "date": 1581312065202
+    },
+    {
+      "type": "edit",
+      "id": "637099da797cbc29",
+      "item": {
+        "type": "paragraph",
+        "id": "637099da797cbc29",
+        "text": "Solving wiki identity and authorship would maybe simplify my wiki devops problems."
+      },
+      "date": 1581312194207
+    },
+    {
+      "type": "edit",
+      "id": "637099da797cbc29",
+      "item": {
+        "type": "paragraph",
+        "id": "637099da797cbc29",
+        "text": "Solving wiki identity and authorship would maybe simplify my wiki devops problems. [[Clean Fast Install"
+      },
+      "date": 1581312239960
+    },
+    {
+      "type": "edit",
+      "id": "637099da797cbc29",
+      "item": {
+        "type": "paragraph",
+        "id": "637099da797cbc29",
+        "text": "Solving wiki identity and authorship would maybe simplify my wiki devops problems. [[Clean Fast Install in Docker]] and [[Docker All the Things]] and [https://github.com/dobbs/container-terminal.git dobbs/container-terminal] and [https://github.com/dobbs/wiki-tls dobbs/wiki-tls] and [https://local thing]"
+      },
+      "date": 1581312321812
+    },
+    {
+      "type": "edit",
+      "id": "637099da797cbc29",
+      "item": {
+        "type": "paragraph",
+        "id": "637099da797cbc29",
+        "text": "Solving wiki identity and authorship would maybe simplify my wiki devops problems. [[Clean Fast Install in Docker]] and [[Docker All the Things]] and [https://github.com/dobbs/container-terminal.git dobbs/container-terminal] and [https://github.com/dobbs/wiki-tls dobbs/wiki-tls] and [https://local-farm.wiki.dbbs.co local-farm.wiki.dbbs.co]"
+      },
+      "date": 1581312363152
+    },
+    {
+      "type": "edit",
+      "id": "637099da797cbc29",
+      "item": {
+        "type": "paragraph",
+        "id": "637099da797cbc29",
+        "text": "Solving wiki identity and authorship would maybe simplify my wiki devops problems. Consider the many attempts: [[Clean Fast Install in Docker]] and [[Docker All the Things]] and [https://github.com/dobbs/container-terminal.git dobbs/container-terminal] and [https://github.com/dobbs/wiki-tls dobbs/wiki-tls] and [https://local-farm.wiki.dbbs.co local-farm.wiki.dbbs.co] and [https:// wiki-k8s]"
+      },
+      "date": 1581312428967
+    },
+    {
+      "type": "edit",
+      "id": "637099da797cbc29",
+      "item": {
+        "type": "paragraph",
+        "id": "637099da797cbc29",
+        "text": "Solving wiki identity and authorship would maybe simplify my wiki devops problems. Consider the many attempts: [[Clean Fast Install in Docker]] and [[Docker All the Things]] and [https://github.com/dobbs/container-terminal.git dobbs/container-terminal] and [https://github.com/dobbs/wiki-tls dobbs/wiki-tls] and [https://local-farm.wiki.dbbs.co local-farm.wiki.dbbs.co] and [https://github.com/dobbs/farm/tree/master/examples/k8s dobbs/farm/examples/k8s]"
+      },
+      "date": 1581312492751
+    },
+    {
+      "type": "add",
+      "id": "7edd8497d8cd9a94",
+      "item": {
+        "type": "factory",
+        "id": "7edd8497d8cd9a94",
+        "text": "# Motivation"
+      },
+      "after": "28a84df13b5e693a",
+      "date": 1581312561482
+    },
+    {
+      "type": "edit",
+      "id": "7edd8497d8cd9a94",
+      "item": {
+        "type": "markdown",
+        "id": "7edd8497d8cd9a94",
+        "text": "#  Motivation"
+      },
+      "date": 1581312589701
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "a0cc6315adf788ba"
+      },
+      "id": "a0cc6315adf788ba",
+      "type": "add",
+      "after": "637099da797cbc29",
+      "date": 1581312601855
+    },
+    {
+      "type": "edit",
+      "id": "a0cc6315adf788ba",
+      "item": {
+        "type": "markdown",
+        "id": "a0cc6315adf788ba",
+        "text": "# Proposals"
+      },
+      "date": 1581312622801
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "42aeec17ae6ae2cc"
+      },
+      "id": "42aeec17ae6ae2cc",
+      "type": "add",
+      "after": "a0cc6315adf788ba",
+      "date": 1581312629693
+    },
+    {
+      "type": "edit",
+      "id": "42aeec17ae6ae2cc",
+      "item": {
+        "type": "paragraph",
+        "id": "42aeec17ae6ae2cc",
+        "text": "Embrace crypto identity. The wiki flag communicates ownership. I should like the flag to include a public key."
+      },
+      "date": 1581312635338
+    },
+    {
+      "type": "add",
+      "id": "52ecd3e4b33a4360",
+      "item": {
+        "type": "paragraph",
+        "id": "52ecd3e4b33a4360",
+        "text": "Embrace event sourcing. The journal will be the authoritative datasource. The story will be a snapshot of a particular point in time."
+      },
+      "after": "42aeec17ae6ae2cc",
+      "date": 1581312638620
+    },
+    {
+      "type": "add",
+      "id": "507529e87f57bb91",
+      "item": {
+        "type": "paragraph",
+        "id": "507529e87f57bb91",
+        "text": "Edit events in the journal will be signed with the author identity."
+      },
+      "after": "52ecd3e4b33a4360",
+      "date": 1581312640994
+    },
+    {
+      "type": "add",
+      "id": "102303511777428f",
+      "item": {
+        "type": "paragraph",
+        "id": "102303511777428f",
+        "text": "Something a bit hand-wavy about authors in a community vouching for each other in a community. Some other notion about masons operating in secret under what they described as the tyranny of the Catholic Church. Maybe also how organized crime operates. See also [https://dobbse.net/ Veteran's Day, POW communication systems, and Warefare]"
+      },
+      "after": "507529e87f57bb91",
+      "date": 1581312668661
+    },
+    {
+      "type": "add",
+      "id": "500f44488f70d0de",
+      "item": {
+        "type": "paragraph",
+        "id": "500f44488f70d0de",
+        "text": "Something about local wiki editing and publication. The moment of publication is when it becomes important to declare authorship."
+      },
+      "after": "102303511777428f",
+      "date": 1581312673015
+    },
+    {
+      "type": "add",
+      "id": "de26a1b630fc98c2",
+      "item": {
+        "type": "paragraph",
+        "id": "de26a1b630fc98c2",
+        "text": "One role of the server is primarily a public file store with CORS and mime types. (The other roles of the server are to do with unattended operation.) The data itself could encodes authorship."
+      },
+      "after": "500f44488f70d0de",
+      "date": 1581312746744
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "680b43413810a91c"
+      },
+      "id": "680b43413810a91c",
+      "type": "add",
+      "after": "de26a1b630fc98c2",
+      "date": 1581312772669
+    },
+    {
+      "type": "edit",
+      "id": "680b43413810a91c",
+      "item": {
+        "type": "markdown",
+        "id": "680b43413810a91c",
+        "text": "# Tools"
+      },
+      "date": 1581312781255
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "88437bc32a45bcd5"
+      },
+      "id": "88437bc32a45bcd5",
+      "type": "add",
+      "after": "680b43413810a91c",
+      "date": 1581312783425
+    },
+    {
+      "type": "edit",
+      "id": "88437bc32a45bcd5",
+      "item": {
+        "type": "paragraph",
+        "id": "88437bc32a45bcd5",
+        "text": "I am newly interested in my glitch-based experiments in wiki components. Particularly after witnessing Ward introducing Thompson to javascript and web programming with a browser console. Ward reminisced about how thin the veil was between the code and the UI in Smalltalk 80. Web components are a web-native varient. Not as pure, but servicable."
+      },
+      "date": 1581312791081
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "caf53f102f44ad3b"
+      },
+      "id": "caf53f102f44ad3b",
+      "type": "add",
+      "after": "88437bc32a45bcd5",
+      "date": 1581312803695
+    },
+    {
+      "type": "edit",
+      "id": "caf53f102f44ad3b",
+      "item": {
+        "type": "paragraph",
+        "id": "caf53f102f44ad3b",
+        "text": "deno does not yet provide a crypto library. See [https://github.com issue #3098] and [https://github.com issue #1891]\n"
+      },
+      "date": 1581312853568
+    },
+    {
+      "type": "add",
+      "id": "e06503d3d1302dcb",
+      "item": {
+        "type": "paragraph",
+        "id": "e06503d3d1302dcb",
+        "text": "There is window.crypto.getRandomValues. See [https:// MDN]"
+      },
+      "after": "caf53f102f44ad3b",
+      "date": 1581312870557
+    },
+    {
+      "type": "add",
+      "id": "ab51901f7d801a97",
+      "item": {
+        "type": "paragraph",
+        "id": "ab51901f7d801a97",
+        "text": "Someone has contributed an implementation of [https:// curve25519]. See [https:// wikipedia]"
+      },
+      "after": "e06503d3d1302dcb",
+      "date": 1581312893766
+    },
+    {
+      "type": "add",
+      "id": "8427b6cb334bc1e1",
+      "item": {
+        "type": "paragraph",
+        "id": "8427b6cb334bc1e1",
+        "text": "libsodium in javascript. See [https:// github], [https:// stackoverflow]."
+      },
+      "after": "ab51901f7d801a97",
+      "date": 1581312934738
+    },
+    {
+      "type": "add",
+      "id": "586aaed63794351e",
+      "item": {
+        "type": "paragraph",
+        "id": "586aaed63794351e",
+        "text": "sodiumoxide in rust (clever name) [https:// github]"
+      },
+      "after": "8427b6cb334bc1e1",
+      "date": 1581312965548
+    },
+    {
+      "type": "add",
+      "id": "70ad61c53d94b00d",
+      "item": {
+        "type": "paragraph",
+        "id": "70ad61c53d94b00d",
+        "text": "wasm crypto [https:// github]"
+      },
+      "after": "586aaed63794351e",
+      "date": 1581312976912
+    },
+    {
+      "type": "add",
+      "id": "817f08eb1bbaf9b1",
+      "item": {
+        "type": "paragraph",
+        "id": "817f08eb1bbaf9b1",
+        "text": "something also about connecting dots between these ideas and what Chris Gebhardt describes in [https://infocentral.com infocentral.com]"
+      },
+      "after": "70ad61c53d94b00d",
+      "date": 1581312993266
+    },
+    {
+      "type": "add",
+      "id": "d7f2944e72b6a7cc",
+      "item": {
+        "type": "paragraph",
+        "id": "d7f2944e72b6a7cc",
+        "text": "Separate author identity from site and from domain name."
+      },
+      "after": "52ecd3e4b33a4360",
+      "date": 1581313081804
+    },
+    {
+      "type": "edit",
+      "id": "88437bc32a45bcd5",
+      "item": {
+        "type": "paragraph",
+        "id": "88437bc32a45bcd5",
+        "text": "I am newly interested in my glitch-based experiments in [https://glitch.com/edit/#!/wiki-components wiki components]. Particularly after witnessing Ward introducing Thompson to javascript and web programming with a browser console. Ward reminisced about how thin the veil was between the code and the UI in Smalltalk 80. Web components are a web-native varient. Not as pure, but servicable."
+      },
+      "date": 1581313137141
+    },
+    {
+      "type": "edit",
+      "id": "102303511777428f",
+      "item": {
+        "type": "paragraph",
+        "id": "102303511777428f",
+        "text": "Something a bit hand-wavy about authors in a community vouching for each other in a community. Some other notion about masons operating in secret under what they described as the tyranny of the Catholic Church. Maybe also how organized crime operates. See also [http://dobbse.net/thinair/2002/11/veterans-day.html Veteran's Day, POW communication systems, and Warefare]"
+      },
+      "date": 1581313164515
+    },
+    {
+      "type": "edit",
+      "id": "caf53f102f44ad3b",
+      "item": {
+        "type": "paragraph",
+        "id": "caf53f102f44ad3b",
+        "text": "deno does not yet provide a crypto library. See [https://github.com/denoland/deno/issues/3098 issue #3098] and [https://github.com/denoland/deno/issues/1891 issue #1891]\n"
+      },
+      "date": 1581313195273
+    },
+    {
+      "type": "edit",
+      "id": "e06503d3d1302dcb",
+      "item": {
+        "type": "paragraph",
+        "id": "e06503d3d1302dcb",
+        "text": "There is window.crypto.getRandomValues. See [https://developer.mozilla.org/en-US/docs/Web/API/Window/crypto MDN]"
+      },
+      "date": 1581313208777
+    },
+    {
+      "type": "edit",
+      "id": "e06503d3d1302dcb",
+      "item": {
+        "type": "paragraph",
+        "id": "e06503d3d1302dcb",
+        "text": "There is window.crypto.getRandomValues(). See [https://developer.mozilla.org/en-US/docs/Web/API/Window/crypto MDN]"
+      },
+      "date": 1581313216490
+    },
+    {
+      "type": "edit",
+      "id": "ab51901f7d801a97",
+      "item": {
+        "type": "paragraph",
+        "id": "ab51901f7d801a97",
+        "text": "Someone has contributed an implementation of [https://deno.land/x/curve25519/mod.ts? curve25519]. See [https://en.wikipedia.org/wiki/Curve25519 wikipedia]"
+      },
+      "date": 1581313248596
+    },
+    {
+      "type": "edit",
+      "id": "8427b6cb334bc1e1",
+      "item": {
+        "type": "paragraph",
+        "id": "8427b6cb334bc1e1",
+        "text": "libsodium in javascript. See [https://github.com/jedisct1/libsodium.js github], [https://stackoverflow.com/questions/51812991/simple-javascript-encryption-using-libsodium-js-in-this-sandbox-demo stackoverflow]."
+      },
+      "date": 1581313280287
+    },
+    {
+      "type": "edit",
+      "id": "586aaed63794351e",
+      "item": {
+        "type": "paragraph",
+        "id": "586aaed63794351e",
+        "text": "sodiumoxide in rust (clever name) [https://github.com/sodiumoxide/sodiumoxide github]"
+      },
+      "date": 1581313291541
+    },
+    {
+      "type": "edit",
+      "id": "70ad61c53d94b00d",
+      "item": {
+        "type": "paragraph",
+        "id": "70ad61c53d94b00d",
+        "text": "wasm crypto [https://github.com/jedisct1/wasm-crypto github]"
+      },
+      "date": 1581313302921
+    },
+    {
+      "type": "edit",
+      "id": "caf53f102f44ad3b",
+      "item": {
+        "type": "paragraph",
+        "id": "caf53f102f44ad3b",
+        "text": "deno does not yet provide a crypto library. See [https://github.com/denoland/deno/issues/3098 issue #3098] and [https://github.com/denoland/deno/issues/1891 issue #1891]"
+      },
+      "date": 1581313324422
+    },
+    {
+      "type": "add",
+      "id": "6fa1bd6e2af69d53",
+      "item": {
+        "type": "factory",
+        "id": "6fa1bd6e2af69d53",
+        "text": "One of the following may be a "
+      },
+      "after": "caf53f102f44ad3b",
+      "date": 1581313343540
+    },
+    {
+      "type": "remove",
+      "id": "6fa1bd6e2af69d53",
+      "date": 1581313354978
+    },
+    {
+      "type": "add",
+      "id": "7ac0f8ae2c52652c",
+      "item": {
+        "type": "paragraph",
+        "id": "7ac0f8ae2c52652c",
+        "text": "Something of the following may be a serviceable starting point for experimenting."
+      },
+      "after": "caf53f102f44ad3b",
+      "date": 1581313388572
+    },
+    {
+      "type": "edit",
+      "id": "637099da797cbc29",
+      "item": {
+        "type": "paragraph",
+        "id": "637099da797cbc29",
+        "text": "Solving wiki identity and authorship would maybe simplify my wiki devops problems. Consider the many attempts: [[Wiki and Kubernetes]] and [[Clean Fast Install in Docker]] and [[Docker All the Things]] and [https://github.com/dobbs/container-terminal.git dobbs/container-terminal] and [https://github.com/dobbs/wiki-tls dobbs/wiki-tls] and [https://local-farm.wiki.dbbs.co local-farm.wiki.dbbs.co] and [https://github.com/dobbs/farm/tree/master/examples/k8s dobbs/farm/examples/k8s]"
+      },
+      "date": 1581314010527
+    },
+    {
+      "type": "add",
+      "id": "ec6455f45f21527d",
+      "item": {
+        "type": "paragraph",
+        "id": "ec6455f45f21527d",
+        "text": "Secure Scuttlebut (aka. SSB) may have solved similar problems: [http://conferences.sigcomm.org/acm-icn/2019/proceedings/slides/tschudin-icn2019-20190925.pdf pdf]"
+      },
+      "after": "817f08eb1bbaf9b1",
+      "date": 1587926034088
+    },
+    {
+      "type": "add",
+      "id": "4c2d226427dd62c2",
+      "item": {
+        "type": "paragraph",
+        "id": "4c2d226427dd62c2",
+        "text": "We also know DAT is pursuing similar goals to SSB, that Paul Frazee left SSB to join DAT community with Beaker Browser."
+      },
+      "after": "ec6455f45f21527d",
+      "date": 1587926441385
+    },
+    {
+      "type": "edit",
+      "id": "52ecd3e4b33a4360",
+      "item": {
+        "type": "paragraph",
+        "id": "52ecd3e4b33a4360",
+        "text": "[[Embrace Event Sourcing]]—The journal will be the authoritative datasource. The story will be a snapshot of a particular point in time."
+      },
+      "date": 1601002862344
+    },
+    {
+      "type": "edit",
+      "id": "102303511777428f",
+      "item": {
+        "type": "paragraph",
+        "id": "102303511777428f",
+        "text": "Something a bit hand-wavy about authors in a community vouching for each other in a community. Some other notion about masons operating in secret under what they described as the tyranny of the Catholic Church. Maybe also how organized crime operates. See also [http://dobbse.net/thinair/2002/11/veterans-day.html Veteran's Day, POW communication systems, and Warfare]"
+      },
+      "date": 1601005613856
+    }
+  ]
+}

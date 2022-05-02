@@ -1,0 +1,143 @@
+{
+  "title": "<wiki-link>",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "0a0a6d1aab3621c8",
+      "text": "Example code for <wiki-link> is over in ObservableHQ."
+    },
+    {
+      "type": "frame",
+      "id": "f84233f063584238",
+      "text": "https://observablehq.com/embed/@dobbs/wiki-collaboration?cell=dom\nIs this thing on?\nHEIGHT 200"
+    },
+    {
+      "type": "paragraph",
+      "id": "9c957ccc19e9c0b2",
+      "text": "What we really want to resolve is a title, not a slug."
+    },
+    {
+      "type": "paragraph",
+      "id": "e68c607cc1c6b776",
+      "text": "It might help if each site knows it's own conversation technique. One challenge is when one site forks a page from another, the new home for that page needs to know two title conversion strategies."
+    },
+    {
+      "type": "code",
+      "id": "90c60a3ffcdf41c0",
+      "text": "<wiki-link site=\"some.example.com\">\n Some Title\n</wiki-link>"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "<wiki-link>",
+        "story": []
+      },
+      "date": 1610565824953
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "0a0a6d1aab3621c8"
+      },
+      "id": "0a0a6d1aab3621c8",
+      "type": "add",
+      "date": 1610565827024
+    },
+    {
+      "type": "edit",
+      "id": "0a0a6d1aab3621c8",
+      "item": {
+        "type": "paragraph",
+        "id": "0a0a6d1aab3621c8",
+        "text": "TODO: find the example code"
+      },
+      "date": 1610565840073
+    },
+    {
+      "type": "add",
+      "id": "90c60a3ffcdf41c0",
+      "item": {
+        "type": "factory",
+        "id": "90c60a3ffcdf41c0",
+        "text": "<wiki-link site=\"some.example.come\"></wiki-link>"
+      },
+      "after": "0a0a6d1aab3621c8",
+      "date": 1610565864799
+    },
+    {
+      "type": "edit",
+      "id": "90c60a3ffcdf41c0",
+      "item": {
+        "type": "code",
+        "id": "90c60a3ffcdf41c0",
+        "text": "<wiki-link site=\"some.example.come\">\n Some Title\n</wiki-link>"
+      },
+      "date": 1610565891494
+    },
+    {
+      "type": "add",
+      "id": "9c957ccc19e9c0b2",
+      "item": {
+        "type": "paragraph",
+        "id": "9c957ccc19e9c0b2",
+        "text": "What we really want to resolve is a title, not a slug."
+      },
+      "after": "0a0a6d1aab3621c8",
+      "date": 1610565910796
+    },
+    {
+      "type": "add",
+      "id": "e68c607cc1c6b776",
+      "item": {
+        "type": "paragraph",
+        "id": "e68c607cc1c6b776",
+        "text": "It might help if each site knows it's own conversation technique. One challenge is when one site forks a page from another, the new home for that page needs to know two title conversion strategies."
+      },
+      "after": "9c957ccc19e9c0b2",
+      "date": 1610566027072
+    },
+    {
+      "id": "f84233f063584238",
+      "type": "add",
+      "item": {
+        "type": "frame",
+        "id": "f84233f063584238",
+        "text": "https://observablehq.com/embed/@dobbs/wiki-collaboration?cell=dom\nIs this thing on?"
+      },
+      "after": "0a0a6d1aab3621c8",
+      "date": 1611010018682
+    },
+    {
+      "type": "edit",
+      "id": "f84233f063584238",
+      "item": {
+        "type": "frame",
+        "id": "f84233f063584238",
+        "text": "https://observablehq.com/embed/@dobbs/wiki-collaboration?cell=dom\nIs this thing on?\nHEIGHT 200"
+      },
+      "date": 1611010503963
+    },
+    {
+      "type": "edit",
+      "id": "0a0a6d1aab3621c8",
+      "item": {
+        "type": "paragraph",
+        "id": "0a0a6d1aab3621c8",
+        "text": "Example code for <wiki-link> is over in ObservableHQ."
+      },
+      "date": 1611010560621
+    },
+    {
+      "type": "edit",
+      "id": "90c60a3ffcdf41c0",
+      "item": {
+        "type": "code",
+        "id": "90c60a3ffcdf41c0",
+        "text": "<wiki-link site=\"some.example.com\">\n Some Title\n</wiki-link>"
+      },
+      "date": 1611010605272
+    }
+  ]
+}

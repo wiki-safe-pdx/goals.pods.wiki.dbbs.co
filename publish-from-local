@@ -1,0 +1,272 @@
+{
+  "title": "Publish from Local",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "88fd6a249f389b07",
+      "text": "Does 'forking' from local, or even a locally hosted private wiki, make sense?  Should the fork operation should be instrumented to notice when the source page is on localhost, and specifically exclude the fork event from the journal when applying the changes?"
+    },
+    {
+      "type": "paragraph",
+      "id": "26a2817de73cb0b2",
+      "text": "When we fork a page to our public wiki, the journal contains a fork event that allows us to reason about the authors who have touched contributed to a page."
+    },
+    {
+      "type": "markdown",
+      "id": "4acb7c1b1bb5539d",
+      "text": "A fork from local distracts from this flow of reasoning _(`local` here could mean `localStorage` when disconnected from the network or not logged in, or `localhost`, or `localtest.me`, or any domain which resolves to `127.0.0.1` or the IPv6 equivalent `::1`)_. Not only does it not contain any information about the site the fork is from. It is also not distinguished from any forks from sites that are not available, so their site flag is not loaded."
+    },
+    {
+      "type": "paragraph",
+      "id": "3d2ba2580c27def7",
+      "text": "Two existing workflows already employed by users:"
+    },
+    {
+      "type": "markdown",
+      "id": "02af19fd19a40ed5",
+      "text": "* editing on a local server, and using scp to copy pages to the server.\n* logging out, and editing pages in browser local storage - publishing them by logging back in and forking from local storage.\n"
+    },
+    {
+      "type": "markdown",
+      "id": "e6bec93853b3d49e",
+      "text": "Rationale for excluding the fork event from the journal... all of these network locations are on the author's laptop: localStorage is in the web browser, localhost and localtest.me are web apps running on the local computer... the browser knows it is talking to itself.  To the degree that the fork event in the journal intends to denote authorship and to satisfy the terms of `CC BY-SA 4.0`, we know all those locations represent the same author.  Or at least the same keyboard."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Publish from Local",
+        "story": []
+      },
+      "date": 1422352212184
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "88fd6a249f389b07"
+      },
+      "id": "88fd6a249f389b07",
+      "type": "add",
+      "date": 1422352216196
+    },
+    {
+      "type": "edit",
+      "id": "88fd6a249f389b07",
+      "item": {
+        "type": "paragraph",
+        "id": "88fd6a249f389b07",
+        "text": "Does 'forking' from local, or even a locally hosted private wiki, make sense?"
+      },
+      "date": 1422352330096
+    },
+    {
+      "type": "add",
+      "id": "26a2817de73cb0b2",
+      "item": {
+        "type": "paragraph",
+        "id": "26a2817de73cb0b2",
+        "text": "When we fork a local copy, the page's journal contains a fork event that allows us to reason about the authors who have touched contributed to a page."
+      },
+      "after": "88fd6a249f389b07",
+      "date": 1422352814276
+    },
+    {
+      "type": "add",
+      "id": "4acb7c1b1bb5539d",
+      "item": {
+        "type": "paragraph",
+        "id": "4acb7c1b1bb5539d",
+        "text": "A fork from local distracts from this flow of reasoning, as if there are unloaded, or failed loading, sitemaps we have to hover over the flag to see where the fork is from. "
+      },
+      "after": "26a2817de73cb0b2",
+      "date": 1422352824850
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "3d2ba2580c27def7"
+      },
+      "id": "3d2ba2580c27def7",
+      "type": "add",
+      "after": "4acb7c1b1bb5539d",
+      "date": 1422352832525
+    },
+    {
+      "type": "edit",
+      "id": "3d2ba2580c27def7",
+      "item": {
+        "type": "paragraph",
+        "id": "3d2ba2580c27def7",
+        "text": "Two existing workflows already employed by users:"
+      },
+      "date": 1422353148416
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "02af19fd19a40ed5"
+      },
+      "id": "02af19fd19a40ed5",
+      "type": "add",
+      "after": "3d2ba2580c27def7",
+      "date": 1422353172121
+    },
+    {
+      "type": "edit",
+      "id": "02af19fd19a40ed5",
+      "item": {
+        "type": "markdown",
+        "id": "02af19fd19a40ed5",
+        "text": "* editing on a local server, and using scp to copy pages to the server.\n* logging out, and editing pages in browser local storage - publishing them by logging back in and forking from local storage."
+      },
+      "date": 1422353270242
+    },
+    {
+      "type": "edit",
+      "id": "4acb7c1b1bb5539d",
+      "item": {
+        "type": "paragraph",
+        "id": "4acb7c1b1bb5539d",
+        "text": "A fork from local distracts from this flow of reasoning. Not only does it not contain any information about the site the fork is from. It is also not distinguished from any forks from sites that are not available, so their site flag is not loaded."
+      },
+      "date": 1422353482829
+    },
+    {
+      "type": "fork",
+      "site": "fedwiki.rodwell.me",
+      "date": 1531151022585
+    },
+    {
+      "type": "edit",
+      "id": "26a2817de73cb0b2",
+      "item": {
+        "type": "paragraph",
+        "id": "26a2817de73cb0b2",
+        "text": "When we fork a page to our public wiki, the journal contains a fork event that allows us to reason about the authors who have touched contributed to a page."
+      },
+      "date": 1531151082481
+    },
+    {
+      "type": "edit",
+      "id": "4acb7c1b1bb5539d",
+      "item": {
+        "type": "factory",
+        "id": "4acb7c1b1bb5539d",
+        "text": "A fork from local  distracts from this flow of reasoning. Not only does it not contain any information about the site the fork is from. It is also not distinguished from any forks from sites that are not available, so their site flag is not loaded."
+      },
+      "date": 1531151093363
+    },
+    {
+      "type": "edit",
+      "id": "4acb7c1b1bb5539d",
+      "item": {
+        "type": "markdown",
+        "id": "4acb7c1b1bb5539d",
+        "text": "A fork from local _(e.g. localhost, or localtest.me, or any domain pointed at `127.0.0.1` or `::0`)_ distracts from this flow of reasoning. Not only does it not contain any information about the site the fork is from. It is also not distinguished from any forks from sites that are not available, so their site flag is not loaded."
+      },
+      "date": 1531151174938
+    },
+    {
+      "type": "edit",
+      "id": "4acb7c1b1bb5539d",
+      "item": {
+        "type": "markdown",
+        "id": "4acb7c1b1bb5539d",
+        "text": "A fork from local _(e.g. localhost, or localtest.me, or any domain pointed at `127.0.0.1` or `::1`)_ distracts from this flow of reasoning. Not only does it not contain any information about the site the fork is from. It is also not distinguished from any forks from sites that are not available, so their site flag is not loaded."
+      },
+      "date": 1531151237143
+    },
+    {
+      "type": "edit",
+      "id": "88fd6a249f389b07",
+      "item": {
+        "type": "paragraph",
+        "id": "88fd6a249f389b07",
+        "text": "Does 'forking' from local, or even a locally hosted private wiki, make sense?  Should the fork operation should be instrumented to notice when the source page is on localhost, and behave differently?"
+      },
+      "date": 1531151383208
+    },
+    {
+      "type": "edit",
+      "id": "4acb7c1b1bb5539d",
+      "item": {
+        "type": "markdown",
+        "id": "4acb7c1b1bb5539d",
+        "text": "A fork from local _(e.g. `localhost`, or `localtest.me`, or any domain pointed at `127.0.0.1` or `::1`)_ distracts from this flow of reasoning. Not only does it not contain any information about the site the fork is from. It is also not distinguished from any forks from sites that are not available, so their site flag is not loaded."
+      },
+      "date": 1531151431006
+    },
+    {
+      "type": "edit",
+      "id": "4acb7c1b1bb5539d",
+      "item": {
+        "type": "markdown",
+        "id": "4acb7c1b1bb5539d",
+        "text": "A fork from local _(e.g. `localhost`, or `localtest.me`, or any domain pointed at `127.0.0.1` or the IPv6 equivalent `::1`)_ distracts from this flow of reasoning. Not only does it not contain any information about the site the fork is from. It is also not distinguished from any forks from sites that are not available, so their site flag is not loaded."
+      },
+      "date": 1531151457751
+    },
+    {
+      "type": "edit",
+      "id": "4acb7c1b1bb5539d",
+      "item": {
+        "type": "markdown",
+        "id": "4acb7c1b1bb5539d",
+        "text": "A fork from local distracts from this flow of reasoning _(`local` here could mean `localhost`, or `localtest.me`, or any domain which resolves to `127.0.0.1` or the IPv6 equivalent `::1`)_. Not only does it not contain any information about the site the fork is from. It is also not distinguished from any forks from sites that are not available, so their site flag is not loaded."
+      },
+      "date": 1531151545591
+    },
+    {
+      "type": "edit",
+      "id": "4acb7c1b1bb5539d",
+      "item": {
+        "type": "markdown",
+        "id": "4acb7c1b1bb5539d",
+        "text": "A fork from local distracts from this flow of reasoning _(`local` here could mean `localStorage` when disconnected from the network or not logged in, or `localhost`, or `localtest.me`, or any domain which resolves to `127.0.0.1` or the IPv6 equivalent `::1`)_. Not only does it not contain any information about the site the fork is from. It is also not distinguished from any forks from sites that are not available, so their site flag is not loaded."
+      },
+      "date": 1531152776466
+    },
+    {
+      "type": "edit",
+      "id": "88fd6a249f389b07",
+      "item": {
+        "type": "paragraph",
+        "id": "88fd6a249f389b07",
+        "text": "Does 'forking' from local, or even a locally hosted private wiki, make sense?  Should the fork operation should be instrumented to notice when the source page is on localhost, and specifically excluded the fork event from the journal when applying the changes?"
+      },
+      "date": 1531152862955
+    },
+    {
+      "type": "edit",
+      "id": "88fd6a249f389b07",
+      "item": {
+        "type": "paragraph",
+        "id": "88fd6a249f389b07",
+        "text": "Does 'forking' from local, or even a locally hosted private wiki, make sense?  Should the fork operation should be instrumented to notice when the source page is on localhost, and specifically exclude the fork event from the journal when applying the changes?"
+      },
+      "date": 1531152880797
+    },
+    {
+      "type": "edit",
+      "id": "02af19fd19a40ed5",
+      "item": {
+        "type": "markdown",
+        "id": "02af19fd19a40ed5",
+        "text": "* editing on a local server, and using scp to copy pages to the server.\n* logging out, and editing pages in browser local storage - publishing them by logging back in and forking from local storage.\n"
+      },
+      "date": 1531152902360
+    },
+    {
+      "type": "add",
+      "id": "e6bec93853b3d49e",
+      "item": {
+        "type": "markdown",
+        "id": "e6bec93853b3d49e",
+        "text": "Rationale for excluding the fork event from the journal... all of these network locations are on the author's laptop: localStorage is in the web browser, localhost and localtest.me are web apps running on the local computer... the browser knows it is talking to itself.  To the degree that the fork event in the journal intends to denote authorship and to satisfy the terms of `CC BY-SA 4.0`, we know all those locations represent the same author.  Or at least the same keyboard."
+      },
+      "after": "02af19fd19a40ed5",
+      "date": 1531153152845
+    }
+  ]
+}

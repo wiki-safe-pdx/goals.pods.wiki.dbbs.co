@@ -1,0 +1,230 @@
+{
+  "title": "Offline Authoring",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "31a356dc65449581",
+      "text": "We value that localStorage enables any reader to author locally. This changes the balance of power between author and audience–enables communication. Yet our community is mostly frustrated by the yellow halo. "
+    },
+    {
+      "type": "paragraph",
+      "id": "2bdb97607f8f927a",
+      "text": "See [[Annotate Yellow Halo]]"
+    },
+    {
+      "type": "paragraph",
+      "id": "bcd0c566c3330c13",
+      "text": "See [[Local Editing]]"
+    },
+    {
+      "type": "paragraph",
+      "id": "2d48fc4015bd603f",
+      "text": "Browser localStorage is scoped by domain name."
+    },
+    {
+      "type": "paragraph",
+      "id": "96ba394dc60a9c14",
+      "text": "Farms depend on proliferation of subdomains."
+    },
+    {
+      "type": "paragraph",
+      "id": "6bee4936329780ea",
+      "text": "Even for authors who understand the yellow halo, it can be difficult to find the local changes."
+    },
+    {
+      "type": "paragraph",
+      "id": "0162a1fb631fe403",
+      "text": "The frame plugin has shown how to use postMessage() to cross domain boundaries."
+    },
+    {
+      "type": "paragraph",
+      "id": "41cdd130af44aacd",
+      "text": "Perhaps offline edits could be sent via postMessage() to a frame within the <footer> that could gather all the edits into the localStorage scoped under a single domain name."
+    },
+    {
+      "type": "paragraph",
+      "id": "20f1649d7f24fcb1",
+      "text": "Could an authorAdapter act somewhat like a siteAdapter but live entirely within that frame?"
+    },
+    {
+      "type": "paragraph",
+      "id": "dd0d4bc5c8bd59a6",
+      "text": "Perhaps this frame could replace the lock icon."
+    },
+    {
+      "type": "paragraph",
+      "id": "4baf40601671e024",
+      "text": "If deno.deploy (or cloudflare) hosted the frame in question, the edge localStorage could allow an author to find their \"local\" changes from multiple browsers or devices."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Offline Authoring",
+        "story": []
+      },
+      "date": 1620832112305
+    },
+    {
+      "id": "31a356dc65449581",
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "31a356dc65449581",
+        "text": "We value that localStorage enables any reader to author locally. This changes the balance of power between author and audience. This enables communication. Our current implementation sadly also comes with the confusing and frustrating yellow halo."
+      },
+      "date": 1620832127248
+    },
+    {
+      "id": "bcd0c566c3330c13",
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "bcd0c566c3330c13",
+        "text": "See [[Local Editing]]"
+      },
+      "after": "31a356dc65449581",
+      "date": 1620832141845
+    },
+    {
+      "id": "2bdb97607f8f927a",
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "2bdb97607f8f927a",
+        "text": "See [[Annotate Yellow Halo]]"
+      },
+      "after": "31a356dc65449581",
+      "date": 1620832143842
+    },
+    {
+      "type": "edit",
+      "id": "31a356dc65449581",
+      "item": {
+        "type": "paragraph",
+        "id": "31a356dc65449581",
+        "text": "We value that localStorage enables any reader to author locally. This changes the balance of power between author and audience–enables communication. Yet our community is mostly frustrated by the yellow halo. "
+      },
+      "date": 1620833282272
+    },
+    {
+      "type": "add",
+      "id": "2d48fc4015bd603f",
+      "item": {
+        "type": "paragraph",
+        "id": "2d48fc4015bd603f",
+        "text": "Browser localStorage is scoped by domain name."
+      },
+      "after": "bcd0c566c3330c13",
+      "date": 1620833372796
+    },
+    {
+      "type": "add",
+      "id": "96ba394dc60a9c14",
+      "item": {
+        "type": "paragraph",
+        "id": "96ba394dc60a9c14",
+        "text": "Farms depend on proliferation of domain names."
+      },
+      "after": "2d48fc4015bd603f",
+      "date": 1620833386230
+    },
+    {
+      "type": "edit",
+      "id": "96ba394dc60a9c14",
+      "item": {
+        "type": "paragraph",
+        "id": "96ba394dc60a9c14",
+        "text": "Farms depend on proliferation of subdomains."
+      },
+      "date": 1620833408492
+    },
+    {
+      "type": "add",
+      "id": "6bee4936329780ea",
+      "item": {
+        "type": "paragraph",
+        "id": "6bee4936329780ea",
+        "text": "Even for authors who understand the yellow halo, it can be difficult to find the local changes."
+      },
+      "after": "96ba394dc60a9c14",
+      "date": 1620833509046
+    },
+    {
+      "type": "add",
+      "id": "0162a1fb631fe403",
+      "item": {
+        "type": "paragraph",
+        "id": "0162a1fb631fe403",
+        "text": "The frame plugin has shown how to use postMessage() to cross domain boundaries."
+      },
+      "after": "6bee4936329780ea",
+      "date": 1620833881475
+    },
+    {
+      "type": "add",
+      "id": "41cdd130af44aacd",
+      "item": {
+        "type": "paragraph",
+        "id": "41cdd130af44aacd",
+        "text": "Perhaps a frame within the "
+      },
+      "after": "0162a1fb631fe403",
+      "date": 1620833895803
+    },
+    {
+      "type": "edit",
+      "id": "41cdd130af44aacd",
+      "item": {
+        "type": "paragraph",
+        "id": "41cdd130af44aacd",
+        "text": "Perhaps offline edits could be sent via postMessage() to a frame within the <footer> that could gather all the edits into the localStorage scoped under a single domain name."
+      },
+      "date": 1620834077122
+    },
+    {
+      "type": "add",
+      "id": "20f1649d7f24fcb1",
+      "item": {
+        "type": "paragraph",
+        "id": "20f1649d7f24fcb1",
+        "text": "Could an originAdapter act somewhat like a siteAdapter but live entirely within that frame?"
+      },
+      "after": "41cdd130af44aacd",
+      "date": 1620834257388
+    },
+    {
+      "type": "add",
+      "id": "dd0d4bc5c8bd59a6",
+      "item": {
+        "type": "paragraph",
+        "id": "dd0d4bc5c8bd59a6",
+        "text": "Perhaps this frame could replace the lock icon."
+      },
+      "after": "20f1649d7f24fcb1",
+      "date": 1620834526056
+    },
+    {
+      "type": "add",
+      "id": "4baf40601671e024",
+      "item": {
+        "type": "paragraph",
+        "id": "4baf40601671e024",
+        "text": "If deno.deploy (or cloudflare) hosted the frame in question, the edge localStorage could allow an author to find their \"local\" changes from multiple browsers or devices."
+      },
+      "after": "dd0d4bc5c8bd59a6",
+      "date": 1620834616691
+    },
+    {
+      "type": "edit",
+      "id": "20f1649d7f24fcb1",
+      "item": {
+        "type": "paragraph",
+        "id": "20f1649d7f24fcb1",
+        "text": "Could an authorAdapter act somewhat like a siteAdapter but live entirely within that frame?"
+      },
+      "date": 1620834637424
+    }
+  ]
+}

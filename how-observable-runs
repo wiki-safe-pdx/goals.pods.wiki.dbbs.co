@@ -1,0 +1,131 @@
+{
+  "title": "How Observable Runs",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "20b7478f5e0031f8",
+      "text": "Observable Notebooks inspire us with their spreadsheet-like dynamic updating."
+    },
+    {
+      "type": "paragraph",
+      "id": "b115824e13652319",
+      "text": "One of our first examples in the Frame Plugin documentation showed an Observable Notebook inside a wiki frame. Observable changed their code and broke our example. Years have passed and Observable now offer downloads of notebooks."
+    },
+    {
+      "type": "frame",
+      "id": "c47648eb16d59123",
+      "text": "https://goals.pods.wiki.dbbs.co/assets/how-observable-runs/index.html\nHEIGHT 1200"
+    },
+    {
+      "type": "assets",
+      "id": "13dfbaf290162663",
+      "text": "how-observable-runs"
+    },
+    {
+      "type": "assets",
+      "id": "a122b61e19ff0100",
+      "text": "how-observable-runs/files"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "How Observable Runs",
+        "story": []
+      },
+      "date": 1606324350140
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "20b7478f5e0031f8"
+      },
+      "id": "20b7478f5e0031f8",
+      "type": "add",
+      "date": 1606324354499
+    },
+    {
+      "type": "edit",
+      "id": "20b7478f5e0031f8",
+      "item": {
+        "type": "paragraph",
+        "id": "20b7478f5e0031f8",
+        "text": "Observable Notebooks inspire us with their spreadsheet-like dynamic updating."
+      },
+      "date": 1606324571473
+    },
+    {
+      "type": "add",
+      "id": "b115824e13652319",
+      "item": {
+        "type": "paragraph",
+        "id": "b115824e13652319",
+        "text": "One of our first examples in the Frame Plugin documentation showed an Observable Notebook inside a wiki frame. Observable changed their code and broke our example. Years have passed and Observable now offer downloads of notebooks."
+      },
+      "after": "20b7478f5e0031f8",
+      "date": 1606324588188
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "13dfbaf290162663"
+      },
+      "id": "13dfbaf290162663",
+      "type": "add",
+      "after": "b115824e13652319",
+      "date": 1606324590918
+    },
+    {
+      "type": "edit",
+      "id": "13dfbaf290162663",
+      "item": {
+        "type": "assets",
+        "id": "13dfbaf290162663",
+        "text": "how-observable-runs"
+      },
+      "date": 1606324601892
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "a122b61e19ff0100"
+      },
+      "id": "a122b61e19ff0100",
+      "type": "add",
+      "after": "13dfbaf290162663",
+      "date": 1606324647222
+    },
+    {
+      "type": "edit",
+      "id": "a122b61e19ff0100",
+      "item": {
+        "type": "assets",
+        "id": "a122b61e19ff0100",
+        "text": "how-observable-runs/files"
+      },
+      "date": 1606324664549
+    },
+    {
+      "type": "add",
+      "id": "c47648eb16d59123",
+      "item": {
+        "type": "factory",
+        "id": "c47648eb16d59123",
+        "text": "https://goals.pods.wiki.dbbs.co/assets/how-observable-runs/index.html"
+      },
+      "after": "b115824e13652319",
+      "date": 1606324751927
+    },
+    {
+      "type": "edit",
+      "id": "c47648eb16d59123",
+      "item": {
+        "type": "frame",
+        "id": "c47648eb16d59123",
+        "text": "https://goals.pods.wiki.dbbs.co/assets/how-observable-runs/index.html\nHEIGHT 1200"
+      },
+      "date": 1606324771090
+    }
+  ]
+}

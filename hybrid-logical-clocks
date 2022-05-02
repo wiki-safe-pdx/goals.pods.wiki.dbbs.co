@@ -1,0 +1,91 @@
+{
+  "title": "Hybrid Logical Clocks",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "65b3d82d0cfcdc72",
+      "text": "There's a tight little algorithm that does a pretty good approximation of telling you \"the order in which events happened\" in a distributed system: the Hybrid Logical Clock (HLC). [https://jaredforsyth.com/posts/hybrid-logical-clocks/ article]"
+    },
+    {
+      "type": "paragraph",
+      "id": "696511280f0591d5",
+      "text": "Might support the goal to [[Embrace Event Sourcing]]."
+    },
+    {
+      "type": "paragraph",
+      "id": "153b86a257c538f5",
+      "text": "See also [[Theory of Patches]]"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Hybrid Logical Clocks",
+        "story": []
+      },
+      "date": 1608417291022
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "65b3d82d0cfcdc72"
+      },
+      "id": "65b3d82d0cfcdc72",
+      "type": "add",
+      "date": 1608417292275
+    },
+    {
+      "type": "edit",
+      "id": "65b3d82d0cfcdc72",
+      "item": {
+        "type": "paragraph",
+        "id": "65b3d82d0cfcdc72",
+        "text": "There's a tight little algorithm that does a pretty good approximation of telling you \"the order in which events happened\" in a distributed system: the Hybrid Logical Clock (HLC). [ article]"
+      },
+      "date": 1608417317138
+    },
+    {
+      "type": "edit",
+      "id": "65b3d82d0cfcdc72",
+      "item": {
+        "type": "paragraph",
+        "id": "65b3d82d0cfcdc72",
+        "text": "There's a tight little algorithm that does a pretty good approximation of telling you \"the order in which events happened\" in a distributed system: the Hybrid Logical Clock (HLC). [https://jaredforsyth.com/posts/hybrid-logical-clocks/ article]"
+      },
+      "date": 1608417330526
+    },
+    {
+      "type": "add",
+      "id": "696511280f0591d5",
+      "item": {
+        "type": "paragraph",
+        "id": "696511280f0591d5",
+        "text": "See [[Embrace Event Sourcing]]"
+      },
+      "after": "65b3d82d0cfcdc72",
+      "date": 1608417353431
+    },
+    {
+      "type": "edit",
+      "id": "696511280f0591d5",
+      "item": {
+        "type": "paragraph",
+        "id": "696511280f0591d5",
+        "text": "Might support the goal to [[Embrace Event Sourcing]]."
+      },
+      "date": 1608417387483
+    },
+    {
+      "type": "add",
+      "id": "153b86a257c538f5",
+      "item": {
+        "type": "paragraph",
+        "id": "153b86a257c538f5",
+        "text": "See also [[Theory of Patches]]"
+      },
+      "after": "696511280f0591d5",
+      "date": 1608417747399
+    }
+  ]
+}

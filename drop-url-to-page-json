@@ -1,0 +1,315 @@
+{
+  "title": "Drop URL to Page JSON",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "40a99f8dee01a1c1",
+      "text": "We imagine how a couple small changes to import, export, drag-and-drop might offer another way to fork pages."
+    },
+    {
+      "type": "paragraph",
+      "id": "7e3df6269a4cea17",
+      "text": "The JSON link at the bottom of the page, when clicked, opens a dialog box which reveals the page json. I can also right-click to open that json payload in a separate tab, or save that json to a file on disk."
+    },
+    {
+      "type": "code",
+      "id": "684904092348d3d3",
+      "text": "{\n  \"title\": \"Drop URL to Page JSON\",\n  \"story\": [...],\n  \"journal\": [...]\n}"
+    },
+    {
+      "type": "paragraph",
+      "id": "175d7f04c20773fe",
+      "text": "The site export [http:/system/export.json export.json] has a similar structure."
+    },
+    {
+      "type": "code",
+      "id": "57c8c37c97663bd3",
+      "text": "[\n  {\n    \"title\": \"...\", \n    \"story\": [...], \n    \"journal\": [...] \n  },\n  ...\n]"
+    },
+    {
+      "type": "paragraph",
+      "id": "240c6021167e3f5c",
+      "text": "Sometimes I will save the page json from a page I have written locally, transform it slightly with jq, an then drag-and-drop that file to a remote wiki, so I can use the wiki import behavior to get that content on a remote site."
+    },
+    {
+      "type": "code",
+      "id": "d98499ef51333639",
+      "text": "jq '[.]' saved-page.json > page-export.json"
+    },
+    {
+      "type": "paragraph",
+      "id": "2d80637967c9c5d6",
+      "text": "A simpler workflow is to drag the page from the local wiki to the remote wiki and click the fork button."
+    },
+    {
+      "type": "paragraph",
+      "id": "cce5834155274030",
+      "text": "I chose the more complicated workflow because the import behavior excludes the local domain name from the journal in the public wiki. That same trick could be abused to violate the CC BY-SA license, but in my case, I'm definitely the author."
+    },
+    {
+      "type": "paragraph",
+      "id": "4a27b6ecfd3b22d3",
+      "text": "One proposal: change the JSON link at the bottom to wrap the page json in an array. That would eliminate the need to apply jq in the transformation."
+    },
+    {
+      "type": "paragraph",
+      "id": "3caa3ee88d45c177",
+      "text": "Another proposal: enhance the drop handler in wiki to notice when a URL has been dropped. If the URL ends in .json and the payload conforms to wiki's export format (an array of pages), then render the import page from that URL. The current drop handler only works if I drop a file, not if I drop a url."
+    },
+    {
+      "type": "paragraph",
+      "id": "e9f001bc1b5a2ded",
+      "text": "Something hand-wavy about needing mechanisms that preserve CC BY-SA while allowing authors some way to keep their private domains private."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Drop URL to Page JSON",
+        "story": []
+      },
+      "date": 1581526438544
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "40a99f8dee01a1c1"
+      },
+      "id": "40a99f8dee01a1c1",
+      "type": "add",
+      "date": 1581526439960
+    },
+    {
+      "type": "edit",
+      "id": "40a99f8dee01a1c1",
+      "item": {
+        "type": "paragraph",
+        "id": "40a99f8dee01a1c1",
+        "text": "We imagine how a couple small changes to import, export, drag-and-drop might offer another way to fork pages."
+      },
+      "date": 1581526503444
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "684904092348d3d3"
+      },
+      "id": "684904092348d3d3",
+      "type": "add",
+      "after": "40a99f8dee01a1c1",
+      "date": 1581526510011
+    },
+    {
+      "type": "edit",
+      "id": "684904092348d3d3",
+      "item": {
+        "type": "code",
+        "id": "684904092348d3d3",
+        "text": "{\n  \"title\": \"Drop URL to Page JSON\",\n  \"story\": [...],\n  \"journal\": [...]\n}"
+      },
+      "date": 1581526554618
+    },
+    {
+      "type": "add",
+      "id": "7e3df6269a4cea17",
+      "item": {
+        "type": "paragraph",
+        "id": "7e3df6269a4cea17",
+        "text": "The JSON link at the bottom of the page, when clicked, opens a dialog box which reveals the page json. I can also "
+      },
+      "after": "40a99f8dee01a1c1",
+      "date": 1581526617061
+    },
+    {
+      "type": "edit",
+      "id": "7e3df6269a4cea17",
+      "item": {
+        "type": "paragraph",
+        "id": "7e3df6269a4cea17",
+        "text": "The JSON link at the bottom of the page, when clicked, opens a dialog box which reveals the page json. I can also right-click to open that json payload in a separate tab."
+      },
+      "date": 1581526646094
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "175d7f04c20773fe"
+      },
+      "id": "175d7f04c20773fe",
+      "type": "add",
+      "after": "684904092348d3d3",
+      "date": 1581526681456
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "57c8c37c97663bd3"
+      },
+      "id": "57c8c37c97663bd3",
+      "type": "add",
+      "after": "175d7f04c20773fe",
+      "date": 1581526684304
+    },
+    {
+      "type": "edit",
+      "id": "57c8c37c97663bd3",
+      "item": {
+        "type": "code",
+        "id": "57c8c37c97663bd3",
+        "text": "[\n  {\n    \"title\": \"...\", \n    \"story\": [...], \n    \"journal\": [...] \n  },\n  ...\n]"
+      },
+      "date": 1581526732790
+    },
+    {
+      "type": "edit",
+      "id": "175d7f04c20773fe",
+      "item": {
+        "type": "paragraph",
+        "id": "175d7f04c20773fe",
+        "text": "The site export [http:/system/export.json export.json] has a similar structure."
+      },
+      "date": 1581526802250
+    },
+    {
+      "type": "edit",
+      "id": "7e3df6269a4cea17",
+      "item": {
+        "type": "paragraph",
+        "id": "7e3df6269a4cea17",
+        "text": "The JSON link at the bottom of the page, when clicked, opens a dialog box which reveals the page json. I can also right-click to open that json payload in a separate tab, or save that json to a file on disk."
+      },
+      "date": 1581526821196
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "240c6021167e3f5c"
+      },
+      "id": "240c6021167e3f5c",
+      "type": "add",
+      "after": "57c8c37c97663bd3",
+      "date": 1581526831497
+    },
+    {
+      "type": "edit",
+      "id": "240c6021167e3f5c",
+      "item": {
+        "type": "paragraph",
+        "id": "240c6021167e3f5c",
+        "text": "Sometimes I will save the page json from a page I have written locally, transform it slightly with jq, an then drag-and-drop that file to a remote wiki, so I can use the wiki import behavior to get that content on a remote site."
+      },
+      "date": 1581526911595
+    },
+    {
+      "type": "add",
+      "id": "2d80637967c9c5d6",
+      "item": {
+        "type": "paragraph",
+        "id": "2d80637967c9c5d6",
+        "text": "An alternative workflow is to drag the page from the local wiki to the remote wiki and click the fork button."
+      },
+      "after": "240c6021167e3f5c",
+      "date": 1581526954362
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "d98499ef51333639"
+      },
+      "id": "d98499ef51333639",
+      "type": "add",
+      "after": "2d80637967c9c5d6",
+      "date": 1581527182792
+    },
+    {
+      "type": "edit",
+      "id": "d98499ef51333639",
+      "item": {
+        "type": "code",
+        "id": "d98499ef51333639",
+        "text": "jq '[.]' saved-page.json > page-export.json"
+      },
+      "date": 1581527211705
+    },
+    {
+      "id": "d98499ef51333639",
+      "type": "move",
+      "order": [
+        "40a99f8dee01a1c1",
+        "7e3df6269a4cea17",
+        "684904092348d3d3",
+        "175d7f04c20773fe",
+        "57c8c37c97663bd3",
+        "240c6021167e3f5c",
+        "d98499ef51333639",
+        "2d80637967c9c5d6"
+      ],
+      "date": 1581527214708
+    },
+    {
+      "type": "edit",
+      "id": "2d80637967c9c5d6",
+      "item": {
+        "type": "paragraph",
+        "id": "2d80637967c9c5d6",
+        "text": "An simpler workflow is to drag the page from the local wiki to the remote wiki and click the fork button."
+      },
+      "date": 1581527239626
+    },
+    {
+      "type": "add",
+      "id": "cce5834155274030",
+      "item": {
+        "type": "paragraph",
+        "id": "cce5834155274030",
+        "text": "I chose the more complicated workflow because the import behavior excludes the local domain name from the journal in the public wiki. That same trick could be abused to violate the CC BY-SA license, but in my case, I'm definitely the author."
+      },
+      "after": "2d80637967c9c5d6",
+      "date": 1581527343537
+    },
+    {
+      "type": "add",
+      "id": "4a27b6ecfd3b22d3",
+      "item": {
+        "type": "paragraph",
+        "id": "4a27b6ecfd3b22d3",
+        "text": "One proposal: change the JSON link at the bottom to wrap the page json in an array. That would eliminate the need to apply jq in the transformation."
+      },
+      "after": "cce5834155274030",
+      "date": 1581527408765
+    },
+    {
+      "type": "add",
+      "id": "3caa3ee88d45c177",
+      "item": {
+        "type": "paragraph",
+        "id": "3caa3ee88d45c177",
+        "text": "Another proposal: enhance the drop handler in wiki to notice when a URL has been dropped. If the URL ends in .json and the payload conforms to wiki's export format (an array of pages), then render the import page from that URL. The current drop handler only works if I drop a file, not if I drop a url."
+      },
+      "after": "4a27b6ecfd3b22d3",
+      "date": 1581527560714
+    },
+    {
+      "type": "add",
+      "id": "e9f001bc1b5a2ded",
+      "item": {
+        "type": "paragraph",
+        "id": "e9f001bc1b5a2ded",
+        "text": "Something hand-wavy about needing mechanisms that preserve CC BY-SA while allowing authors some way to keep their private domains private."
+      },
+      "after": "3caa3ee88d45c177",
+      "date": 1581527653919
+    },
+    {
+      "type": "edit",
+      "id": "2d80637967c9c5d6",
+      "item": {
+        "type": "paragraph",
+        "id": "2d80637967c9c5d6",
+        "text": "A simpler workflow is to drag the page from the local wiki to the remote wiki and click the fork button."
+      },
+      "date": 1581528019764
+    }
+  ]
+}

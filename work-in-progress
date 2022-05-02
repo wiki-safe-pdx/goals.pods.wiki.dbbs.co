@@ -1,0 +1,171 @@
+{
+  "title": "Work in Progress",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "0f3f9e5bef1e94d2",
+      "text": "These are projects we've actually started coding. Sometimes they turn out to have dependencies we hadn't anticipated which makes them linger on. "
+    },
+    {
+      "type": "pagefold",
+      "id": "ee29d81488515f45",
+      "text": "doing"
+    },
+    {
+      "type": "paragraph",
+      "id": "6f67726069525839",
+      "text": "[[Wiki Hosted on Glitch]]"
+    },
+    {
+      "type": "paragraph",
+      "id": "5519fbd6572c9f87",
+      "text": "[[Clean Fast Install]]"
+    },
+    {
+      "type": "paragraph",
+      "id": "629f1f0e737afc6b",
+      "text": "[[Clean Fast Install Locally]]"
+    },
+    {
+      "type": "paragraph",
+      "id": "52e064373c41a6f7",
+      "text": "[[Clean Fast Install in Docker]]"
+    },
+    {
+      "type": "paragraph",
+      "id": "5309c43addbfa660",
+      "text": "[[Layered Authentication]]"
+    },
+    {
+      "type": "paragraph",
+      "id": "ac9f98fc860c2f4a",
+      "text": "[[Experimental Plugin Deployment]] to selected sites to gain experience while developing new or enhanced features."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Work in Progress",
+        "story": []
+      },
+      "date": 1511845511202
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "0f3f9e5bef1e94d2",
+        "text": "These are projects we've actually started coding. Sometimes they turn out to have dependencies we hadn't anticipated which makes them linger on. "
+      },
+      "id": "0f3f9e5bef1e94d2",
+      "date": 1511845559028
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "pagefold",
+        "id": "ee29d81488515f45",
+        "text": "doing"
+      },
+      "after": "0f3f9e5bef1e94d2",
+      "id": "ee29d81488515f45",
+      "date": 1511845607795
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "6f67726069525839"
+      },
+      "id": "6f67726069525839",
+      "type": "add",
+      "after": "ee29d81488515f45",
+      "date": 1511845614180
+    },
+    {
+      "type": "edit",
+      "id": "6f67726069525839",
+      "item": {
+        "type": "paragraph",
+        "id": "6f67726069525839",
+        "text": "[[Clean Fast Install Locally]]"
+      },
+      "date": 1511845950649
+    },
+    {
+      "type": "add",
+      "id": "52e064373c41a6f7",
+      "item": {
+        "type": "paragraph",
+        "id": "52e064373c41a6f7",
+        "text": "[[Clean Fast Install in Docker]]"
+      },
+      "after": "6f67726069525839",
+      "date": 1511846000571
+    },
+    {
+      "type": "add",
+      "id": "5309c43addbfa660",
+      "item": {
+        "type": "paragraph",
+        "id": "5309c43addbfa660",
+        "text": "[[Layered Authentication]]"
+      },
+      "after": "52e064373c41a6f7",
+      "date": 1511846015074
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "ac9f98fc860c2f4a",
+        "text": "[[Experimental Plugin Deployment]] to selected sites to gain experience while developing new or enhanced features."
+      },
+      "after": "5309c43addbfa660",
+      "id": "ac9f98fc860c2f4a",
+      "date": 1512333192596
+    },
+    {
+      "type": "edit",
+      "id": "6f67726069525839",
+      "item": {
+        "type": "paragraph",
+        "id": "6f67726069525839",
+        "text": "[[Clean Fast Install]]"
+      },
+      "date": 1512826246218
+    },
+    {
+      "type": "add",
+      "id": "629f1f0e737afc6b",
+      "item": {
+        "type": "paragraph",
+        "id": "629f1f0e737afc6b",
+        "text": "[[Clean Fast Install Locally]]"
+      },
+      "after": "6f67726069525839",
+      "date": 1512826246950
+    },
+    {
+      "type": "edit",
+      "id": "6f67726069525839",
+      "item": {
+        "type": "paragraph",
+        "id": "6f67726069525839",
+        "text": "[[Wiki Hosted on Glitch]]"
+      },
+      "date": 1544943002361
+    },
+    {
+      "type": "add",
+      "id": "5519fbd6572c9f87",
+      "item": {
+        "type": "paragraph",
+        "id": "5519fbd6572c9f87",
+        "text": "[[Clean Fast Install]]"
+      },
+      "after": "6f67726069525839",
+      "date": 1544943003254
+    }
+  ]
+}

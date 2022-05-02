@@ -1,0 +1,1107 @@
+{
+  "title": "Graphviz Plugin Improvements",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "8e328bd1794ed5f7",
+      "text": "We find it challenging to choose the right next step for improving graphviz plugin. Perhaps collecting the many ideas for improvement will help with the choosing."
+    },
+    {
+      "type": "paragraph",
+      "id": "8bdad7dfa2f55e8e",
+      "text": "Some ideas started in [[2020 Gratitude]], [[<wiki-graph>]], and [[<wiki-link>]]"
+    },
+    {
+      "type": "pagefold",
+      "id": "5ab3faa251ecbf93",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "c85d8b0206ee1857",
+      "text": "Create freeze icon for algorithmic diagrams. See [[About Map Freeze / Thaw]]"
+    },
+    {
+      "type": "paragraph",
+      "id": "5b9c3875ace11b7d",
+      "text": "Devise protocol for new pages to find links from the labels on nodes in a graph."
+    },
+    {
+      "type": "paragraph",
+      "id": "f7439bdbaf1e658c",
+      "text": "Include a key on the graphviz item to list the links within the graph."
+    },
+    {
+      "type": "paragraph",
+      "id": "c2cc2e6dc8a499b9",
+      "text": "Update algorithmic diagrams to use links in sitemap.json"
+    },
+    {
+      "type": "paragraph",
+      "id": "60a10483f00e9271",
+      "text": "Separate wiki graph visitor code from the plugin so it can be used for other graph traversal applications (like search or scrape or pdf generation)."
+    },
+    {
+      "type": "paragraph",
+      "id": "facc97941fe8fd45",
+      "text": "Apply monkey to testing graphviz examples."
+    },
+    {
+      "type": "paragraph",
+      "id": "b2248e2f126ad2a5",
+      "text": "Add pan and zoom to graphs with many nodes. See [[GraphQL Voyager]]. Paul drew our attention to this library: [https://github.com/ariutta/svg-pan-zoom github]"
+    },
+    {
+      "type": "paragraph",
+      "id": "0029f250950a91f7",
+      "text": "✓ Update algorithmic diagrams to make use of backlinks."
+    },
+    {
+      "type": "paragraph",
+      "id": "26a3e33c367fb320",
+      "text": "✓ For hand-written dot, treat any label as a title for a collaborative link. This allows even edges to become clickable. Demands code to handle linefeed characters."
+    },
+    {
+      "type": "paragraph",
+      "id": "362acef3afbf12d5",
+      "text": "Include reference items in the discovery of LINKS. Notice how the diagram below misses the reference to XP and Normative Good."
+    },
+    {
+      "type": "paragraph",
+      "id": "302ef17517879a20",
+      "text": "Figure out correct escaping for pages that include angle brackets <> like <wiki-link> and <wiki-graph>"
+    },
+    {
+      "type": "reference",
+      "id": "208c76edc6f3dff1",
+      "site": "norms.ward.asia.wiki.org",
+      "slug": "xp-and-normative-good",
+      "title": "XP and Normative Good",
+      "text": "Extreme Programming (xp) prescribes a dozen practices that reinforce each other so as to allow teams to make software development decisions. We examine the distribution of responsibilities required for, and means to arrive at, good decisions within this framework."
+    },
+    {
+      "type": "graphviz",
+      "id": "d06a8445d53c8a5a",
+      "text": "DOT digraph\n rankdir=LR\n node [shape=box style=\"rounded, filled\"]\n HERE\n  LINKS HERE -> NODE\n\n\nSTATIC\n\ndigraph {rankdir=LR\nnode [shape=box style=\"rounded, filled\"]\n\"Graphviz\nPlugin\nImprovements\" -> \"2020\nGratitude\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"About\nMap\nFreeze\n/\nThaw\"\n\"Graphviz\nPlugin\nImprovements\" -> \"GraphQL\nVoyager\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"2020\nGratitude\" -> \"About\nGraphviz\nPlugin\"\n\"2020\nGratitude\" -> \"About\nHTML\nPlugin\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"Flow\nof\nEpisodes\"\n\"2020\nGratitude\" -> \"About\nFrame\nIntegrations\"\n\"2020\nGratitude\" -> \"How\nObservable\nRuns\"\n\"2020\nGratitude\" -> \"GraphQL\nVoyager\"\n\"\" -> \"GraphQL\nVoyager\"\n\"GraphQL\nVoyager\" -> \"El\nDorado\nUI\"\n\"\" -> \"GraphQL\nVoyager\"}",
+      "dot": "digraph {rankdir=LR\nnode [shape=box style=\"rounded, filled\"]\n\"Graphviz\nPlugin\nImprovements\" -> \"2020\nGratitude\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"About\nMap\nFreeze\n/\nThaw\"\n\"Graphviz\nPlugin\nImprovements\" -> \"GraphQL\nVoyager\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"2020\nGratitude\" -> \"About\nGraphviz\nPlugin\"\n\"2020\nGratitude\" -> \"About\nHTML\nPlugin\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"Flow\nof\nEpisodes\"\n\"2020\nGratitude\" -> \"About\nFrame\nIntegrations\"\n\"2020\nGratitude\" -> \"How\nObservable\nRuns\"\n\"2020\nGratitude\" -> \"GraphQL\nVoyager\"\n\"\" -> \"GraphQL\nVoyager\"\n\"GraphQL\nVoyager\" -> \"El\nDorado\nUI\"\n\"\" -> \"GraphQL\nVoyager\"}",
+      "svg": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.44.0 (20200518.1210)\n -->\n<!-- Pages: 1 -->\n<svg width=\"528pt\" height=\"495pt\"\n viewBox=\"0.00 0.00 528.22 494.50\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 490.5)\">\n<polygon fill=\"white\" stroke=\"transparent\" points=\"-4,4 -4,-490.5 524.22,-490.5 524.22,4 -4,4\"/>\n<!-- Graphviz\nPlugin\nImprovements -->\n<g id=\"node1\" class=\"node\">\n<title>Graphviz\nPlugin\nImprovements</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M84.8,-463.9C84.8,-463.9 12.07,-463.9 12.07,-463.9 6.07,-463.9 0.07,-457.9 0.07,-451.9 0.07,-451.9 0.07,-417.1 0.07,-417.1 0.07,-411.1 6.07,-405.1 12.07,-405.1 12.07,-405.1 84.8,-405.1 84.8,-405.1 90.8,-405.1 96.8,-411.1 96.8,-417.1 96.8,-417.1 96.8,-451.9 96.8,-451.9 96.8,-457.9 90.8,-463.9 84.8,-463.9\"/>\n<text text-anchor=\"middle\" x=\"48.43\" y=\"-447.1\" font-family=\"Times,serif\" font-size=\"14.00\">Graphviz</text>\n<text text-anchor=\"middle\" x=\"48.43\" y=\"-430.3\" font-family=\"Times,serif\" font-size=\"14.00\">Plugin</text>\n<text text-anchor=\"middle\" x=\"48.43\" y=\"-413.5\" font-family=\"Times,serif\" font-size=\"14.00\">Improvements</text>\n</g>\n<!-- 2020\nGratitude -->\n<g id=\"node2\" class=\"node\">\n<title>2020\nGratitude</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M189.67,-422.1C189.67,-422.1 144.93,-422.1 144.93,-422.1 138.93,-422.1 132.93,-416.1 132.93,-410.1 132.93,-410.1 132.93,-392.9 132.93,-392.9 132.93,-386.9 138.93,-380.9 144.93,-380.9 144.93,-380.9 189.67,-380.9 189.67,-380.9 195.67,-380.9 201.67,-386.9 201.67,-392.9 201.67,-392.9 201.67,-410.1 201.67,-410.1 201.67,-416.1 195.67,-422.1 189.67,-422.1\"/>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-405.7\" font-family=\"Times,serif\" font-size=\"14.00\">2020</text>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-388.9\" font-family=\"Times,serif\" font-size=\"14.00\">Gratitude</text>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt;2020\nGratitude -->\n<g id=\"edge1\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;2020\nGratitude</title>\n<path fill=\"none\" stroke=\"black\" d=\"M96.97,-421.08C105.6,-418.64 114.56,-416.11 123.05,-413.71\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"124.1,-417.05 132.77,-410.97 122.2,-410.32 124.1,-417.05\"/>\n</g>\n<g id=\"node3\" class=\"node\">\n<title></title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M294.17,-486.5C294.17,-486.5 264.17,-486.5 264.17,-486.5 258.17,-486.5 252.17,-480.5 252.17,-474.5 252.17,-474.5 252.17,-462.5 252.17,-462.5 252.17,-456.5 258.17,-450.5 264.17,-450.5 264.17,-450.5 294.17,-450.5 294.17,-450.5 300.17,-450.5 306.17,-456.5 306.17,-462.5 306.17,-462.5 306.17,-474.5 306.17,-474.5 306.17,-480.5 300.17,-486.5 294.17,-486.5\"/>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt; -->\n<g id=\"edge2\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M96.83,-430.36C140.16,-433.39 203.31,-443.13 242.5,-453.08\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"241.6,-456.46 252.17,-455.68 243.42,-449.7 241.6,-456.46\"/>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt; -->\n<g id=\"edge3\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M96.83,-441.55C140.07,-447.97 203.04,-457.33 242.25,-463.16\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"241.76,-466.63 252.17,-464.64 242.79,-459.7 241.76,-466.63\"/>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt; -->\n<g id=\"edge6\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M96.83,-452.73C139.98,-462.54 202.77,-471.53 242,-473.29\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"242.07,-476.8 252.17,-473.59 242.27,-469.8 242.07,-476.8\"/>\n</g>\n<!-- About\nMap\nFreeze\n/\nThaw -->\n<g id=\"node4\" class=\"node\">\n<title>About\nMap\nFreeze\n/\nThaw</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M182.3,-362.5C182.3,-362.5 152.3,-362.5 152.3,-362.5 146.3,-362.5 140.3,-356.5 140.3,-350.5 140.3,-350.5 140.3,-282.5 140.3,-282.5 140.3,-276.5 146.3,-270.5 152.3,-270.5 152.3,-270.5 182.3,-270.5 182.3,-270.5 188.3,-270.5 194.3,-276.5 194.3,-282.5 194.3,-282.5 194.3,-350.5 194.3,-350.5 194.3,-356.5 188.3,-362.5 182.3,-362.5\"/>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-345.9\" font-family=\"Times,serif\" font-size=\"14.00\">About</text>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-329.1\" font-family=\"Times,serif\" font-size=\"14.00\">Map</text>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-312.3\" font-family=\"Times,serif\" font-size=\"14.00\">Freeze</text>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-295.5\" font-family=\"Times,serif\" font-size=\"14.00\">/</text>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-278.7\" font-family=\"Times,serif\" font-size=\"14.00\">Thaw</text>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt;About\nMap\nFreeze\n/\nThaw -->\n<g id=\"edge4\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;About\nMap\nFreeze\n/\nThaw</title>\n<path fill=\"none\" stroke=\"black\" d=\"M78.62,-405.03C95.19,-388.3 115.97,-367.31 133.15,-349.97\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"135.72,-352.35 140.27,-342.78 130.75,-347.43 135.72,-352.35\"/>\n</g>\n<!-- GraphQL\nVoyager -->\n<g id=\"node5\" class=\"node\">\n<title>GraphQL\nVoyager</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M414.06,-466.1C414.06,-466.1 368.78,-466.1 368.78,-466.1 362.78,-466.1 356.78,-460.1 356.78,-454.1 356.78,-454.1 356.78,-436.9 356.78,-436.9 356.78,-430.9 362.78,-424.9 368.78,-424.9 368.78,-424.9 414.06,-424.9 414.06,-424.9 420.06,-424.9 426.06,-430.9 426.06,-436.9 426.06,-436.9 426.06,-454.1 426.06,-454.1 426.06,-460.1 420.06,-466.1 414.06,-466.1\"/>\n<text text-anchor=\"middle\" x=\"391.42\" y=\"-449.7\" font-family=\"Times,serif\" font-size=\"14.00\">GraphQL</text>\n<text text-anchor=\"middle\" x=\"391.42\" y=\"-432.9\" font-family=\"Times,serif\" font-size=\"14.00\">Voyager</text>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt;GraphQL\nVoyager -->\n<g id=\"edge5\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;GraphQL\nVoyager</title>\n<path fill=\"none\" stroke=\"black\" d=\"M55.5,-405.19C80,-292.82 177.17,98.15 320.6,-23.5 380.06,-73.93 388.95,-325.57 390.23,-414.4\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"386.73,-414.68 390.35,-424.63 393.73,-414.59 386.73,-414.68\"/>\n</g>\n<!-- 2020\nGratitude&#45;&gt; -->\n<g id=\"edge9\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M201.86,-409.42C219.43,-418.49 240.46,-431.8 255.99,-443.89\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"254.04,-446.81 263.99,-450.44 258.47,-441.4 254.04,-446.81\"/>\n</g>\n<!-- 2020\nGratitude&#45;&gt; -->\n<g id=\"edge10\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M201.86,-421.97C214.99,-429.97 230.04,-439.15 243.29,-447.23\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"241.77,-450.4 252.13,-452.62 245.42,-444.43 241.77,-450.4\"/>\n</g>\n<!-- 2020\nGratitude&#45;&gt; -->\n<g id=\"edge11\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M185.95,-422.49C201.28,-435.1 223.93,-449.74 242.95,-459.72\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"241.44,-462.88 251.95,-464.22 244.57,-456.62 241.44,-462.88\"/>\n</g>\n<!-- 2020\nGratitude&#45;&gt;GraphQL\nVoyager -->\n<g id=\"edge15\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;GraphQL\nVoyager</title>\n<path fill=\"none\" stroke=\"black\" d=\"M202.04,-408.18C240.72,-415.85 304.24,-428.43 346.69,-436.84\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"346.24,-440.32 356.73,-438.83 347.6,-433.45 346.24,-440.32\"/>\n</g>\n<!-- About\nGraphviz\nPlugin -->\n<g id=\"node6\" class=\"node\">\n<title>About\nGraphviz\nPlugin</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M301.26,-394.9C301.26,-394.9 257.08,-394.9 257.08,-394.9 251.08,-394.9 245.08,-388.9 245.08,-382.9 245.08,-382.9 245.08,-348.1 245.08,-348.1 245.08,-342.1 251.08,-336.1 257.08,-336.1 257.08,-336.1 301.26,-336.1 301.26,-336.1 307.26,-336.1 313.26,-342.1 313.26,-348.1 313.26,-348.1 313.26,-382.9 313.26,-382.9 313.26,-388.9 307.26,-394.9 301.26,-394.9\"/>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-378.1\" font-family=\"Times,serif\" font-size=\"14.00\">About</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-361.3\" font-family=\"Times,serif\" font-size=\"14.00\">Graphviz</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-344.5\" font-family=\"Times,serif\" font-size=\"14.00\">Plugin</text>\n</g>\n<!-- 2020\nGratitude&#45;&gt;About\nGraphviz\nPlugin -->\n<g id=\"edge7\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;About\nGraphviz\nPlugin</title>\n<path fill=\"none\" stroke=\"black\" d=\"M201.86,-390.5C212.4,-387.05 224.19,-383.19 235.29,-379.55\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"236.4,-382.87 244.81,-376.43 234.22,-376.22 236.4,-382.87\"/>\n</g>\n<!-- About\nHTML\nPlugin -->\n<g id=\"node7\" class=\"node\">\n<title>About\nHTML\nPlugin</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M294.83,-318.9C294.83,-318.9 263.51,-318.9 263.51,-318.9 257.51,-318.9 251.51,-312.9 251.51,-306.9 251.51,-306.9 251.51,-272.1 251.51,-272.1 251.51,-266.1 257.51,-260.1 263.51,-260.1 263.51,-260.1 294.83,-260.1 294.83,-260.1 300.83,-260.1 306.83,-266.1 306.83,-272.1 306.83,-272.1 306.83,-306.9 306.83,-306.9 306.83,-312.9 300.83,-318.9 294.83,-318.9\"/>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-302.1\" font-family=\"Times,serif\" font-size=\"14.00\">About</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-285.3\" font-family=\"Times,serif\" font-size=\"14.00\">HTML</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-268.5\" font-family=\"Times,serif\" font-size=\"14.00\">Plugin</text>\n</g>\n<!-- 2020\nGratitude&#45;&gt;About\nHTML\nPlugin -->\n<g id=\"edge8\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;About\nHTML\nPlugin</title>\n<path fill=\"none\" stroke=\"black\" d=\"M192.47,-380.63C195.66,-377.64 198.83,-374.55 201.74,-371.5 219.19,-353.23 220.49,-345.97 237.74,-327.5 239.71,-325.39 241.77,-323.25 243.88,-321.12\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"246.48,-323.47 251.15,-313.96 241.57,-318.48 246.48,-323.47\"/>\n</g>\n<!-- Flow\nof\nEpisodes -->\n<g id=\"node8\" class=\"node\">\n<title>Flow\nof\nEpisodes</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M300.22,-242.9C300.22,-242.9 258.12,-242.9 258.12,-242.9 252.12,-242.9 246.12,-236.9 246.12,-230.9 246.12,-230.9 246.12,-196.1 246.12,-196.1 246.12,-190.1 252.12,-184.1 258.12,-184.1 258.12,-184.1 300.22,-184.1 300.22,-184.1 306.22,-184.1 312.22,-190.1 312.22,-196.1 312.22,-196.1 312.22,-230.9 312.22,-230.9 312.22,-236.9 306.22,-242.9 300.22,-242.9\"/>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-226.1\" font-family=\"Times,serif\" font-size=\"14.00\">Flow</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-209.3\" font-family=\"Times,serif\" font-size=\"14.00\">of</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-192.5\" font-family=\"Times,serif\" font-size=\"14.00\">Episodes</text>\n</g>\n<!-- 2020\nGratitude&#45;&gt;Flow\nof\nEpisodes -->\n<g id=\"edge12\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;Flow\nof\nEpisodes</title>\n<path fill=\"none\" stroke=\"black\" d=\"M194.35,-380.88C197.1,-377.94 199.65,-374.79 201.74,-371.5 231.57,-324.49 208.44,-298.86 237.74,-251.5 238.32,-250.56 238.93,-249.62 239.57,-248.7\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"242.46,-250.68 245.89,-240.65 236.96,-246.35 242.46,-250.68\"/>\n</g>\n<!-- About\nFrame\nIntegrations -->\n<g id=\"node9\" class=\"node\">\n<title>About\nFrame\nIntegrations</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M308.54,-166.9C308.54,-166.9 249.8,-166.9 249.8,-166.9 243.8,-166.9 237.8,-160.9 237.8,-154.9 237.8,-154.9 237.8,-120.1 237.8,-120.1 237.8,-114.1 243.8,-108.1 249.8,-108.1 249.8,-108.1 308.54,-108.1 308.54,-108.1 314.54,-108.1 320.54,-114.1 320.54,-120.1 320.54,-120.1 320.54,-154.9 320.54,-154.9 320.54,-160.9 314.54,-166.9 308.54,-166.9\"/>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-150.1\" font-family=\"Times,serif\" font-size=\"14.00\">About</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-133.3\" font-family=\"Times,serif\" font-size=\"14.00\">Frame</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-116.5\" font-family=\"Times,serif\" font-size=\"14.00\">Integrations</text>\n</g>\n<!-- 2020\nGratitude&#45;&gt;About\nFrame\nIntegrations -->\n<g id=\"edge13\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;About\nFrame\nIntegrations</title>\n<path fill=\"none\" stroke=\"black\" d=\"M195.03,-380.74C197.59,-377.86 199.91,-374.77 201.74,-371.5 245.02,-294.23 195.35,-253.27 237.74,-175.5 237.79,-175.41 237.84,-175.31 237.89,-175.22\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"240.93,-176.97 243.59,-166.71 235.11,-173.07 240.93,-176.97\"/>\n</g>\n<!-- How\nObservable\nRuns -->\n<g id=\"node10\" class=\"node\">\n<title>How\nObservable\nRuns</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M306.92,-90.9C306.92,-90.9 251.42,-90.9 251.42,-90.9 245.42,-90.9 239.42,-84.9 239.42,-78.9 239.42,-78.9 239.42,-44.1 239.42,-44.1 239.42,-38.1 245.42,-32.1 251.42,-32.1 251.42,-32.1 306.92,-32.1 306.92,-32.1 312.92,-32.1 318.92,-38.1 318.92,-44.1 318.92,-44.1 318.92,-78.9 318.92,-78.9 318.92,-84.9 312.92,-90.9 306.92,-90.9\"/>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-74.1\" font-family=\"Times,serif\" font-size=\"14.00\">How</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-57.3\" font-family=\"Times,serif\" font-size=\"14.00\">Observable</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-40.5\" font-family=\"Times,serif\" font-size=\"14.00\">Runs</text>\n</g>\n<!-- 2020\nGratitude&#45;&gt;How\nObservable\nRuns -->\n<g id=\"edge14\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;How\nObservable\nRuns</title>\n<path fill=\"none\" stroke=\"black\" d=\"M195.19,-380.83C197.72,-377.93 199.99,-374.81 201.74,-371.5 257.14,-266.49 186.02,-210.97 238.52,-100.21\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"241.73,-101.6 243.06,-91.09 235.47,-98.48 241.73,-101.6\"/>\n</g>\n<!-- &#45;&gt;GraphQL\nVoyager -->\n<g id=\"edge16\" class=\"edge\">\n<title>&#45;&gt;GraphQL\nVoyager</title>\n<path fill=\"none\" stroke=\"black\" d=\"M306.3,-457.21C318.27,-453.88 332.8,-450.59 346.39,-448.06\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"347.29,-451.45 356.54,-446.28 346.09,-444.56 347.29,-451.45\"/>\n</g>\n<!-- &#45;&gt;GraphQL\nVoyager -->\n<g id=\"edge18\" class=\"edge\">\n<title>&#45;&gt;GraphQL\nVoyager</title>\n<path fill=\"none\" stroke=\"black\" d=\"M306.3,-468.89C318.39,-467.2 333.09,-464.4 346.79,-461.22\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"347.65,-464.61 356.54,-458.85 346,-457.81 347.65,-464.61\"/>\n</g>\n<!-- El\nDorado\nUI -->\n<g id=\"node11\" class=\"node\">\n<title>El\nDorado\nUI</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M508.22,-474.9C508.22,-474.9 474.25,-474.9 474.25,-474.9 468.25,-474.9 462.25,-468.9 462.25,-462.9 462.25,-462.9 462.25,-428.1 462.25,-428.1 462.25,-422.1 468.25,-416.1 474.25,-416.1 474.25,-416.1 508.22,-416.1 508.22,-416.1 514.22,-416.1 520.22,-422.1 520.22,-428.1 520.22,-428.1 520.22,-462.9 520.22,-462.9 520.22,-468.9 514.22,-474.9 508.22,-474.9\"/>\n<text text-anchor=\"middle\" x=\"491.23\" y=\"-458.1\" font-family=\"Times,serif\" font-size=\"14.00\">El</text>\n<text text-anchor=\"middle\" x=\"491.23\" y=\"-441.3\" font-family=\"Times,serif\" font-size=\"14.00\">Dorado</text>\n<text text-anchor=\"middle\" x=\"491.23\" y=\"-424.5\" font-family=\"Times,serif\" font-size=\"14.00\">UI</text>\n</g>\n<!-- GraphQL\nVoyager&#45;&gt;El\nDorado\nUI -->\n<g id=\"edge17\" class=\"edge\">\n<title>GraphQL\nVoyager&#45;&gt;El\nDorado\nUI</title>\n<path fill=\"none\" stroke=\"black\" d=\"M426.08,-445.5C434.41,-445.5 443.4,-445.5 451.93,-445.5\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"452.04,-449 462.04,-445.5 452.04,-442 452.04,-449\"/>\n</g>\n</g>\n</svg>\n"
+    },
+    {
+      "type": "pagefold",
+      "id": "5e43526fdc41371c",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "643cfbcdf80ee516",
+      "text": "Replace jQuery click handlers."
+    },
+    {
+      "type": "paragraph",
+      "id": "df9b27af462bd8bb",
+      "text": "A motivating use case: allow authors to use the SVG from the graphviz plugin outside of federated wiki. Letting the graphs serve as navigation aid is a key external use."
+    },
+    {
+      "type": "paragraph",
+      "id": "e4f57bf81872f886",
+      "text": "Consider wrapping the SVG with [[<wiki-graph>]]."
+    },
+    {
+      "type": "paragraph",
+      "id": "df58de0a3e884d0d",
+      "text": "Consider pre-processing the dot to add URLs to every node—would still require some other processing to make those links collaborative."
+    },
+    {
+      "type": "pagefold",
+      "id": "8c8257b08fd68432",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "f09f9ee262583268",
+      "text": "Honor internal vs external class annotations on links."
+    },
+    {
+      "type": "code",
+      "id": "63ee7a90197b2326",
+      "text": "digraph {\n  randir=LR\n  A -> B [\n    URL=/some-page.html\n    class=internal\n    label=\"The\\nTitle\"\n  ]\n\n  B -> C [\n    URL=http://example.com\n    class=external\n  ]\n}"
+    },
+    {
+      "type": "graphviz",
+      "id": "43e77312c3f69337",
+      "text": "digraph {\n  rankdir=LR\n  A -> B [\n    URL=\"/some-page.html\"\n    class=internal\n    label=\"The\\nTitle\"\n  ]\n\n  B -> C [\n    URL=\"http://example.com\"\n    class=external\n  ]\n}",
+      "dot": "digraph {\n  A -> B [\n    URL=\"/some-page.html\"\n    class=internal\n    label=\"The\\nTitle\"\n  ]\n\n  B -> C [\n    URL=\"http://example.com\"\n    class=external\n  ]\n}",
+      "svg": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.44.0 (20200518.1210)\n -->\n<!-- Pages: 1 -->\n<svg width=\"62pt\" height=\"223pt\"\n viewBox=\"0.00 0.00 62.00 222.60\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 218.6)\">\n<polygon fill=\"white\" stroke=\"transparent\" points=\"-4,4 -4,-218.6 58,-218.6 58,4 -4,4\"/>\n<!-- A -->\n<g id=\"node1\" class=\"node\">\n<title>A</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-196.6\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-192.4\" font-family=\"Times,serif\" font-size=\"14.00\">A</text>\n</g>\n<!-- B -->\n<g id=\"node2\" class=\"node\">\n<title>B</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-91\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-86.8\" font-family=\"Times,serif\" font-size=\"14.00\">B</text>\n</g>\n<!-- A&#45;&gt;B -->\n<g id=\"edge1\" class=\"edge internal\">\n<title>A&#45;&gt;B</title>\n<g id=\"a_edge1\"><a xlink:href=\"/some-page.html\" xlink:title=\"The\\nTitle\">\n<path fill=\"none\" stroke=\"black\" d=\"M27,-178.49C27,-162.37 27,-137.95 27,-119.17\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"30.5,-119.13 27,-109.13 23.5,-119.13 30.5,-119.13\"/>\n</a>\n</g>\n<g id=\"a_edge1&#45;label\"><a xlink:href=\"/some-page.html\" xlink:title=\"The\\nTitle\">\n<text text-anchor=\"middle\" x=\"40.22\" y=\"-148\" font-family=\"Times,serif\" font-size=\"14.00\">The</text>\n<text text-anchor=\"middle\" x=\"40.22\" y=\"-131.2\" font-family=\"Times,serif\" font-size=\"14.00\">Title</text>\n</a>\n</g>\n</g>\n<!-- C -->\n<g id=\"node3\" class=\"node\">\n<title>C</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-18\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-13.8\" font-family=\"Times,serif\" font-size=\"14.00\">C</text>\n</g>\n<!-- B&#45;&gt;C -->\n<g id=\"edge2\" class=\"edge external\">\n<title>B&#45;&gt;C</title>\n<g id=\"a_edge2\"><a xlink:href=\"http://example.com\">\n<path fill=\"none\" stroke=\"black\" d=\"M27,-72.81C27,-64.79 27,-55.05 27,-46.07\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"30.5,-46.03 27,-36.03 23.5,-46.03 30.5,-46.03\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n"
+    },
+    {
+      "type": "paragraph",
+      "id": "9c9fcb7707c02c84",
+      "text": "The generated SVG makes post-processing to honor classes challenging."
+    },
+    {
+      "type": "paragraph",
+      "id": "88430e62b0897ef3",
+      "text": "The class specified in dot edge properties is rendered in the SVG <g> element which wraps the anchors."
+    },
+    {
+      "type": "code",
+      "id": "f7c9aed8095a6b83",
+      "text": "<g id=\"edge1\" class=\"edge internal\">\n <title>A-&gt;B</title>\n <g id=\"a_edge1\">\n  <a xlink:href=\"/some-page.html\"\n     xlink:title=\"The\\nTitle\">\n   <path ...></path>\n   <polygon ...></polygon>\n  </a>\n </g><!-- end edge -->\n <g id=\"a_edge1-label\">\n  <a xlink:href=\"/some-page.html\"\n     xlink:title=\"The\\nTitle\">\n   <text ...>The</text>\n   <text ...>Title</text>\n  </a>\n </g><!-- end edge label -->\n</g>"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Graphviz Plugin Improvements",
+        "story": []
+      },
+      "date": 1610998291877
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "8e328bd1794ed5f7"
+      },
+      "id": "8e328bd1794ed5f7",
+      "type": "add",
+      "date": 1610998293910
+    },
+    {
+      "type": "edit",
+      "id": "8e328bd1794ed5f7",
+      "item": {
+        "type": "paragraph",
+        "id": "8e328bd1794ed5f7",
+        "text": "We find it challenging to choose the right next step for improving graphviz plugin. Perhaps collecting the many ideas for improvement will help with the choosing."
+      },
+      "date": 1610998344492
+    },
+    {
+      "type": "add",
+      "id": "c85d8b0206ee1857",
+      "item": {
+        "type": "paragraph",
+        "id": "c85d8b0206ee1857",
+        "text": "Create freeze icon for algorithmic diagrams."
+      },
+      "after": "8e328bd1794ed5f7",
+      "date": 1610998377152
+    },
+    {
+      "type": "add",
+      "id": "b0468bb62134193f",
+      "item": {
+        "type": "paragraph",
+        "id": "b0468bb62134193f",
+        "text": "See [[About Map Plugin]]"
+      },
+      "after": "c85d8b0206ee1857",
+      "date": 1610998387438
+    },
+    {
+      "type": "edit",
+      "id": "b0468bb62134193f",
+      "item": {
+        "type": "paragraph",
+        "id": "b0468bb62134193f",
+        "text": "See [[About Map Freeze / Thaw]]"
+      },
+      "date": 1610998407810
+    },
+    {
+      "type": "add",
+      "id": "643cfbcdf80ee516",
+      "item": {
+        "type": "paragraph",
+        "id": "643cfbcdf80ee516",
+        "text": "Replace jQuery click handlers."
+      },
+      "after": "b0468bb62134193f",
+      "date": 1610998772106
+    },
+    {
+      "type": "add",
+      "id": "e4f57bf81872f886",
+      "item": {
+        "type": "paragraph",
+        "id": "e4f57bf81872f886",
+        "text": "Consider wrapping the SVG with [[<wiki-graph>]]."
+      },
+      "after": "643cfbcdf80ee516",
+      "date": 1610998776526
+    },
+    {
+      "type": "add",
+      "id": "df58de0a3e884d0d",
+      "item": {
+        "type": "paragraph",
+        "id": "df58de0a3e884d0d",
+        "text": "Consider pre-processing the dot to add URLs to every node—would still require some other processing to make those links collaborative."
+      },
+      "after": "e4f57bf81872f886",
+      "date": 1610998782987
+    },
+    {
+      "type": "remove",
+      "id": "b0468bb62134193f",
+      "date": 1610998841377
+    },
+    {
+      "type": "edit",
+      "id": "c85d8b0206ee1857",
+      "item": {
+        "type": "paragraph",
+        "id": "c85d8b0206ee1857",
+        "text": "Create freeze icon for algorithmic diagrams. See [[About Map Freeze / Thaw]]"
+      },
+      "date": 1610998843369
+    },
+    {
+      "type": "add",
+      "id": "26a3e33c367fb320",
+      "item": {
+        "type": "paragraph",
+        "id": "26a3e33c367fb320",
+        "text": "For hand-written dot, treat any label as a title for a collaborative link. This allows even edges to become clickable. Demands code to handle linefeed characters."
+      },
+      "after": "df58de0a3e884d0d",
+      "date": 1610999018725
+    },
+    {
+      "type": "add",
+      "id": "f09f9ee262583268",
+      "item": {
+        "type": "paragraph",
+        "id": "f09f9ee262583268",
+        "text": "Honor internal vs external class annotations on links."
+      },
+      "after": "26a3e33c367fb320",
+      "date": 1610999065022
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "63ee7a90197b2326"
+      },
+      "id": "63ee7a90197b2326",
+      "type": "add",
+      "after": "f09f9ee262583268",
+      "date": 1610999069921
+    },
+    {
+      "type": "edit",
+      "id": "63ee7a90197b2326",
+      "item": {
+        "type": "code",
+        "id": "63ee7a90197b2326",
+        "text": "digraph {\n  A -> B [\n    URL=/some-page.html\n    class=internal\n    label=\"The\\nTitle\"\n  ]\n\n  B -> C [\n    URL=http://example.com\n    class=external\n  ]\n}"
+      },
+      "date": 1610999225765
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "43e77312c3f69337"
+      },
+      "id": "43e77312c3f69337",
+      "type": "add",
+      "after": "63ee7a90197b2326",
+      "date": 1610999229085
+    },
+    {
+      "type": "edit",
+      "id": "43e77312c3f69337",
+      "item": {
+        "type": "graphviz",
+        "id": "43e77312c3f69337",
+        "text": "digraph {\n  A -> B [\n    URL=/some-page.html\n    class=internal\n    label=\"The\\nTitle\"\n  ]\n\n  B -> C [\n    URL=http://example.com\n    class=external\n  ]\n}"
+      },
+      "date": 1610999239713
+    },
+    {
+      "type": "edit",
+      "id": "43e77312c3f69337",
+      "item": {
+        "type": "graphviz",
+        "id": "43e77312c3f69337",
+        "text": "digraph {\n  A -> B [\n    URL=\"/some-page.html\"\n    class=internal\n    label=\"The\\nTitle\"\n  ]\n\n  B -> C [\n    URL=\"http://example.com\"\n    class=external\n  ]\n}"
+      },
+      "date": 1610999256809
+    },
+    {
+      "type": "edit",
+      "id": "63ee7a90197b2326",
+      "item": {
+        "type": "code",
+        "id": "63ee7a90197b2326",
+        "text": "digraph {\n  randir=LR\n  A -> B [\n    URL=/some-page.html\n    class=internal\n    label=\"The\\nTitle\"\n  ]\n\n  B -> C [\n    URL=http://example.com\n    class=external\n  ]\n}"
+      },
+      "date": 1610999269992
+    },
+    {
+      "type": "edit",
+      "id": "43e77312c3f69337",
+      "item": {
+        "type": "graphviz",
+        "id": "43e77312c3f69337",
+        "text": "digraph {\n  rankdir=LR\n  A -> B [\n    URL=\"/some-page.html\"\n    class=internal\n    label=\"The\\nTitle\"\n  ]\n\n  B -> C [\n    URL=\"http://example.com\"\n    class=external\n  ]\n}",
+        "dot": "digraph {\n  A -> B [\n    URL=\"/some-page.html\"\n    class=internal\n    label=\"The\\nTitle\"\n  ]\n\n  B -> C [\n    URL=\"http://example.com\"\n    class=external\n  ]\n}",
+        "svg": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.44.0 (20200518.1210)\n -->\n<!-- Pages: 1 -->\n<svg width=\"62pt\" height=\"223pt\"\n viewBox=\"0.00 0.00 62.00 222.60\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 218.6)\">\n<polygon fill=\"white\" stroke=\"transparent\" points=\"-4,4 -4,-218.6 58,-218.6 58,4 -4,4\"/>\n<!-- A -->\n<g id=\"node1\" class=\"node\">\n<title>A</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-196.6\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-192.4\" font-family=\"Times,serif\" font-size=\"14.00\">A</text>\n</g>\n<!-- B -->\n<g id=\"node2\" class=\"node\">\n<title>B</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-91\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-86.8\" font-family=\"Times,serif\" font-size=\"14.00\">B</text>\n</g>\n<!-- A&#45;&gt;B -->\n<g id=\"edge1\" class=\"edge internal\">\n<title>A&#45;&gt;B</title>\n<g id=\"a_edge1\"><a xlink:href=\"/some-page.html\" xlink:title=\"The\\nTitle\">\n<path fill=\"none\" stroke=\"black\" d=\"M27,-178.49C27,-162.37 27,-137.95 27,-119.17\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"30.5,-119.13 27,-109.13 23.5,-119.13 30.5,-119.13\"/>\n</a>\n</g>\n<g id=\"a_edge1&#45;label\"><a xlink:href=\"/some-page.html\" xlink:title=\"The\\nTitle\">\n<text text-anchor=\"middle\" x=\"40.22\" y=\"-148\" font-family=\"Times,serif\" font-size=\"14.00\">The</text>\n<text text-anchor=\"middle\" x=\"40.22\" y=\"-131.2\" font-family=\"Times,serif\" font-size=\"14.00\">Title</text>\n</a>\n</g>\n</g>\n<!-- C -->\n<g id=\"node3\" class=\"node\">\n<title>C</title>\n<ellipse fill=\"none\" stroke=\"black\" cx=\"27\" cy=\"-18\" rx=\"27\" ry=\"18\"/>\n<text text-anchor=\"middle\" x=\"27\" y=\"-13.8\" font-family=\"Times,serif\" font-size=\"14.00\">C</text>\n</g>\n<!-- B&#45;&gt;C -->\n<g id=\"edge2\" class=\"edge external\">\n<title>B&#45;&gt;C</title>\n<g id=\"a_edge2\"><a xlink:href=\"http://example.com\">\n<path fill=\"none\" stroke=\"black\" d=\"M27,-72.81C27,-64.79 27,-55.05 27,-46.07\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"30.5,-46.03 27,-36.03 23.5,-46.03 30.5,-46.03\"/>\n</a>\n</g>\n</g>\n</g>\n</svg>\n"
+      },
+      "date": 1610999276788
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "5ab3faa251ecbf93"
+      },
+      "id": "5ab3faa251ecbf93",
+      "type": "add",
+      "after": "43e77312c3f69337",
+      "date": 1610999455836
+    },
+    {
+      "type": "edit",
+      "id": "5ab3faa251ecbf93",
+      "item": {
+        "type": "pagefold",
+        "id": "5ab3faa251ecbf93",
+        "text": "."
+      },
+      "date": 1610999458439
+    },
+    {
+      "id": "5ab3faa251ecbf93",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "643cfbcdf80ee516",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "26a3e33c367fb320",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337"
+      ],
+      "date": 1610999466062
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "5e43526fdc41371c"
+      },
+      "id": "5e43526fdc41371c",
+      "type": "add",
+      "after": "43e77312c3f69337",
+      "date": 1610999470237
+    },
+    {
+      "type": "edit",
+      "id": "5e43526fdc41371c",
+      "item": {
+        "type": "pagefold",
+        "id": "5e43526fdc41371c",
+        "text": "."
+      },
+      "date": 1610999474135
+    },
+    {
+      "id": "5e43526fdc41371c",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "5e43526fdc41371c",
+        "643cfbcdf80ee516",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "26a3e33c367fb320",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337"
+      ],
+      "date": 1610999479718
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "8c8257b08fd68432"
+      },
+      "id": "8c8257b08fd68432",
+      "type": "add",
+      "after": "43e77312c3f69337",
+      "date": 1610999489326
+    },
+    {
+      "type": "edit",
+      "id": "8c8257b08fd68432",
+      "item": {
+        "type": "pagefold",
+        "id": "8c8257b08fd68432",
+        "text": "."
+      },
+      "date": 1610999491972
+    },
+    {
+      "id": "8c8257b08fd68432",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "5e43526fdc41371c",
+        "643cfbcdf80ee516",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "8c8257b08fd68432",
+        "26a3e33c367fb320",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337"
+      ],
+      "date": 1610999503386
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "7f2364bd113237e6"
+      },
+      "id": "7f2364bd113237e6",
+      "type": "add",
+      "after": "43e77312c3f69337",
+      "date": 1610999507487
+    },
+    {
+      "type": "edit",
+      "id": "7f2364bd113237e6",
+      "item": {
+        "type": "pagefold",
+        "id": "7f2364bd113237e6",
+        "text": "."
+      },
+      "date": 1610999510365
+    },
+    {
+      "id": "7f2364bd113237e6",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "5e43526fdc41371c",
+        "643cfbcdf80ee516",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "8c8257b08fd68432",
+        "26a3e33c367fb320",
+        "7f2364bd113237e6",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337"
+      ],
+      "date": 1610999523428
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "9c9fcb7707c02c84"
+      },
+      "id": "9c9fcb7707c02c84",
+      "type": "add",
+      "after": "43e77312c3f69337",
+      "date": 1610999530873
+    },
+    {
+      "type": "edit",
+      "id": "9c9fcb7707c02c84",
+      "item": {
+        "type": "paragraph",
+        "id": "9c9fcb7707c02c84",
+        "text": "The generated SVG makes post-processing to honor classes challenging."
+      },
+      "date": 1610999611033
+    },
+    {
+      "type": "add",
+      "id": "88430e62b0897ef3",
+      "item": {
+        "type": "paragraph",
+        "id": "88430e62b0897ef3",
+        "text": "The class specified in dot edge properties is rendered in the SVG <g> element which wraps the anchors."
+      },
+      "after": "9c9fcb7707c02c84",
+      "date": 1611002136199
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "f7c9aed8095a6b83"
+      },
+      "id": "f7c9aed8095a6b83",
+      "type": "add",
+      "after": "88430e62b0897ef3",
+      "date": 1611002271578
+    },
+    {
+      "type": "edit",
+      "id": "f7c9aed8095a6b83",
+      "item": {
+        "type": "code",
+        "id": "f7c9aed8095a6b83",
+        "text": "<g id=\"edge1\" class=\"edge internal\">\n <title>A-&gt;B</title>\n <g id=\"a_edge1\">\n  <a xlink:href=\"/some-page.html\"\n     xlink:title=\"The\\nTitle\">\n   <path ...></path>\n   <polygon ...></polygon>\n  </a>\n </g><!-- end edge -->\n <g id=\"a_edge1-label\">\n  <a xlink:href=\"/some-page.html\"\n     xlink:title=\"The\\nTitle\">\n   <text ...>The</text>\n   <text ...>Title</text>\n  </a>\n </g><!-- end edge label -->\n</g>"
+      },
+      "date": 1611002472050
+    },
+    {
+      "type": "add",
+      "id": "df9b27af462bd8bb",
+      "item": {
+        "type": "paragraph",
+        "id": "df9b27af462bd8bb",
+        "text": "A motivating use case: allow authors to use the SVG from the graphviz plugin outside of federated wiki. Letting the graphs serve as navigation aid is a key external use."
+      },
+      "after": "df58de0a3e884d0d",
+      "date": 1611009609854
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "f7c3e38f1c837cd4"
+      },
+      "id": "f7c3e38f1c837cd4",
+      "type": "add",
+      "after": "f7c9aed8095a6b83",
+      "date": 1611009629073
+    },
+    {
+      "type": "edit",
+      "id": "f7c3e38f1c837cd4",
+      "item": {
+        "type": "pagefold",
+        "id": "f7c3e38f1c837cd4",
+        "text": "."
+      },
+      "date": 1611009632248
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "c2cc2e6dc8a499b9"
+      },
+      "id": "c2cc2e6dc8a499b9",
+      "type": "add",
+      "after": "f7c3e38f1c837cd4",
+      "date": 1611009633731
+    },
+    {
+      "type": "edit",
+      "id": "c2cc2e6dc8a499b9",
+      "item": {
+        "type": "paragraph",
+        "id": "c2cc2e6dc8a499b9",
+        "text": "Update algorithmic diagrams to use links in sitemap.json"
+      },
+      "date": 1611009781370
+    },
+    {
+      "type": "add",
+      "id": "0029f250950a91f7",
+      "item": {
+        "type": "paragraph",
+        "id": "0029f250950a91f7",
+        "text": "Update algorithmic diagrams to make use of backlinks."
+      },
+      "after": "c2cc2e6dc8a499b9",
+      "date": 1611009805925
+    },
+    {
+      "type": "add",
+      "id": "60a10483f00e9271",
+      "item": {
+        "type": "paragraph",
+        "id": "60a10483f00e9271",
+        "text": "Separate wiki graph visitor code from the plugin so it can be used for other graph traversal applications (like search or scrape or pdf generation)."
+      },
+      "after": "0029f250950a91f7",
+      "date": 1611009886511
+    },
+    {
+      "type": "add",
+      "id": "facc97941fe8fd45",
+      "item": {
+        "type": "paragraph",
+        "id": "facc97941fe8fd45",
+        "text": "Apply monkey to testing graphviz examples."
+      },
+      "after": "60a10483f00e9271",
+      "date": 1611009929719
+    },
+    {
+      "id": "df9b27af462bd8bb",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "5e43526fdc41371c",
+        "643cfbcdf80ee516",
+        "df9b27af462bd8bb",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "8c8257b08fd68432",
+        "26a3e33c367fb320",
+        "7f2364bd113237e6",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337",
+        "9c9fcb7707c02c84",
+        "88430e62b0897ef3",
+        "f7c9aed8095a6b83",
+        "f7c3e38f1c837cd4",
+        "c2cc2e6dc8a499b9",
+        "0029f250950a91f7",
+        "60a10483f00e9271",
+        "facc97941fe8fd45"
+      ],
+      "date": 1611009947957
+    },
+    {
+      "type": "add",
+      "id": "8bdad7dfa2f55e8e",
+      "item": {
+        "type": "paragraph",
+        "id": "8bdad7dfa2f55e8e",
+        "text": "Some ideas started in [[2020 Gratitude]], [[<wiki-graph>]], and [[<wiki-link>]]"
+      },
+      "after": "8e328bd1794ed5f7",
+      "date": 1611010721079
+    },
+    {
+      "type": "add",
+      "id": "5b9c3875ace11b7d",
+      "item": {
+        "type": "paragraph",
+        "id": "5b9c3875ace11b7d",
+        "text": "Devise protocol for new pages to find links from the labels on nodes in a graph."
+      },
+      "after": "c85d8b0206ee1857",
+      "date": 1611015156414
+    },
+    {
+      "type": "add",
+      "id": "f7439bdbaf1e658c",
+      "item": {
+        "type": "paragraph",
+        "id": "f7439bdbaf1e658c",
+        "text": "Include a key on the graphviz item to list the links within the graph."
+      },
+      "after": "5b9c3875ace11b7d",
+      "date": 1611015205858
+    },
+    {
+      "id": "c2cc2e6dc8a499b9",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "8bdad7dfa2f55e8e",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "5b9c3875ace11b7d",
+        "f7439bdbaf1e658c",
+        "c2cc2e6dc8a499b9",
+        "5e43526fdc41371c",
+        "643cfbcdf80ee516",
+        "df9b27af462bd8bb",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "8c8257b08fd68432",
+        "26a3e33c367fb320",
+        "7f2364bd113237e6",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337",
+        "9c9fcb7707c02c84",
+        "88430e62b0897ef3",
+        "f7c9aed8095a6b83",
+        "f7c3e38f1c837cd4",
+        "0029f250950a91f7",
+        "60a10483f00e9271",
+        "facc97941fe8fd45"
+      ],
+      "date": 1611015229007
+    },
+    {
+      "id": "0029f250950a91f7",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "8bdad7dfa2f55e8e",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "5b9c3875ace11b7d",
+        "f7439bdbaf1e658c",
+        "c2cc2e6dc8a499b9",
+        "0029f250950a91f7",
+        "5e43526fdc41371c",
+        "643cfbcdf80ee516",
+        "df9b27af462bd8bb",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "8c8257b08fd68432",
+        "26a3e33c367fb320",
+        "7f2364bd113237e6",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337",
+        "9c9fcb7707c02c84",
+        "88430e62b0897ef3",
+        "f7c9aed8095a6b83",
+        "f7c3e38f1c837cd4",
+        "60a10483f00e9271",
+        "facc97941fe8fd45"
+      ],
+      "date": 1611015241175
+    },
+    {
+      "id": "60a10483f00e9271",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "8bdad7dfa2f55e8e",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "5b9c3875ace11b7d",
+        "f7439bdbaf1e658c",
+        "c2cc2e6dc8a499b9",
+        "0029f250950a91f7",
+        "60a10483f00e9271",
+        "5e43526fdc41371c",
+        "643cfbcdf80ee516",
+        "df9b27af462bd8bb",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "8c8257b08fd68432",
+        "26a3e33c367fb320",
+        "7f2364bd113237e6",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337",
+        "9c9fcb7707c02c84",
+        "88430e62b0897ef3",
+        "f7c9aed8095a6b83",
+        "f7c3e38f1c837cd4",
+        "facc97941fe8fd45"
+      ],
+      "date": 1611015251354
+    },
+    {
+      "id": "facc97941fe8fd45",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "8bdad7dfa2f55e8e",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "5b9c3875ace11b7d",
+        "f7439bdbaf1e658c",
+        "c2cc2e6dc8a499b9",
+        "0029f250950a91f7",
+        "60a10483f00e9271",
+        "facc97941fe8fd45",
+        "5e43526fdc41371c",
+        "643cfbcdf80ee516",
+        "df9b27af462bd8bb",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "8c8257b08fd68432",
+        "26a3e33c367fb320",
+        "7f2364bd113237e6",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337",
+        "9c9fcb7707c02c84",
+        "88430e62b0897ef3",
+        "f7c9aed8095a6b83",
+        "f7c3e38f1c837cd4"
+      ],
+      "date": 1611015255803
+    },
+    {
+      "type": "remove",
+      "id": "f7c3e38f1c837cd4",
+      "date": 1611015269510
+    },
+    {
+      "type": "add",
+      "id": "b2248e2f126ad2a5",
+      "item": {
+        "type": "paragraph",
+        "id": "b2248e2f126ad2a5",
+        "text": "Add pan and zoom to graphs with many nodes. See [[GraphQL Explorer]]"
+      },
+      "after": "facc97941fe8fd45",
+      "date": 1611072041860
+    },
+    {
+      "type": "edit",
+      "id": "b2248e2f126ad2a5",
+      "item": {
+        "type": "paragraph",
+        "id": "b2248e2f126ad2a5",
+        "text": "Add pan and zoom to graphs with many nodes. See [[GraphQL Voyager]]"
+      },
+      "date": 1611072067144
+    },
+    {
+      "id": "08553874c08df3d8",
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "08553874c08df3d8",
+        "text": "Paul drew our attention to an SVG pan and zoom library which seems to be widely used. [https://github.com/ariutta/svg-pan-zoom github]"
+      },
+      "after": "b2248e2f126ad2a5",
+      "date": 1611072134765
+    },
+    {
+      "type": "remove",
+      "id": "08553874c08df3d8",
+      "date": 1611072153965
+    },
+    {
+      "type": "edit",
+      "id": "b2248e2f126ad2a5",
+      "item": {
+        "type": "paragraph",
+        "id": "b2248e2f126ad2a5",
+        "text": "Add pan and zoom to graphs with many nodes. See [[GraphQL Voyager]]. Paul drew our attention to this library: [https://github.com/ariutta/svg-pan-zoom github]"
+      },
+      "date": 1611072159202
+    },
+    {
+      "type": "edit",
+      "id": "0029f250950a91f7",
+      "item": {
+        "type": "paragraph",
+        "id": "0029f250950a91f7",
+        "text": " Update algorithmic diagrams to make use of backlinks."
+      },
+      "date": 1611632093379
+    },
+    {
+      "type": "edit",
+      "id": "0029f250950a91f7",
+      "item": {
+        "type": "paragraph",
+        "id": "0029f250950a91f7",
+        "text": "✓ Update algorithmic diagrams to make use of backlinks."
+      },
+      "date": 1611632177673
+    },
+    {
+      "type": "edit",
+      "id": "26a3e33c367fb320",
+      "item": {
+        "type": "paragraph",
+        "id": "26a3e33c367fb320",
+        "text": "✓ For hand-written dot, treat any label as a title for a collaborative link. This allows even edges to become clickable. Demands code to handle linefeed characters."
+      },
+      "date": 1621257936676
+    },
+    {
+      "id": "26a3e33c367fb320",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "8bdad7dfa2f55e8e",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "5b9c3875ace11b7d",
+        "f7439bdbaf1e658c",
+        "c2cc2e6dc8a499b9",
+        "0029f250950a91f7",
+        "60a10483f00e9271",
+        "facc97941fe8fd45",
+        "b2248e2f126ad2a5",
+        "26a3e33c367fb320",
+        "5e43526fdc41371c",
+        "643cfbcdf80ee516",
+        "df9b27af462bd8bb",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "8c8257b08fd68432",
+        "7f2364bd113237e6",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337",
+        "9c9fcb7707c02c84",
+        "88430e62b0897ef3",
+        "f7c9aed8095a6b83"
+      ],
+      "date": 1621257942127
+    },
+    {
+      "id": "0029f250950a91f7",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "8bdad7dfa2f55e8e",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "5b9c3875ace11b7d",
+        "f7439bdbaf1e658c",
+        "c2cc2e6dc8a499b9",
+        "60a10483f00e9271",
+        "facc97941fe8fd45",
+        "b2248e2f126ad2a5",
+        "0029f250950a91f7",
+        "26a3e33c367fb320",
+        "5e43526fdc41371c",
+        "643cfbcdf80ee516",
+        "df9b27af462bd8bb",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "8c8257b08fd68432",
+        "7f2364bd113237e6",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337",
+        "9c9fcb7707c02c84",
+        "88430e62b0897ef3",
+        "f7c9aed8095a6b83"
+      ],
+      "date": 1621257945528
+    },
+    {
+      "type": "remove",
+      "id": "7f2364bd113237e6",
+      "date": 1621257950166
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "d06a8445d53c8a5a"
+      },
+      "id": "d06a8445d53c8a5a",
+      "type": "add",
+      "after": "f7c9aed8095a6b83",
+      "date": 1621257965354
+    },
+    {
+      "type": "edit",
+      "id": "d06a8445d53c8a5a",
+      "item": {
+        "type": "graphviz",
+        "id": "d06a8445d53c8a5a",
+        "text": "DOT digraph\n rankdir=LR\n node [shape=box style=\"rounded, filled\"]\n HERE\n  LINKS HERE -> NODE"
+      },
+      "date": 1621258010709
+    },
+    {
+      "type": "edit",
+      "id": "d06a8445d53c8a5a",
+      "item": {
+        "type": "graphviz",
+        "id": "d06a8445d53c8a5a",
+        "text": "DOT digraph\n rankdir=LR\n node [shape=box style=\"rounded, filled\"]\n HERE\n  LINKS HERE -> NODE\n   HERE\n    LINKS HERE -> NODE\n\nSTATIC\n\ndigraph {rankdir=LR\nnode [shape=box style=\"rounded, filled\"]\n\"Graphviz\nPlugin\nImprovements\" -> \"2020\nGratitude\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"About\nMap\nFreeze\n/\nThaw\"\n\"Graphviz\nPlugin\nImprovements\" -> \"GraphQL\nVoyager\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"}",
+        "dot": "digraph {rankdir=LR\nnode [shape=box style=\"rounded, filled\"]\n\"Graphviz\nPlugin\nImprovements\" -> \"2020\nGratitude\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"About\nMap\nFreeze\n/\nThaw\"\n\"Graphviz\nPlugin\nImprovements\" -> \"GraphQL\nVoyager\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"}",
+        "svg": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.44.0 (20200518.1210)\n -->\n<!-- Pages: 1 -->\n<svg width=\"211pt\" height=\"274pt\"\n viewBox=\"0.00 0.00 210.51 273.60\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 269.6)\">\n<polygon fill=\"white\" stroke=\"transparent\" points=\"-4,4 -4,-269.6 206.51,-269.6 206.51,4 -4,4\"/>\n<!-- Graphviz\nPlugin\nImprovements -->\n<g id=\"node1\" class=\"node\">\n<title>Graphviz\nPlugin\nImprovements</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M84.8,-217.2C84.8,-217.2 12.07,-217.2 12.07,-217.2 6.07,-217.2 0.07,-211.2 0.07,-205.2 0.07,-205.2 0.07,-170.4 0.07,-170.4 0.07,-164.4 6.07,-158.4 12.07,-158.4 12.07,-158.4 84.8,-158.4 84.8,-158.4 90.8,-158.4 96.8,-164.4 96.8,-170.4 96.8,-170.4 96.8,-205.2 96.8,-205.2 96.8,-211.2 90.8,-217.2 84.8,-217.2\"/>\n<text text-anchor=\"middle\" x=\"48.43\" y=\"-200.4\" font-family=\"Times,serif\" font-size=\"14.00\">Graphviz</text>\n<text text-anchor=\"middle\" x=\"48.43\" y=\"-183.6\" font-family=\"Times,serif\" font-size=\"14.00\">Plugin</text>\n<text text-anchor=\"middle\" x=\"48.43\" y=\"-166.8\" font-family=\"Times,serif\" font-size=\"14.00\">Improvements</text>\n</g>\n<!-- 2020\nGratitude -->\n<g id=\"node2\" class=\"node\">\n<title>2020\nGratitude</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M190.06,-265.4C190.06,-265.4 145.32,-265.4 145.32,-265.4 139.32,-265.4 133.32,-259.4 133.32,-253.4 133.32,-253.4 133.32,-236.2 133.32,-236.2 133.32,-230.2 139.32,-224.2 145.32,-224.2 145.32,-224.2 190.06,-224.2 190.06,-224.2 196.06,-224.2 202.06,-230.2 202.06,-236.2 202.06,-236.2 202.06,-253.4 202.06,-253.4 202.06,-259.4 196.06,-265.4 190.06,-265.4\"/>\n<text text-anchor=\"middle\" x=\"167.69\" y=\"-249\" font-family=\"Times,serif\" font-size=\"14.00\">2020</text>\n<text text-anchor=\"middle\" x=\"167.69\" y=\"-232.2\" font-family=\"Times,serif\" font-size=\"14.00\">Gratitude</text>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt;2020\nGratitude -->\n<g id=\"edge1\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;2020\nGratitude</title>\n<path fill=\"none\" stroke=\"black\" d=\"M97.13,-210.98C105.97,-215.28 115.16,-219.75 123.85,-223.98\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"122.52,-227.22 133.05,-228.45 125.58,-220.93 122.52,-227.22\"/>\n</g>\n<g id=\"node3\" class=\"node\">\n<title></title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M182.69,-205.8C182.69,-205.8 152.69,-205.8 152.69,-205.8 146.69,-205.8 140.69,-199.8 140.69,-193.8 140.69,-193.8 140.69,-181.8 140.69,-181.8 140.69,-175.8 146.69,-169.8 152.69,-169.8 152.69,-169.8 182.69,-169.8 182.69,-169.8 188.69,-169.8 194.69,-175.8 194.69,-181.8 194.69,-181.8 194.69,-193.8 194.69,-193.8 194.69,-199.8 188.69,-205.8 182.69,-205.8\"/>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt; -->\n<g id=\"edge2\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M97.13,-174.51C108.25,-174.08 119.92,-174.31 130.46,-175.22\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"130.23,-178.71 140.56,-176.34 131.01,-171.76 130.23,-178.71\"/>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt; -->\n<g id=\"edge3\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M97.13,-187.8C108.25,-187.8 119.92,-187.8 130.46,-187.8\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"130.56,-191.3 140.56,-187.8 130.56,-184.3 130.56,-191.3\"/>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt; -->\n<g id=\"edge6\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M97.13,-201.09C108.25,-201.52 119.92,-201.29 130.46,-200.38\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"131.01,-203.84 140.56,-199.26 130.23,-196.89 131.01,-203.84\"/>\n</g>\n<!-- About\nMap\nFreeze\n/\nThaw -->\n<g id=\"node4\" class=\"node\">\n<title>About\nMap\nFreeze\n/\nThaw</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M182.69,-151.8C182.69,-151.8 152.69,-151.8 152.69,-151.8 146.69,-151.8 140.69,-145.8 140.69,-139.8 140.69,-139.8 140.69,-71.8 140.69,-71.8 140.69,-65.8 146.69,-59.8 152.69,-59.8 152.69,-59.8 182.69,-59.8 182.69,-59.8 188.69,-59.8 194.69,-65.8 194.69,-71.8 194.69,-71.8 194.69,-139.8 194.69,-139.8 194.69,-145.8 188.69,-151.8 182.69,-151.8\"/>\n<text text-anchor=\"middle\" x=\"167.69\" y=\"-135.2\" font-family=\"Times,serif\" font-size=\"14.00\">About</text>\n<text text-anchor=\"middle\" x=\"167.69\" y=\"-118.4\" font-family=\"Times,serif\" font-size=\"14.00\">Map</text>\n<text text-anchor=\"middle\" x=\"167.69\" y=\"-101.6\" font-family=\"Times,serif\" font-size=\"14.00\">Freeze</text>\n<text text-anchor=\"middle\" x=\"167.69\" y=\"-84.8\" font-family=\"Times,serif\" font-size=\"14.00\">/</text>\n<text text-anchor=\"middle\" x=\"167.69\" y=\"-68\" font-family=\"Times,serif\" font-size=\"14.00\">Thaw</text>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt;About\nMap\nFreeze\n/\nThaw -->\n<g id=\"edge4\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;About\nMap\nFreeze\n/\nThaw</title>\n<path fill=\"none\" stroke=\"black\" d=\"M91.43,-158.43C104.78,-149.09 119.38,-138.88 132.14,-129.96\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"134.45,-132.61 140.64,-124.01 130.44,-126.88 134.45,-132.61\"/>\n</g>\n<!-- GraphQL\nVoyager -->\n<g id=\"node5\" class=\"node\">\n<title>GraphQL\nVoyager</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M190.33,-41.4C190.33,-41.4 145.05,-41.4 145.05,-41.4 139.05,-41.4 133.05,-35.4 133.05,-29.4 133.05,-29.4 133.05,-12.2 133.05,-12.2 133.05,-6.2 139.05,-0.2 145.05,-0.2 145.05,-0.2 190.33,-0.2 190.33,-0.2 196.33,-0.2 202.33,-6.2 202.33,-12.2 202.33,-12.2 202.33,-29.4 202.33,-29.4 202.33,-35.4 196.33,-41.4 190.33,-41.4\"/>\n<text text-anchor=\"middle\" x=\"167.69\" y=\"-25\" font-family=\"Times,serif\" font-size=\"14.00\">GraphQL</text>\n<text text-anchor=\"middle\" x=\"167.69\" y=\"-8.2\" font-family=\"Times,serif\" font-size=\"14.00\">Voyager</text>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt;GraphQL\nVoyager -->\n<g id=\"edge5\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;GraphQL\nVoyager</title>\n<path fill=\"none\" stroke=\"black\" d=\"M64.06,-158.33C79.17,-129.4 104.47,-84.78 132.87,-50.8 133.36,-50.21 133.86,-49.63 134.37,-49.04\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"137.09,-51.27 141.47,-41.62 132.03,-46.43 137.09,-51.27\"/>\n</g>\n</g>\n</svg>\n"
+      },
+      "date": 1621258096436
+    },
+    {
+      "id": "d06a8445d53c8a5a",
+      "type": "move",
+      "order": [
+        "8e328bd1794ed5f7",
+        "8bdad7dfa2f55e8e",
+        "5ab3faa251ecbf93",
+        "c85d8b0206ee1857",
+        "5b9c3875ace11b7d",
+        "f7439bdbaf1e658c",
+        "c2cc2e6dc8a499b9",
+        "60a10483f00e9271",
+        "facc97941fe8fd45",
+        "b2248e2f126ad2a5",
+        "0029f250950a91f7",
+        "26a3e33c367fb320",
+        "d06a8445d53c8a5a",
+        "5e43526fdc41371c",
+        "643cfbcdf80ee516",
+        "df9b27af462bd8bb",
+        "e4f57bf81872f886",
+        "df58de0a3e884d0d",
+        "8c8257b08fd68432",
+        "f09f9ee262583268",
+        "63ee7a90197b2326",
+        "43e77312c3f69337",
+        "9c9fcb7707c02c84",
+        "88430e62b0897ef3",
+        "f7c9aed8095a6b83"
+      ],
+      "date": 1621258142853
+    },
+    {
+      "type": "add",
+      "id": "362acef3afbf12d5",
+      "item": {
+        "type": "paragraph",
+        "id": "362acef3afbf12d5",
+        "text": "Include reference items in the discovery of LINKS"
+      },
+      "after": "26a3e33c367fb320",
+      "date": 1621258178056
+    },
+    {
+      "type": "edit",
+      "id": "362acef3afbf12d5",
+      "item": {
+        "type": "paragraph",
+        "id": "362acef3afbf12d5",
+        "text": "Include reference items in the discovery of LINKS. Notice how the diagram below misses the reference to XP and Normative Good."
+      },
+      "date": 1621258298805
+    },
+    {
+      "type": "edit",
+      "id": "d06a8445d53c8a5a",
+      "item": {
+        "type": "graphviz",
+        "id": "d06a8445d53c8a5a",
+        "text": "DOT digraph\n rankdir=LR\n node [shape=box style=\"rounded, filled\"]\n HERE\n  LINKS HERE -> NODE\n\n\nSTATIC\n\ndigraph {rankdir=LR\nnode [shape=box style=\"rounded, filled\"]\n\"Graphviz\nPlugin\nImprovements\" -> \"2020\nGratitude\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"About\nMap\nFreeze\n/\nThaw\"\n\"Graphviz\nPlugin\nImprovements\" -> \"GraphQL\nVoyager\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"2020\nGratitude\" -> \"About\nGraphviz\nPlugin\"\n\"2020\nGratitude\" -> \"About\nHTML\nPlugin\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"Flow\nof\nEpisodes\"\n\"2020\nGratitude\" -> \"About\nFrame\nIntegrations\"\n\"2020\nGratitude\" -> \"How\nObservable\nRuns\"\n\"2020\nGratitude\" -> \"GraphQL\nVoyager\"\n\"\" -> \"GraphQL\nVoyager\"\n\"GraphQL\nVoyager\" -> \"El\nDorado\nUI\"\n\"\" -> \"GraphQL\nVoyager\"}",
+        "dot": "digraph {rankdir=LR\nnode [shape=box style=\"rounded, filled\"]\n\"Graphviz\nPlugin\nImprovements\" -> \"2020\nGratitude\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"Graphviz\nPlugin\nImprovements\" -> \"About\nMap\nFreeze\n/\nThaw\"\n\"Graphviz\nPlugin\nImprovements\" -> \"GraphQL\nVoyager\"\n\"Graphviz\nPlugin\nImprovements\" -> \"\"\n\"2020\nGratitude\" -> \"About\nGraphviz\nPlugin\"\n\"2020\nGratitude\" -> \"About\nHTML\nPlugin\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"\"\n\"2020\nGratitude\" -> \"Flow\nof\nEpisodes\"\n\"2020\nGratitude\" -> \"About\nFrame\nIntegrations\"\n\"2020\nGratitude\" -> \"How\nObservable\nRuns\"\n\"2020\nGratitude\" -> \"GraphQL\nVoyager\"\n\"\" -> \"GraphQL\nVoyager\"\n\"GraphQL\nVoyager\" -> \"El\nDorado\nUI\"\n\"\" -> \"GraphQL\nVoyager\"}",
+        "svg": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<!-- Generated by graphviz version 2.44.0 (20200518.1210)\n -->\n<!-- Pages: 1 -->\n<svg width=\"528pt\" height=\"495pt\"\n viewBox=\"0.00 0.00 528.22 494.50\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n<g id=\"graph0\" class=\"graph\" transform=\"scale(1 1) rotate(0) translate(4 490.5)\">\n<polygon fill=\"white\" stroke=\"transparent\" points=\"-4,4 -4,-490.5 524.22,-490.5 524.22,4 -4,4\"/>\n<!-- Graphviz\nPlugin\nImprovements -->\n<g id=\"node1\" class=\"node\">\n<title>Graphviz\nPlugin\nImprovements</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M84.8,-463.9C84.8,-463.9 12.07,-463.9 12.07,-463.9 6.07,-463.9 0.07,-457.9 0.07,-451.9 0.07,-451.9 0.07,-417.1 0.07,-417.1 0.07,-411.1 6.07,-405.1 12.07,-405.1 12.07,-405.1 84.8,-405.1 84.8,-405.1 90.8,-405.1 96.8,-411.1 96.8,-417.1 96.8,-417.1 96.8,-451.9 96.8,-451.9 96.8,-457.9 90.8,-463.9 84.8,-463.9\"/>\n<text text-anchor=\"middle\" x=\"48.43\" y=\"-447.1\" font-family=\"Times,serif\" font-size=\"14.00\">Graphviz</text>\n<text text-anchor=\"middle\" x=\"48.43\" y=\"-430.3\" font-family=\"Times,serif\" font-size=\"14.00\">Plugin</text>\n<text text-anchor=\"middle\" x=\"48.43\" y=\"-413.5\" font-family=\"Times,serif\" font-size=\"14.00\">Improvements</text>\n</g>\n<!-- 2020\nGratitude -->\n<g id=\"node2\" class=\"node\">\n<title>2020\nGratitude</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M189.67,-422.1C189.67,-422.1 144.93,-422.1 144.93,-422.1 138.93,-422.1 132.93,-416.1 132.93,-410.1 132.93,-410.1 132.93,-392.9 132.93,-392.9 132.93,-386.9 138.93,-380.9 144.93,-380.9 144.93,-380.9 189.67,-380.9 189.67,-380.9 195.67,-380.9 201.67,-386.9 201.67,-392.9 201.67,-392.9 201.67,-410.1 201.67,-410.1 201.67,-416.1 195.67,-422.1 189.67,-422.1\"/>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-405.7\" font-family=\"Times,serif\" font-size=\"14.00\">2020</text>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-388.9\" font-family=\"Times,serif\" font-size=\"14.00\">Gratitude</text>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt;2020\nGratitude -->\n<g id=\"edge1\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;2020\nGratitude</title>\n<path fill=\"none\" stroke=\"black\" d=\"M96.97,-421.08C105.6,-418.64 114.56,-416.11 123.05,-413.71\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"124.1,-417.05 132.77,-410.97 122.2,-410.32 124.1,-417.05\"/>\n</g>\n<g id=\"node3\" class=\"node\">\n<title></title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M294.17,-486.5C294.17,-486.5 264.17,-486.5 264.17,-486.5 258.17,-486.5 252.17,-480.5 252.17,-474.5 252.17,-474.5 252.17,-462.5 252.17,-462.5 252.17,-456.5 258.17,-450.5 264.17,-450.5 264.17,-450.5 294.17,-450.5 294.17,-450.5 300.17,-450.5 306.17,-456.5 306.17,-462.5 306.17,-462.5 306.17,-474.5 306.17,-474.5 306.17,-480.5 300.17,-486.5 294.17,-486.5\"/>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt; -->\n<g id=\"edge2\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M96.83,-430.36C140.16,-433.39 203.31,-443.13 242.5,-453.08\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"241.6,-456.46 252.17,-455.68 243.42,-449.7 241.6,-456.46\"/>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt; -->\n<g id=\"edge3\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M96.83,-441.55C140.07,-447.97 203.04,-457.33 242.25,-463.16\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"241.76,-466.63 252.17,-464.64 242.79,-459.7 241.76,-466.63\"/>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt; -->\n<g id=\"edge6\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M96.83,-452.73C139.98,-462.54 202.77,-471.53 242,-473.29\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"242.07,-476.8 252.17,-473.59 242.27,-469.8 242.07,-476.8\"/>\n</g>\n<!-- About\nMap\nFreeze\n/\nThaw -->\n<g id=\"node4\" class=\"node\">\n<title>About\nMap\nFreeze\n/\nThaw</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M182.3,-362.5C182.3,-362.5 152.3,-362.5 152.3,-362.5 146.3,-362.5 140.3,-356.5 140.3,-350.5 140.3,-350.5 140.3,-282.5 140.3,-282.5 140.3,-276.5 146.3,-270.5 152.3,-270.5 152.3,-270.5 182.3,-270.5 182.3,-270.5 188.3,-270.5 194.3,-276.5 194.3,-282.5 194.3,-282.5 194.3,-350.5 194.3,-350.5 194.3,-356.5 188.3,-362.5 182.3,-362.5\"/>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-345.9\" font-family=\"Times,serif\" font-size=\"14.00\">About</text>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-329.1\" font-family=\"Times,serif\" font-size=\"14.00\">Map</text>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-312.3\" font-family=\"Times,serif\" font-size=\"14.00\">Freeze</text>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-295.5\" font-family=\"Times,serif\" font-size=\"14.00\">/</text>\n<text text-anchor=\"middle\" x=\"167.3\" y=\"-278.7\" font-family=\"Times,serif\" font-size=\"14.00\">Thaw</text>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt;About\nMap\nFreeze\n/\nThaw -->\n<g id=\"edge4\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;About\nMap\nFreeze\n/\nThaw</title>\n<path fill=\"none\" stroke=\"black\" d=\"M78.62,-405.03C95.19,-388.3 115.97,-367.31 133.15,-349.97\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"135.72,-352.35 140.27,-342.78 130.75,-347.43 135.72,-352.35\"/>\n</g>\n<!-- GraphQL\nVoyager -->\n<g id=\"node5\" class=\"node\">\n<title>GraphQL\nVoyager</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M414.06,-466.1C414.06,-466.1 368.78,-466.1 368.78,-466.1 362.78,-466.1 356.78,-460.1 356.78,-454.1 356.78,-454.1 356.78,-436.9 356.78,-436.9 356.78,-430.9 362.78,-424.9 368.78,-424.9 368.78,-424.9 414.06,-424.9 414.06,-424.9 420.06,-424.9 426.06,-430.9 426.06,-436.9 426.06,-436.9 426.06,-454.1 426.06,-454.1 426.06,-460.1 420.06,-466.1 414.06,-466.1\"/>\n<text text-anchor=\"middle\" x=\"391.42\" y=\"-449.7\" font-family=\"Times,serif\" font-size=\"14.00\">GraphQL</text>\n<text text-anchor=\"middle\" x=\"391.42\" y=\"-432.9\" font-family=\"Times,serif\" font-size=\"14.00\">Voyager</text>\n</g>\n<!-- Graphviz\nPlugin\nImprovements&#45;&gt;GraphQL\nVoyager -->\n<g id=\"edge5\" class=\"edge\">\n<title>Graphviz\nPlugin\nImprovements&#45;&gt;GraphQL\nVoyager</title>\n<path fill=\"none\" stroke=\"black\" d=\"M55.5,-405.19C80,-292.82 177.17,98.15 320.6,-23.5 380.06,-73.93 388.95,-325.57 390.23,-414.4\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"386.73,-414.68 390.35,-424.63 393.73,-414.59 386.73,-414.68\"/>\n</g>\n<!-- 2020\nGratitude&#45;&gt; -->\n<g id=\"edge9\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M201.86,-409.42C219.43,-418.49 240.46,-431.8 255.99,-443.89\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"254.04,-446.81 263.99,-450.44 258.47,-441.4 254.04,-446.81\"/>\n</g>\n<!-- 2020\nGratitude&#45;&gt; -->\n<g id=\"edge10\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M201.86,-421.97C214.99,-429.97 230.04,-439.15 243.29,-447.23\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"241.77,-450.4 252.13,-452.62 245.42,-444.43 241.77,-450.4\"/>\n</g>\n<!-- 2020\nGratitude&#45;&gt; -->\n<g id=\"edge11\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;</title>\n<path fill=\"none\" stroke=\"black\" d=\"M185.95,-422.49C201.28,-435.1 223.93,-449.74 242.95,-459.72\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"241.44,-462.88 251.95,-464.22 244.57,-456.62 241.44,-462.88\"/>\n</g>\n<!-- 2020\nGratitude&#45;&gt;GraphQL\nVoyager -->\n<g id=\"edge15\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;GraphQL\nVoyager</title>\n<path fill=\"none\" stroke=\"black\" d=\"M202.04,-408.18C240.72,-415.85 304.24,-428.43 346.69,-436.84\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"346.24,-440.32 356.73,-438.83 347.6,-433.45 346.24,-440.32\"/>\n</g>\n<!-- About\nGraphviz\nPlugin -->\n<g id=\"node6\" class=\"node\">\n<title>About\nGraphviz\nPlugin</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M301.26,-394.9C301.26,-394.9 257.08,-394.9 257.08,-394.9 251.08,-394.9 245.08,-388.9 245.08,-382.9 245.08,-382.9 245.08,-348.1 245.08,-348.1 245.08,-342.1 251.08,-336.1 257.08,-336.1 257.08,-336.1 301.26,-336.1 301.26,-336.1 307.26,-336.1 313.26,-342.1 313.26,-348.1 313.26,-348.1 313.26,-382.9 313.26,-382.9 313.26,-388.9 307.26,-394.9 301.26,-394.9\"/>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-378.1\" font-family=\"Times,serif\" font-size=\"14.00\">About</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-361.3\" font-family=\"Times,serif\" font-size=\"14.00\">Graphviz</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-344.5\" font-family=\"Times,serif\" font-size=\"14.00\">Plugin</text>\n</g>\n<!-- 2020\nGratitude&#45;&gt;About\nGraphviz\nPlugin -->\n<g id=\"edge7\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;About\nGraphviz\nPlugin</title>\n<path fill=\"none\" stroke=\"black\" d=\"M201.86,-390.5C212.4,-387.05 224.19,-383.19 235.29,-379.55\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"236.4,-382.87 244.81,-376.43 234.22,-376.22 236.4,-382.87\"/>\n</g>\n<!-- About\nHTML\nPlugin -->\n<g id=\"node7\" class=\"node\">\n<title>About\nHTML\nPlugin</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M294.83,-318.9C294.83,-318.9 263.51,-318.9 263.51,-318.9 257.51,-318.9 251.51,-312.9 251.51,-306.9 251.51,-306.9 251.51,-272.1 251.51,-272.1 251.51,-266.1 257.51,-260.1 263.51,-260.1 263.51,-260.1 294.83,-260.1 294.83,-260.1 300.83,-260.1 306.83,-266.1 306.83,-272.1 306.83,-272.1 306.83,-306.9 306.83,-306.9 306.83,-312.9 300.83,-318.9 294.83,-318.9\"/>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-302.1\" font-family=\"Times,serif\" font-size=\"14.00\">About</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-285.3\" font-family=\"Times,serif\" font-size=\"14.00\">HTML</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-268.5\" font-family=\"Times,serif\" font-size=\"14.00\">Plugin</text>\n</g>\n<!-- 2020\nGratitude&#45;&gt;About\nHTML\nPlugin -->\n<g id=\"edge8\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;About\nHTML\nPlugin</title>\n<path fill=\"none\" stroke=\"black\" d=\"M192.47,-380.63C195.66,-377.64 198.83,-374.55 201.74,-371.5 219.19,-353.23 220.49,-345.97 237.74,-327.5 239.71,-325.39 241.77,-323.25 243.88,-321.12\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"246.48,-323.47 251.15,-313.96 241.57,-318.48 246.48,-323.47\"/>\n</g>\n<!-- Flow\nof\nEpisodes -->\n<g id=\"node8\" class=\"node\">\n<title>Flow\nof\nEpisodes</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M300.22,-242.9C300.22,-242.9 258.12,-242.9 258.12,-242.9 252.12,-242.9 246.12,-236.9 246.12,-230.9 246.12,-230.9 246.12,-196.1 246.12,-196.1 246.12,-190.1 252.12,-184.1 258.12,-184.1 258.12,-184.1 300.22,-184.1 300.22,-184.1 306.22,-184.1 312.22,-190.1 312.22,-196.1 312.22,-196.1 312.22,-230.9 312.22,-230.9 312.22,-236.9 306.22,-242.9 300.22,-242.9\"/>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-226.1\" font-family=\"Times,serif\" font-size=\"14.00\">Flow</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-209.3\" font-family=\"Times,serif\" font-size=\"14.00\">of</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-192.5\" font-family=\"Times,serif\" font-size=\"14.00\">Episodes</text>\n</g>\n<!-- 2020\nGratitude&#45;&gt;Flow\nof\nEpisodes -->\n<g id=\"edge12\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;Flow\nof\nEpisodes</title>\n<path fill=\"none\" stroke=\"black\" d=\"M194.35,-380.88C197.1,-377.94 199.65,-374.79 201.74,-371.5 231.57,-324.49 208.44,-298.86 237.74,-251.5 238.32,-250.56 238.93,-249.62 239.57,-248.7\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"242.46,-250.68 245.89,-240.65 236.96,-246.35 242.46,-250.68\"/>\n</g>\n<!-- About\nFrame\nIntegrations -->\n<g id=\"node9\" class=\"node\">\n<title>About\nFrame\nIntegrations</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M308.54,-166.9C308.54,-166.9 249.8,-166.9 249.8,-166.9 243.8,-166.9 237.8,-160.9 237.8,-154.9 237.8,-154.9 237.8,-120.1 237.8,-120.1 237.8,-114.1 243.8,-108.1 249.8,-108.1 249.8,-108.1 308.54,-108.1 308.54,-108.1 314.54,-108.1 320.54,-114.1 320.54,-120.1 320.54,-120.1 320.54,-154.9 320.54,-154.9 320.54,-160.9 314.54,-166.9 308.54,-166.9\"/>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-150.1\" font-family=\"Times,serif\" font-size=\"14.00\">About</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-133.3\" font-family=\"Times,serif\" font-size=\"14.00\">Frame</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-116.5\" font-family=\"Times,serif\" font-size=\"14.00\">Integrations</text>\n</g>\n<!-- 2020\nGratitude&#45;&gt;About\nFrame\nIntegrations -->\n<g id=\"edge13\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;About\nFrame\nIntegrations</title>\n<path fill=\"none\" stroke=\"black\" d=\"M195.03,-380.74C197.59,-377.86 199.91,-374.77 201.74,-371.5 245.02,-294.23 195.35,-253.27 237.74,-175.5 237.79,-175.41 237.84,-175.31 237.89,-175.22\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"240.93,-176.97 243.59,-166.71 235.11,-173.07 240.93,-176.97\"/>\n</g>\n<!-- How\nObservable\nRuns -->\n<g id=\"node10\" class=\"node\">\n<title>How\nObservable\nRuns</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M306.92,-90.9C306.92,-90.9 251.42,-90.9 251.42,-90.9 245.42,-90.9 239.42,-84.9 239.42,-78.9 239.42,-78.9 239.42,-44.1 239.42,-44.1 239.42,-38.1 245.42,-32.1 251.42,-32.1 251.42,-32.1 306.92,-32.1 306.92,-32.1 312.92,-32.1 318.92,-38.1 318.92,-44.1 318.92,-44.1 318.92,-78.9 318.92,-78.9 318.92,-84.9 312.92,-90.9 306.92,-90.9\"/>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-74.1\" font-family=\"Times,serif\" font-size=\"14.00\">How</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-57.3\" font-family=\"Times,serif\" font-size=\"14.00\">Observable</text>\n<text text-anchor=\"middle\" x=\"279.17\" y=\"-40.5\" font-family=\"Times,serif\" font-size=\"14.00\">Runs</text>\n</g>\n<!-- 2020\nGratitude&#45;&gt;How\nObservable\nRuns -->\n<g id=\"edge14\" class=\"edge\">\n<title>2020\nGratitude&#45;&gt;How\nObservable\nRuns</title>\n<path fill=\"none\" stroke=\"black\" d=\"M195.19,-380.83C197.72,-377.93 199.99,-374.81 201.74,-371.5 257.14,-266.49 186.02,-210.97 238.52,-100.21\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"241.73,-101.6 243.06,-91.09 235.47,-98.48 241.73,-101.6\"/>\n</g>\n<!-- &#45;&gt;GraphQL\nVoyager -->\n<g id=\"edge16\" class=\"edge\">\n<title>&#45;&gt;GraphQL\nVoyager</title>\n<path fill=\"none\" stroke=\"black\" d=\"M306.3,-457.21C318.27,-453.88 332.8,-450.59 346.39,-448.06\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"347.29,-451.45 356.54,-446.28 346.09,-444.56 347.29,-451.45\"/>\n</g>\n<!-- &#45;&gt;GraphQL\nVoyager -->\n<g id=\"edge18\" class=\"edge\">\n<title>&#45;&gt;GraphQL\nVoyager</title>\n<path fill=\"none\" stroke=\"black\" d=\"M306.3,-468.89C318.39,-467.2 333.09,-464.4 346.79,-461.22\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"347.65,-464.61 356.54,-458.85 346,-457.81 347.65,-464.61\"/>\n</g>\n<!-- El\nDorado\nUI -->\n<g id=\"node11\" class=\"node\">\n<title>El\nDorado\nUI</title>\n<path fill=\"lightgrey\" stroke=\"black\" d=\"M508.22,-474.9C508.22,-474.9 474.25,-474.9 474.25,-474.9 468.25,-474.9 462.25,-468.9 462.25,-462.9 462.25,-462.9 462.25,-428.1 462.25,-428.1 462.25,-422.1 468.25,-416.1 474.25,-416.1 474.25,-416.1 508.22,-416.1 508.22,-416.1 514.22,-416.1 520.22,-422.1 520.22,-428.1 520.22,-428.1 520.22,-462.9 520.22,-462.9 520.22,-468.9 514.22,-474.9 508.22,-474.9\"/>\n<text text-anchor=\"middle\" x=\"491.23\" y=\"-458.1\" font-family=\"Times,serif\" font-size=\"14.00\">El</text>\n<text text-anchor=\"middle\" x=\"491.23\" y=\"-441.3\" font-family=\"Times,serif\" font-size=\"14.00\">Dorado</text>\n<text text-anchor=\"middle\" x=\"491.23\" y=\"-424.5\" font-family=\"Times,serif\" font-size=\"14.00\">UI</text>\n</g>\n<!-- GraphQL\nVoyager&#45;&gt;El\nDorado\nUI -->\n<g id=\"edge17\" class=\"edge\">\n<title>GraphQL\nVoyager&#45;&gt;El\nDorado\nUI</title>\n<path fill=\"none\" stroke=\"black\" d=\"M426.08,-445.5C434.41,-445.5 443.4,-445.5 451.93,-445.5\"/>\n<polygon fill=\"black\" stroke=\"black\" points=\"452.04,-449 462.04,-445.5 452.04,-442 452.04,-449\"/>\n</g>\n</g>\n</svg>\n"
+      },
+      "date": 1621258309940
+    },
+    {
+      "id": "208c76edc6f3dff1",
+      "type": "add",
+      "item": {
+        "type": "reference",
+        "id": "208c76edc6f3dff1",
+        "site": "norms.ward.asia.wiki.org",
+        "slug": "xp-and-normative-good",
+        "title": "XP and Normative Good",
+        "text": "Extreme Programming (xp) prescribes a dozen practices that reinforce each other so as to allow teams to make software development decisions. We examine the distribution of responsibilities required for, and means to arrive at, good decisions within this framework."
+      },
+      "after": "362acef3afbf12d5",
+      "date": 1621258319701
+    },
+    {
+      "type": "add",
+      "id": "302ef17517879a20",
+      "item": {
+        "type": "paragraph",
+        "id": "302ef17517879a20",
+        "text": "Figure out correct escaping for pages that include angle brackets <> like <wiki-link> and <wiki-graph>"
+      },
+      "after": "362acef3afbf12d5",
+      "date": 1621258403660
+    }
+  ]
+}

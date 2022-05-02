@@ -1,0 +1,81 @@
+{
+  "title": "Theory of Patches",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "266bc8b50af1e2e6",
+      "text": "The darcs patch formalism is the underlying \"math\" which helps us understand how darcs should behave when exchanging patches between repositories. It is implemented in the darcs engine as data structures for representing sequences of patches and Haskell functions equivalent to the operations in the formalism. This section is addressed at two audiences: curious onlookers and people wanting to participate in the development of the darcs core. My aim is to help you understand the intuitions behind all this math, so that you can get up to speed with current conflictors research as fast as possible and start making contributions. You should note that I myself am only starting to learn about patch theory and conflictors, so there may be mistakes ahead. [https://en.wikibooks.org/wiki/Understanding_Darcs/Patch_theory page]"
+    },
+    {
+      "type": "paragraph",
+      "id": "696511280f0591d5",
+      "text": "Might support the goal to [[Embrace Event Sourcing]]."
+    },
+    {
+      "type": "paragraph",
+      "id": "f4854cd465aac039",
+      "text": "See also [[Hybrid Logical Clocks]]"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Theory of Patches",
+        "story": []
+      },
+      "date": 1608417674374
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "266bc8b50af1e2e6"
+      },
+      "id": "266bc8b50af1e2e6",
+      "type": "add",
+      "date": 1608417676348
+    },
+    {
+      "type": "edit",
+      "id": "266bc8b50af1e2e6",
+      "item": {
+        "type": "paragraph",
+        "id": "266bc8b50af1e2e6",
+        "text": "The darcs patch formalism is the underlying \"math\" which helps us understand how darcs should behave when exchanging patches between repositories. It is implemented in the darcs engine as data structures for representing sequences of patches and Haskell functions equivalent to the operations in the formalism. This section is addressed at two audiences: curious onlookers and people wanting to participate in the development of the darcs core. My aim is to help you understand the intuitions behind all this math, so that you can get up to speed with current conflictors research as fast as possible and start making contributions. You should note that I myself am only starting to learn about patch theory and conflictors, so there may be mistakes ahead. [ page]"
+      },
+      "date": 1608417689212
+    },
+    {
+      "type": "edit",
+      "id": "266bc8b50af1e2e6",
+      "item": {
+        "type": "paragraph",
+        "id": "266bc8b50af1e2e6",
+        "text": "The darcs patch formalism is the underlying \"math\" which helps us understand how darcs should behave when exchanging patches between repositories. It is implemented in the darcs engine as data structures for representing sequences of patches and Haskell functions equivalent to the operations in the formalism. This section is addressed at two audiences: curious onlookers and people wanting to participate in the development of the darcs core. My aim is to help you understand the intuitions behind all this math, so that you can get up to speed with current conflictors research as fast as possible and start making contributions. You should note that I myself am only starting to learn about patch theory and conflictors, so there may be mistakes ahead. [https://en.wikibooks.org/wiki/Understanding_Darcs/Patch_theory page]"
+      },
+      "date": 1608417706152
+    },
+    {
+      "id": "696511280f0591d5",
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "696511280f0591d5",
+        "text": "Might support the goal to [[Embrace Event Sourcing]]."
+      },
+      "after": "266bc8b50af1e2e6",
+      "date": 1608417731616
+    },
+    {
+      "type": "add",
+      "id": "f4854cd465aac039",
+      "item": {
+        "type": "paragraph",
+        "id": "f4854cd465aac039",
+        "text": "See also [[Hybrid Logical Clocks]]"
+      },
+      "after": "696511280f0591d5",
+      "date": 1608417759931
+    }
+  ]
+}

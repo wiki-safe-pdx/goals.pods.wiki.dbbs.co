@@ -1,0 +1,1040 @@
+{
+  "title": "Glitch 2019-07 Bug",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "c9df6edb6bdfdf9a",
+      "text": "The title of this page optimistically hopes we'll git this bug fixed before the end of the month. Something in glitch internals seems to be interacting badly with something in wiki's internals. I believe the problem is that wiki makes assumptions about where wiki-server package and wiki-client package live on disk and that pnpm installs packages according to different conventions. There are a lot of moving parts. Below the symptoms, see a drawing what I understand of the parts and their relationships."
+    },
+    {
+      "type": "paragraph",
+      "id": "1d22f3add5d30e56",
+      "text": "2019-07-14 Update: we have a PR just for wiki-server which fixes this bug. [https://github.com/fedwiki/wiki-server/pull/148 wiki-server/pull/148]"
+    },
+    {
+      "type": "paragraph",
+      "id": "9b86599b2939154b",
+      "text": "These closed PRs fixed the bug and let wiki run in glitch. But the above fix is preferred because it works without changes to wiki-client."
+    },
+    {
+      "type": "paragraph",
+      "id": "51056c4f04c77783",
+      "text": "[https://github.com/fedwiki/wiki-client/pull/244 wiki-client/pull/244]"
+    },
+    {
+      "type": "paragraph",
+      "id": "4d83757af999906e",
+      "text": "[https://github.com/fedwiki/wiki-server/pull/147 wiki-server/pull/147]"
+    },
+    {
+      "type": "pagefold",
+      "id": "0b37c263748ad735",
+      "text": "symptoms"
+    },
+    {
+      "type": "reference",
+      "id": "8840fb9b85bb3286",
+      "site": "wiki-wiki.glitch.me",
+      "slug": "wiki-hosted-on-glitch",
+      "title": "Wiki Hosted on Glitch",
+      "text": "This reference link works okay. The server is running and serving .json files to clients from other origin servers in the federation. But breaks when trying to render the static pages directly."
+    },
+    {
+      "type": "paragraph",
+      "id": "aa4f0b584dbce19b",
+      "text": "[https://wiki-wiki.glitch.me wiki-wiki.glitch.me] <-- this link breaks:"
+    },
+    {
+      "type": "code",
+      "id": "6ea898429f6cc880",
+      "text": "Error: Failed to lookup view \"static.html\" in views directory \"/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-client/views\"\n    at Function.render (/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/express/4.17.1/node_modules/express/lib/application.js:580:17)\n    at ServerResponse.render (/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/express/4.17.1/node_modules/express/lib/response.js:1012:7)\n    at Object.cb (/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server/lib/server.coffee:326:11)\n    at /rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server/lib/page.coffee:237:14\n    at /rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server/lib/page.coffee:64:7\n    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)\n\n"
+    },
+    {
+      "type": "pagefold",
+      "id": "b87cc7c38c6e8643",
+      "text": "diagnosis"
+    },
+    {
+      "type": "graphviz",
+      "id": "a71e5e15d987b9f5",
+      "text": "strict digraph {\nnode [shape=box style=filled fillcolor=white]\n{\n  node [fillcolor=orange]\n  wiki \"wiki-client\" \"wiki-server\"\n}\n\n\nwiki -> { \"wiki-client\" \"wiki-server\" }\n\n\"wiki-client\" -> { \n  node [fillcolor=grey]\n  \"./views/static.html\"\n  \"./views/oops.html\"\n} [label=provides]\n\n\"wiki-server\" -> {\n  node [fillcolor=grey]\n  \"./../wiki-client/views/static.html\"\n  \"./../wiki-client/views/oops.html\"\n} [label=expects]\n\n}"
+    },
+    {
+      "type": "paragraph",
+      "id": "77b9347eed4ff6fb",
+      "text": "pnpm installs the modules in different locations on disk:"
+    },
+    {
+      "type": "code",
+      "id": "04c1018f73624b81",
+      "text": "$ pnpm ls wiki-client wiki-server\nwiki-wiki@0.0.6 /app\n├─┬ wiki@0.19.0\n│ ├── wiki-client@0.17.0\n│ └── wiki-server@0.15.2\n├── wiki-client@link:node_modules/.registry.npmjs.org/wiki-client/0.17.0/node_modules/wiki-client\n└── wiki-server@link:node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server\n"
+    },
+    {
+      "type": "paragraph",
+      "id": "cdb6b1c842880fd7",
+      "text": "I tried changing wiki-server and wiki-client so that the server would ask the client for the path where to find the views for express.js calls to res.render()."
+    },
+    {
+      "type": "paragraph",
+      "id": "91b2e242a0a8d65b",
+      "text": "See [[Hack Wiki Using Glitch]]"
+    },
+    {
+      "type": "paragraph",
+      "id": "611afcdd36436a18",
+      "text": "Paul suggested a solution that involves only a one-line change to wiki-server."
+    },
+    {
+      "type": "paragraph",
+      "id": "9a989a886df39449",
+      "text": "Nick commented on PR #148 with a variant on Paul's suggestion to use require.resolve() which I was able to get working."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Glitch 2019-07 Bug",
+        "story": []
+      },
+      "date": 1562369644318
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "c9df6edb6bdfdf9a"
+      },
+      "id": "c9df6edb6bdfdf9a",
+      "type": "add",
+      "date": 1562369646445
+    },
+    {
+      "type": "edit",
+      "id": "c9df6edb6bdfdf9a",
+      "item": {
+        "type": "paragraph",
+        "id": "c9df6edb6bdfdf9a",
+        "text": "The title of this page optimistically hopes we'll git this bug fixed before the end of the month. Something in glitch internals seems to be interacting badly with something in wiki's internals. I believe the problem is that wiki makes assumptions about where wiki-server package and wiki-client package live on disk and that pnpm installs packages according to different conventions. There are a lot of moving parts. Drawing what I understand of the parts and their relationships."
+      },
+      "date": 1562369853307
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "a71e5e15d987b9f5"
+      },
+      "id": "a71e5e15d987b9f5",
+      "type": "add",
+      "after": "c9df6edb6bdfdf9a",
+      "date": 1562369855486
+    },
+    {
+      "type": "edit",
+      "id": "a71e5e15d987b9f5",
+      "item": {
+        "type": "graphviz",
+        "id": "a71e5e15d987b9f5",
+        "text": "strict digraph {\n\nwiki -> wiki-client\nwiki -> wiki-server\n\n}"
+      },
+      "date": 1562370042781
+    },
+    {
+      "type": "edit",
+      "id": "a71e5e15d987b9f5",
+      "item": {
+        "type": "graphviz",
+        "id": "a71e5e15d987b9f5",
+        "text": "strict digraph {\n\nwiki -> \"wiki-client\"\nwiki -> \"wiki-server\"\n\n}"
+      },
+      "date": 1562370054688
+    },
+    {
+      "type": "edit",
+      "id": "a71e5e15d987b9f5",
+      "item": {
+        "type": "graphviz",
+        "id": "a71e5e15d987b9f5",
+        "text": "strict digraph {\n\n{\n  node [style=box bgcolor=orange]\n  wiki\n  \"wiki-client\"\n  \"wiki-server\"\n}\n\nwiki -> \"wiki-client\"\nwiki -> \"wiki-server\"\n\n}"
+      },
+      "date": 1562370191871
+    },
+    {
+      "type": "edit",
+      "id": "a71e5e15d987b9f5",
+      "item": {
+        "type": "graphviz",
+        "id": "a71e5e15d987b9f5",
+        "text": "strict digraph {\n\n{\n  node [style=box]\n  wiki\n  \"wiki-client\"\n  \"wiki-server\"\n}\n\nwiki -> \"wiki-client\"\nwiki -> \"wiki-server\"\n\n}"
+      },
+      "date": 1562370204428
+    },
+    {
+      "type": "edit",
+      "id": "a71e5e15d987b9f5",
+      "item": {
+        "type": "graphviz",
+        "id": "a71e5e15d987b9f5",
+        "text": "strict digraph {\n\n  node [shape=box]\n\nwiki -> \"wiki-client\"\nwiki -> \"wiki-server\"\n\n}"
+      },
+      "date": 1562370218651
+    },
+    {
+      "type": "edit",
+      "id": "a71e5e15d987b9f5",
+      "item": {
+        "type": "graphviz",
+        "id": "a71e5e15d987b9f5",
+        "text": "strict digraph {\n\n{\n  node [shape=box bgcolor=orange]\n  wiki \"wiki-client\" \"wiki-server\"\n}\n\nwiki -> \"wiki-client\"\nwiki -> \"wiki-server\"\n\n}"
+      },
+      "date": 1562370249277
+    },
+    {
+      "type": "edit",
+      "id": "a71e5e15d987b9f5",
+      "item": {
+        "type": "graphviz",
+        "id": "a71e5e15d987b9f5",
+        "text": "strict digraph {\n\n{\n  node [shape=box style=filled fillcolor=orange]\n  wiki \"wiki-client\" \"wiki-server\"\n}\n\nwiki -> \"wiki-client\"\nwiki -> \"wiki-server\"\n\n}"
+      },
+      "date": 1562370343516
+    },
+    {
+      "type": "edit",
+      "id": "a71e5e15d987b9f5",
+      "item": {
+        "type": "graphviz",
+        "id": "a71e5e15d987b9f5",
+        "text": "strict digraph {\nnode [shape=box style=filled fillcolor=white]\n{\n  node [fillcolor=orange]\n  wiki \"wiki-client\" \"wiki-server\"\n}\n\nwiki -> \"wiki-client\"\nwiki -> \"wiki-server\"\n\n}"
+      },
+      "date": 1562370424052
+    },
+    {
+      "type": "edit",
+      "id": "a71e5e15d987b9f5",
+      "item": {
+        "type": "graphviz",
+        "id": "a71e5e15d987b9f5",
+        "text": "strict digraph {\nnode [shape=box style=filled fillcolor=white]\n{\n  node [fillcolor=orange]\n  wiki \"wiki-client\" \"wiki-server\"\n}\n\n\nwiki -> { \"wiki-client\" \"wiki-server\" }\n\n\"wiki-client\" -> { \n  node [fillcolor=grey]\n  \"./views/static.html\"\n  \"./views/oops.html\"\n} [label=provides]\n\n}"
+      },
+      "date": 1562370548404
+    },
+    {
+      "type": "edit",
+      "id": "a71e5e15d987b9f5",
+      "item": {
+        "type": "graphviz",
+        "id": "a71e5e15d987b9f5",
+        "text": "strict digraph {\nnode [shape=box style=filled fillcolor=white]\n{\n  node [fillcolor=orange]\n  wiki \"wiki-client\" \"wiki-server\"\n}\n\n\nwiki -> { \"wiki-client\" \"wiki-server\" }\n\n\"wiki-client\" -> { \n  node [fillcolor=grey]\n  \"./views/static.html\"\n  \"./views/oops.html\"\n} [label=provides]\n\n\"wiki-server\" -> {\n  node [fillcolor=grey]\n  \"./../wiki-client/views/static.html\"\n  \"./../wiki-client/views/oops.html\"\n} [label=expects]\n\n}"
+      },
+      "date": 1562370676972
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "04c1018f73624b81"
+      },
+      "id": "04c1018f73624b81",
+      "type": "add",
+      "after": "a71e5e15d987b9f5",
+      "date": 1562371619009
+    },
+    {
+      "type": "edit",
+      "id": "04c1018f73624b81",
+      "item": {
+        "type": "code",
+        "id": "04c1018f73624b81",
+        "text": "wiki-wiki@0.0.6 /app\n├─┬ wiki@0.19.0\n│ ├── wiki-client@0.17.0\n│ └── wiki-server@0.15.2\n├── wiki-client@link:node_modules/.registry.npmjs.org/wiki-client/0.17.0/node_modules/wiki-client\n└── wiki-server@link:node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server\n"
+      },
+      "date": 1562371625680
+    },
+    {
+      "type": "edit",
+      "id": "04c1018f73624b81",
+      "item": {
+        "type": "code",
+        "id": "04c1018f73624b81",
+        "text": "$ pnpm ls wiki-client wiki-server\nwiki-wiki@0.0.6 /app\n├─┬ wiki@0.19.0\n│ ├── wiki-client@0.17.0\n│ └── wiki-server@0.15.2\n├── wiki-client@link:node_modules/.registry.npmjs.org/wiki-client/0.17.0/node_modules/wiki-client\n└── wiki-server@link:node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server\n"
+      },
+      "date": 1562371671427
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "f287bd15ab30569f"
+      },
+      "id": "f287bd15ab30569f",
+      "type": "add",
+      "after": "04c1018f73624b81",
+      "date": 1562375136115
+    },
+    {
+      "type": "edit",
+      "id": "f287bd15ab30569f",
+      "item": {
+        "type": "code",
+        "id": "f287bd15ab30569f",
+        "text": "https://glitch.com/edit/#!/childish-agenda?path=wiki-client/lib/views.coffee:4:0"
+      },
+      "date": 1562375141060
+    },
+    {
+      "type": "remove",
+      "id": "f287bd15ab30569f",
+      "date": 1562375151517
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "3747c3bd84615ba7"
+      },
+      "id": "3747c3bd84615ba7",
+      "type": "add",
+      "after": "04c1018f73624b81",
+      "date": 1562375153090
+    },
+    {
+      "type": "edit",
+      "id": "3747c3bd84615ba7",
+      "item": {
+        "type": "paragraph",
+        "id": "3747c3bd84615ba7",
+        "text": "[https://glitch.com/edit/#!/childish-agenda?path=wiki-client/lib/views.coffee:4:0 wiki-client/lib/views.coffee]"
+      },
+      "date": 1562375171294
+    },
+    {
+      "type": "add",
+      "id": "3f4b52a6e2bf575d",
+      "item": {
+        "type": "paragraph",
+        "id": "3f4b52a6e2bf575d",
+        "text": "[https://glitch.com/edit/#!/childish-agenda?path=wiki-server/lib/server.coffee:170:38 wiki-server/lib/server.coffee:170]"
+      },
+      "after": "3747c3bd84615ba7",
+      "date": 1562375262961
+    },
+    {
+      "type": "add",
+      "id": "535e82f1cb225bab",
+      "item": {
+        "type": "paragraph",
+        "id": "535e82f1cb225bab",
+        "text": "[https://glitch.com/edit/#!/childish-agenda?path=wiki-server/lib/server.coffee:50:0 wiki-server/lib/server.coffee:50]"
+      },
+      "after": "3747c3bd84615ba7",
+      "date": 1562375306610
+    },
+    {
+      "type": "edit",
+      "id": "3747c3bd84615ba7",
+      "item": {
+        "type": "paragraph",
+        "id": "3747c3bd84615ba7",
+        "text": "[https://glitch.com/edit/#!/childish-agenda?path=wiki-client/lib/views.coffee:4:0 wiki-client/lib/views.coffee] "
+      },
+      "date": 1562375314329
+    },
+    {
+      "type": "add",
+      "id": "cdb6b1c842880fd7",
+      "item": {
+        "type": "paragraph",
+        "id": "cdb6b1c842880fd7",
+        "text": "I tried changing wiki-server and wiki-client so that the server would ask the client for the path where to find the views for express.js calls to res.render()."
+      },
+      "after": "04c1018f73624b81",
+      "date": 1562375421030
+    },
+    {
+      "type": "add",
+      "id": "0ba774c977cdc226",
+      "item": {
+        "type": "paragraph",
+        "id": "0ba774c977cdc226",
+        "text": "I remixed [https://glitch.com/~wiki-wiki glitch.com/~wiki-wiki] and installed the modified client and server here: [https://glitch.com/~surf-system glitch.com/~surf-system]"
+      },
+      "after": "3f4b52a6e2bf575d",
+      "date": 1562375582700
+    },
+    {
+      "type": "add",
+      "id": "77b9347eed4ff6fb",
+      "item": {
+        "type": "paragraph",
+        "id": "77b9347eed4ff6fb",
+        "text": "pnpm installs the modules in different locations on disk"
+      },
+      "after": "0ba774c977cdc226",
+      "date": 1562375659168
+    },
+    {
+      "type": "move",
+      "order": [
+        "c9df6edb6bdfdf9a",
+        "a71e5e15d987b9f5",
+        "77b9347eed4ff6fb",
+        "04c1018f73624b81",
+        "cdb6b1c842880fd7",
+        "3747c3bd84615ba7",
+        "535e82f1cb225bab",
+        "3f4b52a6e2bf575d",
+        "0ba774c977cdc226"
+      ],
+      "id": "77b9347eed4ff6fb",
+      "date": 1562375663337
+    },
+    {
+      "type": "edit",
+      "id": "77b9347eed4ff6fb",
+      "item": {
+        "type": "paragraph",
+        "id": "77b9347eed4ff6fb",
+        "text": "pnpm installs the modules in different locations on disk:"
+      },
+      "date": 1562375668062
+    },
+    {
+      "type": "add",
+      "id": "2f085df888c837cf",
+      "item": {
+        "type": "paragraph",
+        "id": "2f085df888c837cf",
+        "text": "That trick isn't working. [https://surf-system.glitch.me surf-system.glitch.me] shows the following error:"
+      },
+      "after": "0ba774c977cdc226",
+      "date": 1562375713700
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "80a57a300ad92c3b"
+      },
+      "id": "80a57a300ad92c3b",
+      "type": "add",
+      "after": "2f085df888c837cf",
+      "date": 1562375726907
+    },
+    {
+      "type": "edit",
+      "id": "80a57a300ad92c3b",
+      "item": {
+        "type": "code",
+        "id": "80a57a300ad92c3b",
+        "text": "\n\nError: Failed to lookup view \"static.html\" in views directory \"/rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.childish-agenda.glitch.me/pkg/wiki-server-0.15.3-glitchify/node_modules/wiki-client/views\"\n    at Function.render (/rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.registry.npmjs.org/express/4.17.1/node_modules/express/lib/application.js:580:17)\n    at ServerResponse.render (/rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.registry.npmjs.org/express/4.17.1/node_modules/express/lib/response.js:1012:7)\n    at Object.cb (/rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.childish-agenda.glitch.me/pkg/wiki-server-0.15.3-glitchify/node_modules/wiki-server/lib/server.coffee:326:11)\n    at /rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.childish-agenda.glitch.me/pkg/wiki-server-0.15.3-glitchify/node_modules/wiki-server/lib/page.coffee:237:14\n    at /rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.childish-agenda.glitch.me/pkg/wiki-server-0.15.3-glitchify/node_modules/wiki-server/lib/page.coffee:64:7\n    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)\n\n"
+      },
+      "date": 1562375730199
+    },
+    {
+      "type": "edit",
+      "id": "80a57a300ad92c3b",
+      "item": {
+        "type": "code",
+        "id": "80a57a300ad92c3b",
+        "text": "Error: Failed to lookup view \"static.html\" in views directory \"/rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.childish-agenda.glitch.me/pkg/wiki-server-0.15.3-glitchify/node_modules/wiki-client/views\"\n    at Function.render (/rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.registry.npmjs.org/express/4.17.1/node_modules/express/lib/application.js:580:17)\n    at ServerResponse.render (/rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.registry.npmjs.org/express/4.17.1/node_modules/express/lib/response.js:1012:7)\n    at Object.cb (/rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.childish-agenda.glitch.me/pkg/wiki-server-0.15.3-glitchify/node_modules/wiki-server/lib/server.coffee:326:11)\n    at /rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.childish-agenda.glitch.me/pkg/wiki-server-0.15.3-glitchify/node_modules/wiki-server/lib/page.coffee:237:14\n    at /rbd/pnpm-volume/63a7ff9c-c947-4a1b-9495-bf5c1f010ac4/node_modules/.childish-agenda.glitch.me/pkg/wiki-server-0.15.3-glitchify/node_modules/wiki-server/lib/page.coffee:64:7\n    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)\n\n"
+      },
+      "date": 1562375734759
+    },
+    {
+      "type": "edit",
+      "id": "2f085df888c837cf",
+      "item": {
+        "type": "paragraph",
+        "id": "2f085df888c837cf",
+        "text": "That trick wasn't working. [https://surf-system.glitch.me surf-system.glitch.me] showed the following error:"
+      },
+      "date": 1562376500723
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "37c1497ef92a9c35"
+      },
+      "id": "37c1497ef92a9c35",
+      "type": "add",
+      "after": "80a57a300ad92c3b",
+      "date": 1562376505883
+    },
+    {
+      "type": "edit",
+      "id": "37c1497ef92a9c35",
+      "item": {
+        "type": "paragraph",
+        "id": "37c1497ef92a9c35",
+        "text": "Of particular note... that's still looking for views inside of wiki-server*/node_modules/wiki-client/views."
+      },
+      "date": 1562376580580
+    },
+    {
+      "type": "add",
+      "id": "31714c35b766ef6e",
+      "item": {
+        "type": "paragraph",
+        "id": "31714c35b766ef6e",
+        "text": "I managed to get passed that problem by updating the wiki-server dev dependency on wiki-client."
+      },
+      "after": "37c1497ef92a9c35",
+      "date": 1562376709339
+    },
+    {
+      "type": "add",
+      "id": "2ba44cac1e93895c",
+      "item": {
+        "type": "paragraph",
+        "id": "2ba44cac1e93895c",
+        "text": "And that introduced a new problem where /client.js doesn't seem to exist on the installed server."
+      },
+      "after": "31714c35b766ef6e",
+      "date": 1562376748522
+    },
+    {
+      "type": "fork",
+      "date": 1562376866951
+    },
+    {
+      "type": "add",
+      "id": "aa4f0b584dbce19b",
+      "item": {
+        "type": "paragraph",
+        "id": "aa4f0b584dbce19b",
+        "text": "Initial symptom is partial breakage of [https://wiki-wiki.glitch.me wiki-wiki.glitch.me] <-- this link breaks"
+      },
+      "after": "c9df6edb6bdfdf9a",
+      "date": 1562377054743
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "6ea898429f6cc880"
+      },
+      "id": "6ea898429f6cc880",
+      "type": "add",
+      "after": "2ba44cac1e93895c",
+      "date": 1562377067473
+    },
+    {
+      "type": "edit",
+      "id": "6ea898429f6cc880",
+      "item": {
+        "type": "code",
+        "id": "6ea898429f6cc880",
+        "text": "\n\nError: Failed to lookup view \"static.html\" in views directory \"/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-client/views\"\n    at Function.render (/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/express/4.17.1/node_modules/express/lib/application.js:580:17)\n    at ServerResponse.render (/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/express/4.17.1/node_modules/express/lib/response.js:1012:7)\n    at Object.cb (/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server/lib/server.coffee:326:11)\n    at /rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server/lib/page.coffee:237:14\n    at /rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server/lib/page.coffee:64:7\n    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)\n\n"
+      },
+      "date": 1562377077874
+    },
+    {
+      "type": "edit",
+      "id": "6ea898429f6cc880",
+      "item": {
+        "type": "code",
+        "id": "6ea898429f6cc880",
+        "text": "Error: Failed to lookup view \"static.html\" in views directory \"/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-client/views\"\n    at Function.render (/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/express/4.17.1/node_modules/express/lib/application.js:580:17)\n    at ServerResponse.render (/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/express/4.17.1/node_modules/express/lib/response.js:1012:7)\n    at Object.cb (/rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server/lib/server.coffee:326:11)\n    at /rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server/lib/page.coffee:237:14\n    at /rbd/pnpm-volume/9f646303-4d77-434e-af52-bc3b24e95687/node_modules/.registry.npmjs.org/wiki-server/0.15.2/node_modules/wiki-server/lib/page.coffee:64:7\n    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)\n\n"
+      },
+      "date": 1562377082244
+    },
+    {
+      "type": "move",
+      "order": [
+        "c9df6edb6bdfdf9a",
+        "aa4f0b584dbce19b",
+        "6ea898429f6cc880",
+        "a71e5e15d987b9f5",
+        "77b9347eed4ff6fb",
+        "04c1018f73624b81",
+        "cdb6b1c842880fd7",
+        "3747c3bd84615ba7",
+        "535e82f1cb225bab",
+        "3f4b52a6e2bf575d",
+        "0ba774c977cdc226",
+        "2f085df888c837cf",
+        "80a57a300ad92c3b",
+        "37c1497ef92a9c35",
+        "31714c35b766ef6e",
+        "2ba44cac1e93895c"
+      ],
+      "id": "6ea898429f6cc880",
+      "date": 1562377116500
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "8840fb9b85bb3286"
+      },
+      "id": "8840fb9b85bb3286",
+      "type": "add",
+      "after": "2ba44cac1e93895c",
+      "date": 1562377145350
+    },
+    {
+      "type": "edit",
+      "id": "8840fb9b85bb3286",
+      "item": {
+        "type": "reference",
+        "id": "8840fb9b85bb3286",
+        "site": "wiki-wiki.glitch.me",
+        "slug": "wiki-hosted-on-glitch",
+        "title": "Wiki Hosted on Glitch",
+        "text": "Here we demonstrate using [https://glitch.com Glitch.com] to host wiki for authors."
+      },
+      "date": 1562377148325
+    },
+    {
+      "type": "move",
+      "order": [
+        "c9df6edb6bdfdf9a",
+        "aa4f0b584dbce19b",
+        "6ea898429f6cc880",
+        "8840fb9b85bb3286",
+        "a71e5e15d987b9f5",
+        "77b9347eed4ff6fb",
+        "04c1018f73624b81",
+        "cdb6b1c842880fd7",
+        "3747c3bd84615ba7",
+        "535e82f1cb225bab",
+        "3f4b52a6e2bf575d",
+        "0ba774c977cdc226",
+        "2f085df888c837cf",
+        "80a57a300ad92c3b",
+        "37c1497ef92a9c35",
+        "31714c35b766ef6e",
+        "2ba44cac1e93895c"
+      ],
+      "id": "8840fb9b85bb3286",
+      "date": 1562377160664
+    },
+    {
+      "type": "edit",
+      "id": "8840fb9b85bb3286",
+      "item": {
+        "type": "reference",
+        "id": "8840fb9b85bb3286",
+        "site": "wiki-wiki.glitch.me",
+        "slug": "wiki-hosted-on-glitch",
+        "title": "Wiki Hosted on Glitch",
+        "text": "<-- This reference link works okay. The server is running and serving .json files to clients from other origin servers in the federation. But breaks when trying to render the static pages directly."
+      },
+      "date": 1562377254355
+    },
+    {
+      "type": "edit",
+      "id": "8840fb9b85bb3286",
+      "item": {
+        "type": "reference",
+        "id": "8840fb9b85bb3286",
+        "site": "wiki-wiki.glitch.me",
+        "slug": "wiki-hosted-on-glitch",
+        "title": "Wiki Hosted on Glitch",
+        "text": "This reference link works okay. The server is running and serving .json files to clients from other origin servers in the federation. But breaks when trying to render the static pages directly."
+      },
+      "date": 1562377262014
+    },
+    {
+      "type": "move",
+      "order": [
+        "c9df6edb6bdfdf9a",
+        "aa4f0b584dbce19b",
+        "8840fb9b85bb3286",
+        "6ea898429f6cc880",
+        "a71e5e15d987b9f5",
+        "77b9347eed4ff6fb",
+        "04c1018f73624b81",
+        "cdb6b1c842880fd7",
+        "3747c3bd84615ba7",
+        "535e82f1cb225bab",
+        "3f4b52a6e2bf575d",
+        "0ba774c977cdc226",
+        "2f085df888c837cf",
+        "80a57a300ad92c3b",
+        "37c1497ef92a9c35",
+        "31714c35b766ef6e",
+        "2ba44cac1e93895c"
+      ],
+      "id": "8840fb9b85bb3286",
+      "date": 1562377287708
+    },
+    {
+      "type": "move",
+      "order": [
+        "c9df6edb6bdfdf9a",
+        "8840fb9b85bb3286",
+        "aa4f0b584dbce19b",
+        "6ea898429f6cc880",
+        "a71e5e15d987b9f5",
+        "77b9347eed4ff6fb",
+        "04c1018f73624b81",
+        "cdb6b1c842880fd7",
+        "3747c3bd84615ba7",
+        "535e82f1cb225bab",
+        "3f4b52a6e2bf575d",
+        "0ba774c977cdc226",
+        "2f085df888c837cf",
+        "80a57a300ad92c3b",
+        "37c1497ef92a9c35",
+        "31714c35b766ef6e",
+        "2ba44cac1e93895c"
+      ],
+      "id": "aa4f0b584dbce19b",
+      "date": 1562377291078
+    },
+    {
+      "type": "edit",
+      "id": "aa4f0b584dbce19b",
+      "item": {
+        "type": "paragraph",
+        "id": "aa4f0b584dbce19b",
+        "text": "[https://wiki-wiki.glitch.me wiki-wiki.glitch.me] <-- this link breaks."
+      },
+      "date": 1562377326299
+    },
+    {
+      "type": "edit",
+      "id": "aa4f0b584dbce19b",
+      "item": {
+        "type": "paragraph",
+        "id": "aa4f0b584dbce19b",
+        "text": "[https://wiki-wiki.glitch.me wiki-wiki.glitch.me] <-- this link breaks:"
+      },
+      "date": 1562377333043
+    },
+    {
+      "type": "edit",
+      "id": "c9df6edb6bdfdf9a",
+      "item": {
+        "type": "paragraph",
+        "id": "c9df6edb6bdfdf9a",
+        "text": "The title of this page optimistically hopes we'll git this bug fixed before the end of the month. Something in glitch internals seems to be interacting badly with something in wiki's internals. I believe the problem is that wiki makes assumptions about where wiki-server package and wiki-client package live on disk and that pnpm installs packages according to different conventions. There are a lot of moving parts. Below the symptoms, see a drawing what I understand of the parts and their relationships."
+      },
+      "date": 1562377389832
+    },
+    {
+      "type": "add",
+      "id": "91b2e242a0a8d65b",
+      "item": {
+        "type": "paragraph",
+        "id": "91b2e242a0a8d65b",
+        "text": "See [[Hack Wiki Using Glitch]]"
+      },
+      "after": "cdb6b1c842880fd7",
+      "date": 1562377843664
+    },
+    {
+      "type": "edit",
+      "id": "2ba44cac1e93895c",
+      "item": {
+        "type": "paragraph",
+        "id": "2ba44cac1e93895c",
+        "text": "And that introduced a new problem where /client.js doesn't seem to exist on the installed server. <-- resolved this bug by running grunt build before running npm pack."
+      },
+      "date": 1562422923936
+    },
+    {
+      "type": "add",
+      "id": "611afcdd36436a18",
+      "item": {
+        "type": "paragraph",
+        "id": "611afcdd36436a18",
+        "text": "Paul suggested a solution that involves only a one-line change to wiki-server."
+      },
+      "after": "2ba44cac1e93895c",
+      "date": 1562422956919
+    },
+    {
+      "type": "add",
+      "id": "4d83757af999906e",
+      "item": {
+        "type": "paragraph",
+        "id": "4d83757af999906e",
+        "text": "[https://github.com/fedwiki/wiki-server/pull/147 wiki-server/pull/147]"
+      },
+      "after": "c9df6edb6bdfdf9a",
+      "date": 1562457281984
+    },
+    {
+      "type": "add",
+      "id": "51056c4f04c77783",
+      "item": {
+        "type": "paragraph",
+        "id": "51056c4f04c77783",
+        "text": "[https://github.com/fedwiki/wiki-client/pull/244 wiki-client/pull/244]"
+      },
+      "after": "4d83757af999906e",
+      "date": 1562457303940
+    },
+    {
+      "type": "move",
+      "order": [
+        "c9df6edb6bdfdf9a",
+        "51056c4f04c77783",
+        "4d83757af999906e",
+        "8840fb9b85bb3286",
+        "aa4f0b584dbce19b",
+        "6ea898429f6cc880",
+        "a71e5e15d987b9f5",
+        "77b9347eed4ff6fb",
+        "04c1018f73624b81",
+        "cdb6b1c842880fd7",
+        "91b2e242a0a8d65b",
+        "3747c3bd84615ba7",
+        "535e82f1cb225bab",
+        "3f4b52a6e2bf575d",
+        "0ba774c977cdc226",
+        "2f085df888c837cf",
+        "80a57a300ad92c3b",
+        "37c1497ef92a9c35",
+        "31714c35b766ef6e",
+        "2ba44cac1e93895c",
+        "611afcdd36436a18"
+      ],
+      "id": "51056c4f04c77783",
+      "date": 1562457307333
+    },
+    {
+      "type": "add",
+      "id": "9b86599b2939154b",
+      "item": {
+        "type": "paragraph",
+        "id": "9b86599b2939154b",
+        "text": "These PRs fix the bug and let wiki run in glitch."
+      },
+      "after": "c9df6edb6bdfdf9a",
+      "date": 1562457348824
+    },
+    {
+      "type": "add",
+      "id": "1d22f3add5d30e56",
+      "item": {
+        "type": "paragraph",
+        "id": "1d22f3add5d30e56",
+        "text": "2019-07-14 Update: we have a PR just for wiki-server which fixes this bug."
+      },
+      "after": "c9df6edb6bdfdf9a",
+      "date": 1563131565495
+    },
+    {
+      "type": "add",
+      "id": "dbf61ab36af97478",
+      "item": {
+        "type": "paragraph",
+        "id": "dbf61ab36af97478",
+        "text": "[https://github.com/fedwiki/wiki-server/pull/148 wiki-server/pull/148]"
+      },
+      "after": "1d22f3add5d30e56",
+      "date": 1563132004024
+    },
+    {
+      "type": "remove",
+      "id": "dbf61ab36af97478",
+      "date": 1563132012847
+    },
+    {
+      "type": "edit",
+      "id": "1d22f3add5d30e56",
+      "item": {
+        "type": "paragraph",
+        "id": "1d22f3add5d30e56",
+        "text": "2019-07-14 Update: we have a PR just for wiki-server which fixes this bug. [https://github.com/fedwiki/wiki-server/pull/148 wiki-server/pull/148]"
+      },
+      "date": 1563132017693
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "0b37c263748ad735"
+      },
+      "id": "0b37c263748ad735",
+      "type": "add",
+      "after": "611afcdd36436a18",
+      "date": 1563132031767
+    },
+    {
+      "type": "edit",
+      "id": "0b37c263748ad735",
+      "item": {
+        "type": "pagefold",
+        "id": "0b37c263748ad735",
+        "text": "symptoms"
+      },
+      "date": 1563132036535
+    },
+    {
+      "type": "move",
+      "order": [
+        "c9df6edb6bdfdf9a",
+        "1d22f3add5d30e56",
+        "9b86599b2939154b",
+        "51056c4f04c77783",
+        "4d83757af999906e",
+        "8840fb9b85bb3286",
+        "aa4f0b584dbce19b",
+        "6ea898429f6cc880",
+        "0b37c263748ad735",
+        "a71e5e15d987b9f5",
+        "77b9347eed4ff6fb",
+        "04c1018f73624b81",
+        "cdb6b1c842880fd7",
+        "91b2e242a0a8d65b",
+        "3747c3bd84615ba7",
+        "535e82f1cb225bab",
+        "3f4b52a6e2bf575d",
+        "0ba774c977cdc226",
+        "2f085df888c837cf",
+        "80a57a300ad92c3b",
+        "37c1497ef92a9c35",
+        "31714c35b766ef6e",
+        "2ba44cac1e93895c",
+        "611afcdd36436a18"
+      ],
+      "id": "0b37c263748ad735",
+      "date": 1563132048110
+    },
+    {
+      "type": "move",
+      "order": [
+        "c9df6edb6bdfdf9a",
+        "1d22f3add5d30e56",
+        "9b86599b2939154b",
+        "51056c4f04c77783",
+        "4d83757af999906e",
+        "0b37c263748ad735",
+        "8840fb9b85bb3286",
+        "aa4f0b584dbce19b",
+        "6ea898429f6cc880",
+        "a71e5e15d987b9f5",
+        "77b9347eed4ff6fb",
+        "04c1018f73624b81",
+        "cdb6b1c842880fd7",
+        "91b2e242a0a8d65b",
+        "3747c3bd84615ba7",
+        "535e82f1cb225bab",
+        "3f4b52a6e2bf575d",
+        "0ba774c977cdc226",
+        "2f085df888c837cf",
+        "80a57a300ad92c3b",
+        "37c1497ef92a9c35",
+        "31714c35b766ef6e",
+        "2ba44cac1e93895c",
+        "611afcdd36436a18"
+      ],
+      "id": "0b37c263748ad735",
+      "date": 1563132055168
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "b87cc7c38c6e8643"
+      },
+      "id": "b87cc7c38c6e8643",
+      "type": "add",
+      "after": "611afcdd36436a18",
+      "date": 1563132070777
+    },
+    {
+      "type": "edit",
+      "id": "b87cc7c38c6e8643",
+      "item": {
+        "type": "pagefold",
+        "id": "b87cc7c38c6e8643",
+        "text": "diagnosis"
+      },
+      "date": 1563132077001
+    },
+    {
+      "type": "move",
+      "order": [
+        "c9df6edb6bdfdf9a",
+        "1d22f3add5d30e56",
+        "9b86599b2939154b",
+        "51056c4f04c77783",
+        "4d83757af999906e",
+        "0b37c263748ad735",
+        "8840fb9b85bb3286",
+        "aa4f0b584dbce19b",
+        "6ea898429f6cc880",
+        "b87cc7c38c6e8643",
+        "a71e5e15d987b9f5",
+        "77b9347eed4ff6fb",
+        "04c1018f73624b81",
+        "cdb6b1c842880fd7",
+        "91b2e242a0a8d65b",
+        "3747c3bd84615ba7",
+        "535e82f1cb225bab",
+        "3f4b52a6e2bf575d",
+        "0ba774c977cdc226",
+        "2f085df888c837cf",
+        "80a57a300ad92c3b",
+        "37c1497ef92a9c35",
+        "31714c35b766ef6e",
+        "2ba44cac1e93895c",
+        "611afcdd36436a18"
+      ],
+      "id": "b87cc7c38c6e8643",
+      "date": 1563132086432
+    },
+    {
+      "type": "remove",
+      "id": "3f4b52a6e2bf575d",
+      "date": 1563132126672
+    },
+    {
+      "type": "remove",
+      "id": "535e82f1cb225bab",
+      "date": 1563132127685
+    },
+    {
+      "type": "remove",
+      "id": "3747c3bd84615ba7",
+      "date": 1563132129046
+    },
+    {
+      "type": "remove",
+      "id": "0ba774c977cdc226",
+      "date": 1563132146503
+    },
+    {
+      "type": "remove",
+      "id": "2f085df888c837cf",
+      "date": 1563132150331
+    },
+    {
+      "type": "remove",
+      "id": "80a57a300ad92c3b",
+      "date": 1563132153327
+    },
+    {
+      "type": "remove",
+      "id": "2ba44cac1e93895c",
+      "date": 1563132168430
+    },
+    {
+      "type": "remove",
+      "id": "31714c35b766ef6e",
+      "date": 1563132169509
+    },
+    {
+      "type": "remove",
+      "id": "37c1497ef92a9c35",
+      "date": 1563132170663
+    },
+    {
+      "type": "add",
+      "id": "9a989a886df39449",
+      "item": {
+        "type": "paragraph",
+        "id": "9a989a886df39449",
+        "text": "Nick commented on PR #148 with a variant on Paul's suggestion to use require.resolve() which I was able to get working."
+      },
+      "after": "611afcdd36436a18",
+      "date": 1563132255728
+    },
+    {
+      "type": "edit",
+      "id": "9b86599b2939154b",
+      "item": {
+        "type": "paragraph",
+        "id": "9b86599b2939154b",
+        "text": "These closed PRs fixed the bug and let wiki run in glitch. But the above fix is preferred because it works without changes to wiki-client."
+      },
+      "date": 1563132310054
+    }
+  ]
+}

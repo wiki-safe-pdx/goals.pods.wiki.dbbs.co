@@ -1,0 +1,43 @@
+{
+  "title": "Spinners",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "e78035cd7fbe53e0",
+      "text": "Minor interest in a simple cycle of UTF-8 characters for a loading spinner. [https://github.com/sindresorhus/cli-spinners/blob/HEAD/spinners.json github]"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Spinners",
+        "story": []
+      },
+      "date": 1608416717583
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "e78035cd7fbe53e0"
+      },
+      "id": "e78035cd7fbe53e0",
+      "type": "add",
+      "date": 1608416719073
+    },
+    {
+      "type": "edit",
+      "id": "e78035cd7fbe53e0",
+      "item": {
+        "type": "paragraph",
+        "id": "e78035cd7fbe53e0",
+        "text": "Minor interest in a simple cycle of UTF-8 characters for a loading spinner. [https://github.com/sindresorhus/cli-spinners/blob/HEAD/spinners.json github]"
+      },
+      "date": 1608416776274
+    },
+    {
+      "type": "fork",
+      "date": 1608417076427
+    }
+  ]
+}

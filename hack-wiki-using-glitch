@@ -1,0 +1,143 @@
+{
+  "title": "Hack Wiki Using Glitch",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "1dea02efbb651423",
+      "text": "While troubleshooting [[Glitch 2019-07 Bug]] I used glitch to host the code for wiki, wiki-client, and wiki-server. The same project also acts as a simple web server to self-host npm packages. [https://glitch.com/~wiki-dev glitch.com/~wiki-dev]"
+    },
+    {
+      "type": "paragraph",
+      "id": "1b42368c6868b999",
+      "text": "Features of glitch and npm combine to make it possible to hack anything about wiki using only glitch. To get started, remix two glitch projects to create a home for your own experiments:"
+    },
+    {
+      "type": "paragraph",
+      "id": "154dd748a58da0a1",
+      "text": "Wiki itself: [https://glitch.com/~wiki-wiki glitch.com/~wiki-wiki]"
+    },
+    {
+      "type": "paragraph",
+      "id": "7f837319eed7e783",
+      "text": "Wiki Dev Environment: [https://glitch.com/~wiki-dev glitch.com/~wiki-dev]"
+    },
+    {
+      "type": "paragraph",
+      "id": "94959210179c0399",
+      "text": "The basic idea is to checkout source code for different parts of wiki into the dev environment, modify the code with the glitch editor, package the changes, and publish them in a special folder in the dev environment. Once published, you can install your experiments into your remix of wiki-wiki to try out the changes, or to share them with other wiki hackers."
+    },
+    {
+      "type": "paragraph",
+      "id": "546b88699c88996f",
+      "text": "Glitch offers collaborative features that seem worth the effort to learn: you can immediately share the code with other hackers or even write code together directly; once installed in a remix of wiki-wiki, you can also immediately share the new behaviors or features you've created, or share the bugs where you can ask for more specific help. Your collaborators can remix what you've done and build on your work."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Hack Wiki Using Glitch",
+        "story": []
+      },
+      "date": 1562377492864
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "1dea02efbb651423"
+      },
+      "id": "1dea02efbb651423",
+      "type": "add",
+      "date": 1562377498969
+    },
+    {
+      "type": "edit",
+      "id": "1dea02efbb651423",
+      "item": {
+        "type": "paragraph",
+        "id": "1dea02efbb651423",
+        "text": "While troubleshooting [[Glitch 2019-07 Bug]] I used glitch to host the code for wiki, wiki-client, and wiki-server. The same project also acts as a simple web server to self-host npm packages. [https://glitch.com/~childish-agenda glitch.com/~childish-agenda]"
+      },
+      "date": 1562377613622
+    },
+    {
+      "type": "fork",
+      "date": 1562450700965
+    },
+    {
+      "type": "edit",
+      "id": "1dea02efbb651423",
+      "item": {
+        "type": "paragraph",
+        "id": "1dea02efbb651423",
+        "text": "While troubleshooting [[Glitch 2019-07 Bug]] I used glitch to host the code for wiki, wiki-client, and wiki-server. The same project also acts as a simple web server to self-host npm packages. [https://glitch.com/~wiki-dev glitch.com/~wiki-dev]"
+      },
+      "date": 1562450718093
+    },
+    {
+      "type": "add",
+      "id": "1b42368c6868b999",
+      "item": {
+        "type": "paragraph",
+        "id": "1b42368c6868b999",
+        "text": "Features of glitch and npm combine to make it possible to hack anything about wiki using only glitch. To get started, remix two glitch projects to create a home for your own experiments:"
+      },
+      "after": "1dea02efbb651423",
+      "date": 1562451307227
+    },
+    {
+      "type": "add",
+      "id": "154dd748a58da0a1",
+      "item": {
+        "type": "paragraph",
+        "id": "154dd748a58da0a1",
+        "text": "Wiki itself: [https://glitch.com/~wiki-wiki glitch.com/~wiki-wiki]"
+      },
+      "after": "1b42368c6868b999",
+      "date": 1562451354650
+    },
+    {
+      "type": "add",
+      "id": "7f837319eed7e783",
+      "item": {
+        "type": "paragraph",
+        "id": "7f837319eed7e783",
+        "text": "Wiki Dev Environment: [https://glitch.com/~wiki-dev glitch.com/~wiki-dev]"
+      },
+      "after": "154dd748a58da0a1",
+      "date": 1562451384105
+    },
+    {
+      "type": "add",
+      "id": "94959210179c0399",
+      "item": {
+        "type": "paragraph",
+        "id": "94959210179c0399",
+        "text": "The basic idea is to checkout source code for different parts of wiki into the dev environment, modify the code with the glitch editor, package the changes, and publish them in a special folder in the dev environment. Once published, you can install your experiments into your remix of wiki-wiki to try out the changes, or to share them with other wiki hackers."
+      },
+      "after": "7f837319eed7e783",
+      "date": 1562451871401
+    },
+    {
+      "type": "add",
+      "id": "546b88699c88996f",
+      "item": {
+        "type": "paragraph",
+        "id": "546b88699c88996f",
+        "text": "There are other ways to hack on wiki that involve learning different details. My experience is mixed; I'm not sure which of these ways I like best nor which feels easiest to get started. Glitch offers collaborative features that seem worth the effort to learn: you can immediately share the code with other hackers or even write code together directly; once installed in a remix of wiki-wiki, you can also immediately share the new behaviors or features you've created, or share the bugs where you can ask for more specific help."
+      },
+      "after": "94959210179c0399",
+      "date": 1562452240732
+    },
+    {
+      "type": "edit",
+      "id": "546b88699c88996f",
+      "item": {
+        "type": "paragraph",
+        "id": "546b88699c88996f",
+        "text": "Glitch offers collaborative features that seem worth the effort to learn: you can immediately share the code with other hackers or even write code together directly; once installed in a remix of wiki-wiki, you can also immediately share the new behaviors or features you've created, or share the bugs where you can ask for more specific help. Your collaborators can remix what you've done and build on your work."
+      },
+      "date": 1562453768195
+    }
+  ]
+}

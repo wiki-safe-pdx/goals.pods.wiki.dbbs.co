@@ -1,0 +1,206 @@
+{
+  "title": "digitalocean-bootstrap.sh",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "5f3953c791c67963",
+      "text": "Here is the script which bootstrapped the digitalocean VM which hosts this wiki.  I have extended it somewhat to manage adding new CNAMEs to my domain name."
+    },
+    {
+      "type": "code",
+      "id": "46dee22bb18bfbdb",
+      "text": "# .env\nDROPLET=wiki.example.com\nTOKEN_FILE=~/.digitalocean-token\nREGION=sfo2\nLE_EMAIL=letsencrypt-email-address@example.com\nCOMPOSE_PROJECT_NAME=wiki\n"
+    },
+    {
+      "type": "code",
+      "id": "c84735b41c420c04",
+      "text": "#!/bin/bash -eu\nset -o pipefail\nIFS=$'\\t\\n\\r'\n\nreadonly COMPOSE_DIR=$( cd $(dirname $0); pwd )\n\nmain() {\n    create-droplet\n    create-droplet-floating-ip\n    create-fqdn\n    create-wildcard-cname\n}\n\ncreate-environment() {\n    source $COMPOSE_DIR/.env\n    [ -n \"${DROPLET:-}\" ]    || { echo \".env missing DROPLET\" ; FATAL=1; }\n    [ -n \"${TOKEN_FILE:-}\" ] || { echo \".env missing TOKEN_FILE\" ; FATAL=1; }\n    [ -n \"${REGION:-}\" ]     || { echo \".env missing REGION\" ; FATAL=1; }\n\n    [ -z \"${FATAL:-}\" ] || exit 1\n}\n\ncreate-droplet() {\n    droplet-exists || {\n        docker-machine \\\n            create --driver digitalocean\\\n            --digitalocean-access-token=$(token) \\\n            --digitalocean-region=$REGION \\\n            $DROPLET\n    }\n}\n\ncreate-droplet-floating-ip() {\n    local IP=$(droplet-floating-ip)\n    [ -n \"$IP\" ] || {\n        local ID=$(droplet-list | awk \"/$DROPLET\\$/ {print \\$1}\")\n        do-api -sS -X POST \\\n               -d \"{\\\"droplet_id\\\":$ID}\" \\\n               \"https://api.digitalocean.com/v2/floating_ips\"\n    }\n}\n\ncreate-fqdn() {\n    fqdn-exists || {\n        do-api -X POST \\\n               -d \"{\\\"name\\\":\\\"${DROPLET}\\\",\\\"ip_address\\\":$(droplet-floating-ip)}\" \\\n               \"https://api.digitalocean.com/v2/domains\"\n    }\n}\n\ncreate-wildcard-cname() {\n    wildcard-cname-exists || {\n        do-api -X POST \\\n               -d \"{\\\"type\\\":\\\"CNAME\\\",\\\"name\\\":\\\"*\\\",\\\"data\\\":\\\"@\\\",\\\"priority\\\":null,\\\"port\\\":null,\\\"weight\\\":null}\" \\\n               \"https://api.digitalocean.com/v2/domains/${DROPLET}/records\"\n    }\n}\n\ndroplet-list-json() {\n    do-api -sS -X GET \"https://api.digitalocean.com/v2/droplets?page=1&per_page=10\"\n}\n\ndroplet-list() {\n    # memoize to self-regulate DO rate-limits\n    if [ -z \"${DROPLET_LIST:-}\" ]; then\n        local JSON=\"$(droplet-list-json)\"\n        echo $JSON\n        <<<\"$JSON\" jq -r '.droplets[]'\n        readonly DROPLET_LIST=\"$(<<<\"$JSON\" jq -r '.droplets[] | .id, .name' \\\n            | paste - -)\"\n    fi\n    echo -e $DROPLET_LIST\n}\n\ndroplet-exists() {\n    droplet-list | grep -q \"$DROPLET\\$\"\n}\n\ndroplet-floating-ip() {\n    do-api -sS -X GET \"https://api.digitalocean.com/v2/floating_ips?page=1&per_page=20\" \\\n        | jq \".floating_ips[] | select(.droplet.name == \\\"$DROPLET\\\") | .ip\"\n}\n\nfqdn-exists() {\n    # not_found is in the error payload if the domain doesn't exist\n    # so this code is a double-negative: true if we don't find \"not_found\"\n    do-api -sS -X GET \"https://api.digitalocean.com/v2/domains/${DROPLET}\" \\\n        | grep -qv not_found\n}\n\nwildcard-cname-exists() {\n    list-cnames \\\n        | grep -q '^*'\n}\n\nlist-cnames() {\n    do-api -sS -X GET \\\n           \"https://api.digitalocean.com/v2/domains/${DROPLET}/records\" \\\n        | jq -r '.domain_records[] | select(.type == \"CNAME\") | .name, .data' \\\n        | paste - -\n}\n\ncreate-cname() {\n    local SUBDOMAIN=\"${1:-*}\"\n    cname-exists $SUBDOMAIN || {\n        local URL=\"https://api.digitalocean.com/v2/domains/${DROPLET}/records\"\n        do-api -X POST -d@- $URL <<EOF\n{\n  \"type\" : \"CNAME\",\n  \"name\" : \"$SUBDOMAIN\",\n  \"data\" : \"@\",\n  \"priority\" : null,\n  \"port\" : null,\n  \"weight\" : null\n}\nEOF\n    }\n}\n\ncname-exists() {\n    local SUBDOMAIN=\"${1:-UNSPECIFIED}\"\n    list-cnames | grep -q \"^$SUBDOMAIN\"\n}\n\ndo-api() {\n    curl \\\n        -H \"Content-Type: application/json\" \\\n        -H \"Authorization: Bearer $(token)\" \\\n        $@\n}\n\ntoken() {\n    cat $TOKEN_FILE\n}\n\ncase ${1:-} in\n    list-cnames \\\n    | create-cname \\\n    | create-droplet \\\n    | create-droplet-floating-ip \\\n    | create-fqdn \\\n    | create-wildcard-cname \\\n    | wildcard-cname-exists \\\n    )\n        readonly CMD=${1}\n        shift\n    ;;\n    *)\n        readonly CMD=main\n    ;;\nesac\n\ncreate-environment\n$CMD $@\n"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "digitalocean-bootstrap.sh",
+        "story": []
+      },
+      "date": 1497057440777
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "c84735b41c420c04"
+      },
+      "id": "c84735b41c420c04",
+      "type": "add",
+      "date": 1497057442754
+    },
+    {
+      "type": "edit",
+      "id": "c84735b41c420c04",
+      "item": {
+        "type": "code",
+        "id": "c84735b41c420c04",
+        "text": "#!/bin/bash -eu\nset -o pipefail\n\nreadonly COMPOSE_DIR=$( cd $(dirname $0); pwd )\n\nmain() {\n    create-droplet\n    create-droplet-floating-ip\n    create-fqdn\n    create-wildcard-cname\n\n    create-docker-environment\n    create-named-volumes\n    open-portal-to-named-volumes\n    install-configs-in-named-volumes\n    close-portal-to-named-volumes\n}\n\ncreate-environment() {\n    source $COMPOSE_DIR/.env\n    [ -n \"${DROPLET:-}\" ]    || { echo \".env missing DROPLET\" ; FATAL=1; }\n    [ -n \"${TOKEN_FILE:-}\" ] || { echo \".env missing TOKEN_FILE\" ; FATAL=1; }\n    [ -n \"${REGION:-}\" ]     || { echo \".env missing REGION\" ; FATAL=1; }\n\n    [ -z \"${FATAL:-}\" ] || exit 1\n}\n\ncreate-droplet() {\n    droplet-exists || {\n        docker-machine \\\n            create --driver digitalocean\\\n            --digitalocean-access-token=$(token) \\\n            --digitalocean-region=$REGION \\\n            $DROPLET\n    }\n}\n\ncreate-droplet-floating-ip() {\n    local IP=$(droplet-floating-ip)\n    [ -n \"$IP\" ] || {\n        local ID=$(droplet-list | awk \"/$DROPLET\\$/ {print \\$1}\")\n        do-api -sS -X POST \\\n               -d \"{\\\"droplet_id\\\":$ID}\" \\\n               \"https://api.digitalocean.com/v2/floating_ips\"\n    }\n}\n\ncreate-docker-environment() {\n    eval $(docker-machine env $DROPLET)\n}\n\ncreate-named-volumes() {\n    docker volume create --name proxy.$DROPLET\n    docker volume create --name wiki.$DROPLET\n}\n\nopen-portal-to-named-volumes() {\n    docker run --name ping -d \\\n           -v proxy.$DROPLET:/proxy \\\n           -v wiki.$DROPLET:/dot-wiki \\\n           buildpack-deps:jessie-curl ping -i 60 localhost\n}\n\ninstall-configs-in-named-volumes() {\n    cd $COMPOSE_DIR\n    docker cp dot-wiki/config.json ping:/dot-wiki/config.json\n    docker cp proxy/Caddyfile ping:/proxy/Caddyfile\n    docker-compose run --rm --user root web chown -R app:app .wiki\n}\n\nclose-portal-to-named-volumes() {\n    docker rm -f ping\n}\n\ncreate-fqdn() {\n    fqdn-exists || {\n        do-api -X POST \\\n               -d \"{\\\"name\\\":\\\"${DROPLET}\\\",\\\"ip_address\\\":$(droplet-floating-ip)}\" \\\n               \"https://api.digitalocean.com/v2/domains\"\n    }\n}\n\ncreate-wildcard-cname() {\n    wildcard-cname-exists || {\n        do-api -X POST \\\n               -d \"{\\\"type\\\":\\\"CNAME\\\",\\\"name\\\":\\\"*\\\",\\\"data\\\":\\\"@\\\",\\\"priority\\\":null,\\\"port\\\":null,\\\"weight\\\":null}\" \\\n               \"https://api.digitalocean.com/v2/domains/${DROPLET}/records\"\n    }\n}\n\ndroplet-list-json() {\n    do-api -sS -X GET \"https://api.digitalocean.com/v2/droplets?page=1&per_page=10\"\n}\n\ndroplet-list() {\n    # memoize to self-regulate DO rate-limits\n    if [ -z \"${DROPLET_LIST:-}\" ]; then\n        local JSON=\"$(droplet-list-json)\"\n        echo $JSON\n        <<<\"$JSON\" jq -r '.droplets[]'\n        readonly DROPLET_LIST=\"$(<<<\"$JSON\" jq -r '.droplets[] | .id, .name' \\\n            | paste - -)\"\n    fi\n    echo -e $DROPLET_LIST\n}\n\ndroplet-exists() {\n    droplet-list | grep -q \"$DROPLET\\$\"\n}\n\ndroplet-floating-ip() {\n    do-api -sS -X GET \"https://api.digitalocean.com/v2/floating_ips?page=1&per_page=20\" \\\n        | jq \".floating_ips[] | select(.droplet.name == \\\"$DROPLET\\\") | .ip\"\n}\n\nfqdn-exists() {\n    # not_found is in the error payload if the domain doesn't exist\n    # so this code is a double-negative: true if we don't find \"not_found\"\n    do-api -sS -X GET \"https://api.digitalocean.com/v2/domains/${DROPLET}\" \\\n        | grep -qv not_found\n}\n\nwildcard-cname-exists() {\n    do-api -sS -X GET \\\n           \"https://api.digitalocean.com/v2/domains/${DROPLET}/records\" \\\n        | jq -r '.domain_records[] | select(.type == \"CNAME\") | .name, .data' \\\n        | paste - - \\\n        | grep -q '^*'\n}\n\ndo-api() {\n    curl \\\n        -H \"Content-Type: application/json\" \\\n        -H \"Authorization: Bearer $(token)\" \\\n        $@\n}\n\ntoken() {\n    cat $TOKEN_FILE\n}\n\ncase ${1:-} in\n    create-droplet|create-droplet-floating-ip|create-fqdn|create-wildcard-cname|wildcard-cname-exists)\n        readonly CMD=${1}\n        shift\n    ;;\n    *)\n        readonly CMD=main\n    ;;\nesac\n\ncreate-environment $@\n$CMD\n"
+      },
+      "date": 1497057452649
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "5f3953c791c67963"
+      },
+      "id": "5f3953c791c67963",
+      "type": "add",
+      "after": "c84735b41c420c04",
+      "date": 1497058050284
+    },
+    {
+      "type": "edit",
+      "id": "5f3953c791c67963",
+      "item": {
+        "type": "paragraph",
+        "id": "5f3953c791c67963",
+        "text": "Here I show the script which bootstrapped the digitalocean VM which hosts this wiki.  I hope to apply wiki to explorations of turtle geometry, specifically, and other programming in general.  I hope to apply docker to easing experimentation with plugins.  This script is on that path."
+      },
+      "date": 1497058470425
+    },
+    {
+      "type": "move",
+      "order": [
+        "5f3953c791c67963",
+        "c84735b41c420c04"
+      ],
+      "id": "c84735b41c420c04",
+      "date": 1497058475306
+    },
+    {
+      "type": "fork",
+      "site": "begin.wiki.dbbs.co",
+      "date": 1512882764937
+    },
+    {
+      "type": "edit",
+      "id": "c84735b41c420c04",
+      "item": {
+        "type": "code",
+        "id": "c84735b41c420c04",
+        "text": "#!/bin/bash -eu\nset -o pipefail\nIFS=$'\\t\\n\\r'\n\nreadonly COMPOSE_DIR=$( cd $(dirname $0); pwd )\n\nmain() {\n    create-droplet\n    create-droplet-floating-ip\n    create-fqdn\n    create-wildcard-cname\n}\n\ncreate-environment() {\n    source $COMPOSE_DIR/.env\n    [ -n \"${DROPLET:-}\" ]    || { echo \".env missing DROPLET\" ; FATAL=1; }\n    [ -n \"${TOKEN_FILE:-}\" ] || { echo \".env missing TOKEN_FILE\" ; FATAL=1; }\n    [ -n \"${REGION:-}\" ]     || { echo \".env missing REGION\" ; FATAL=1; }\n\n    [ -z \"${FATAL:-}\" ] || exit 1\n}\n\ncreate-droplet() {\n    droplet-exists || {\n        docker-machine \\\n            create --driver digitalocean\\\n            --digitalocean-access-token=$(token) \\\n            --digitalocean-region=$REGION \\\n            $DROPLET\n    }\n}\n\ncreate-droplet-floating-ip() {\n    local IP=$(droplet-floating-ip)\n    [ -n \"$IP\" ] || {\n        local ID=$(droplet-list | awk \"/$DROPLET\\$/ {print \\$1}\")\n        do-api -sS -X POST \\\n               -d \"{\\\"droplet_id\\\":$ID}\" \\\n               \"https://api.digitalocean.com/v2/floating_ips\"\n    }\n}\n\ncreate-fqdn() {\n    fqdn-exists || {\n        do-api -X POST \\\n               -d \"{\\\"name\\\":\\\"${DROPLET}\\\",\\\"ip_address\\\":$(droplet-floating-ip)}\" \\\n               \"https://api.digitalocean.com/v2/domains\"\n    }\n}\n\ncreate-wildcard-cname() {\n    wildcard-cname-exists || {\n        do-api -X POST \\\n               -d \"{\\\"type\\\":\\\"CNAME\\\",\\\"name\\\":\\\"*\\\",\\\"data\\\":\\\"@\\\",\\\"priority\\\":null,\\\"port\\\":null,\\\"weight\\\":null}\" \\\n               \"https://api.digitalocean.com/v2/domains/${DROPLET}/records\"\n    }\n}\n\ndroplet-list-json() {\n    do-api -sS -X GET \"https://api.digitalocean.com/v2/droplets?page=1&per_page=10\"\n}\n\ndroplet-list() {\n    # memoize to self-regulate DO rate-limits\n    if [ -z \"${DROPLET_LIST:-}\" ]; then\n        local JSON=\"$(droplet-list-json)\"\n        echo $JSON\n        <<<\"$JSON\" jq -r '.droplets[]'\n        readonly DROPLET_LIST=\"$(<<<\"$JSON\" jq -r '.droplets[] | .id, .name' \\\n            | paste - -)\"\n    fi\n    echo -e $DROPLET_LIST\n}\n\ndroplet-exists() {\n    droplet-list | grep -q \"$DROPLET\\$\"\n}\n\ndroplet-floating-ip() {\n    do-api -sS -X GET \"https://api.digitalocean.com/v2/floating_ips?page=1&per_page=20\" \\\n        | jq \".floating_ips[] | select(.droplet.name == \\\"$DROPLET\\\") | .ip\"\n}\n\nfqdn-exists() {\n    # not_found is in the error payload if the domain doesn't exist\n    # so this code is a double-negative: true if we don't find \"not_found\"\n    do-api -sS -X GET \"https://api.digitalocean.com/v2/domains/${DROPLET}\" \\\n        | grep -qv not_found\n}\n\nwildcard-cname-exists() {\n    list-cnames \\\n        | grep -q '^*'\n}\n\nlist-cnames() {\n    do-api -sS -X GET \\\n           \"https://api.digitalocean.com/v2/domains/${DROPLET}/records\" \\\n        | jq -r '.domain_records[] | select(.type == \"CNAME\") | .name, .data' \\\n        | paste - -\n}\n\ncreate-cname() {\n    local SUBDOMAIN=\"${1:-*}\"\n    cname-exists $SUBDOMAIN || {\n        local URL=\"https://api.digitalocean.com/v2/domains/${DROPLET}/records\"\n        do-api -X POST -d@- $URL <<EOF\n{\n  \"type\" : \"CNAME\",\n  \"name\" : \"$SUBDOMAIN\",\n  \"data\" : \"@\",\n  \"priority\" : null,\n  \"port\" : null,\n  \"weight\" : null\n}\nEOF\n    }\n}\n\ncname-exists() {\n    local SUBDOMAIN=\"${1:-UNSPECIFIED}\"\n    list-cnames | grep -q \"^$SUBDOMAIN\"\n}\n\ndo-api() {\n    curl \\\n        -H \"Content-Type: application/json\" \\\n        -H \"Authorization: Bearer $(token)\" \\\n        $@\n}\n\ntoken() {\n    cat $TOKEN_FILE\n}\n\ncase ${1:-} in\n    list-cnames \\\n    | create-cname \\\n    | create-droplet \\\n    | create-droplet-floating-ip \\\n    | create-fqdn \\\n    | create-wildcard-cname \\\n    | wildcard-cname-exists \\\n    )\n        readonly CMD=${1}\n        shift\n    ;;\n    *)\n        readonly CMD=main\n    ;;\nesac\n\ncreate-environment\n$CMD $@\n"
+      },
+      "date": 1512882797105
+    },
+    {
+      "type": "edit",
+      "id": "5f3953c791c67963",
+      "item": {
+        "type": "paragraph",
+        "id": "5f3953c791c67963",
+        "text": "Here is the script which bootstrapped the digitalocean VM which hosts this wiki.  I have extended it somewhat to manage adding new CNAMEs to my domain name."
+      },
+      "date": 1512882927263
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "46dee22bb18bfbdb"
+      },
+      "id": "46dee22bb18bfbdb",
+      "type": "add",
+      "after": "c84735b41c420c04",
+      "date": 1512882936848
+    },
+    {
+      "type": "edit",
+      "id": "46dee22bb18bfbdb",
+      "item": {
+        "type": "code",
+        "id": "46dee22bb18bfbdb",
+        "text": "DROPLET=wiki.example.com\nTOKEN_FILE=~/.digitalocean-token\nREGION=sfo2\nLE_EMAIL=letsencrypt-email-address@example.com\nCOMPOSE_PROJECT_NAME=wiki\n"
+      },
+      "date": 1512882942960
+    },
+    {
+      "type": "move",
+      "order": [
+        "5f3953c791c67963",
+        "46dee22bb18bfbdb",
+        "c84735b41c420c04"
+      ],
+      "id": "c84735b41c420c04",
+      "date": 1512882969271
+    },
+    {
+      "type": "edit",
+      "id": "46dee22bb18bfbdb",
+      "item": {
+        "type": "code",
+        "id": "46dee22bb18bfbdb",
+        "text": "# .env\nDROPLET=wiki.example.com\nTOKEN_FILE=~/.digitalocean-token\nREGION=sfo2\nLE_EMAIL=letsencrypt-email-address@example.com\nCOMPOSE_PROJECT_NAME=wiki\n"
+      },
+      "date": 1512882997959
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "2b4b636ae47fa391"
+      },
+      "id": "2b4b636ae47fa391",
+      "type": "add",
+      "after": "c84735b41c420c04",
+      "date": 1512883098206
+    },
+    {
+      "type": "move",
+      "order": [
+        "5f3953c791c67963",
+        "46dee22bb18bfbdb",
+        "2b4b636ae47fa391",
+        "c84735b41c420c04"
+      ],
+      "id": "c84735b41c420c04",
+      "date": 1512883157597
+    },
+    {
+      "type": "move",
+      "order": [
+        "5f3953c791c67963",
+        "2b4b636ae47fa391",
+        "46dee22bb18bfbdb",
+        "c84735b41c420c04"
+      ],
+      "id": "2b4b636ae47fa391",
+      "date": 1512883162698
+    },
+    {
+      "type": "edit",
+      "id": "2b4b636ae47fa391",
+      "item": {
+        "type": "markdown",
+        "id": "2b4b636ae47fa391",
+        "text": "I think you could reuse this script as follows:"
+      },
+      "date": 1512883230864
+    },
+    {
+      "type": "add",
+      "id": "b9bba6fefc73b2b1",
+      "item": {
+        "type": "markdown",
+        "id": "b9bba6fefc73b2b1",
+        "text": "edit the variables in `.env`"
+      },
+      "after": "2b4b636ae47fa391",
+      "date": 1512883233959
+    },
+    {
+      "type": "remove",
+      "id": "b9bba6fefc73b2b1",
+      "date": 1512883384070
+    },
+    {
+      "type": "remove",
+      "id": "2b4b636ae47fa391",
+      "date": 1512883388011
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "title": "Scratch",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "20779543bf3c8e9c",
+      "text": "We expect to move these items to a different page once we discover the right name for that page."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Scratch",
+        "story": []
+      },
+      "date": 1606321187487
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "20779543bf3c8e9c"
+      },
+      "id": "20779543bf3c8e9c",
+      "type": "add",
+      "date": 1606321188994
+    },
+    {
+      "type": "edit",
+      "id": "20779543bf3c8e9c",
+      "item": {
+        "type": "paragraph",
+        "id": "20779543bf3c8e9c",
+        "text": "We expect to move these items to a different page once we discover the right name for that page."
+      },
+      "date": 1606321235286
+    },
+    {
+      "type": "add",
+      "id": "c3eaa92ca50090d1",
+      "item": {
+        "type": "paragraph",
+        "id": "c3eaa92ca50090d1",
+        "text": "Ward and Eric paired to explore other ways to instrument a graphviz-generated SVG diagram with collaborative links."
+      },
+      "after": "20779543bf3c8e9c",
+      "date": 1606321310595
+    },
+    {
+      "id": "c3eaa92ca50090d1",
+      "type": "remove",
+      "date": 1606321331503
+    }
+  ]
+}

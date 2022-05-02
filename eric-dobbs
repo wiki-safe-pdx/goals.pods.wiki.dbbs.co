@@ -1,0 +1,135 @@
+{
+  "title": "Eric Dobbs",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "aad33db1eb6c5cd1",
+      "text": "I am an occasional contributor to federated wiki.  I have been learning wiki in parallel with learning docker and containers in general.  Professionally, I'm a software engineer and manager with many years of web development and most recently focused on devops."
+    },
+    {
+      "type": "paragraph",
+      "id": "93906cd8a642c99a",
+      "text": "Contact me by email at eric@dobbse.net"
+    },
+    {
+      "type": "markdown",
+      "id": "e290e6e58467bbb9",
+      "text": "[https://github.com/dobbs github.com/dobbs]\n[https://dobbse.net dobbse.net]\n[https://twitter.com/dobbse @dobbse]\n"
+    },
+    {
+      "type": "roster",
+      "id": "202604a7bc859b10",
+      "text": "ROSTER wiki.dbbs.co/eric-dobbs"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Eric Dobbs",
+        "story": []
+      },
+      "date": 1511762920561
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "aad33db1eb6c5cd1"
+      },
+      "id": "aad33db1eb6c5cd1",
+      "type": "add",
+      "date": 1511762922231
+    },
+    {
+      "type": "edit",
+      "id": "aad33db1eb6c5cd1",
+      "item": {
+        "type": "paragraph",
+        "id": "aad33db1eb6c5cd1",
+        "text": "I am an occasional contributor to federated wiki.  I have been learning wiki in parallel with learning docker and containers in general.  Professionally, I'm a software engineer and manager with many years of web development and most recently focused on devops."
+      },
+      "date": 1511763161244
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "93906cd8a642c99a"
+      },
+      "id": "93906cd8a642c99a",
+      "type": "add",
+      "after": "aad33db1eb6c5cd1",
+      "date": 1511844202347
+    },
+    {
+      "type": "edit",
+      "id": "93906cd8a642c99a",
+      "item": {
+        "type": "paragraph",
+        "id": "93906cd8a642c99a",
+        "text": "Contact me by email at eric@dobbse.net"
+      },
+      "date": 1511844218288
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "markdown",
+        "id": "e290e6e58467bbb9",
+        "text": "[https://wiki.dbbs.co wiki.dbbs.co]\n[https://github.com/dobbs github.com/dobbs]\n[https://dobbse.net dobbse.net]\n[https://twitter.com/dobbse @dobbse]\n[https://wiki-wiki.glitch.com wiki-wiki.glitch.com]"
+      },
+      "after": "93906cd8a642c99a",
+      "id": "e290e6e58467bbb9",
+      "date": 1544414732803
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "html",
+        "id": "f80adaee5751ad1e",
+        "text": "<form \n  action=\"http://new_page/\"\n  style=\"background-color:#eee; padding:15px;\">\n\nCreate New Page<br><br>\n<input\n  name=title\n  size=50\n  placeholder=\"New Page Title\">\n<input\n  type=submit\n  value=create>\n</center>\n</form>"
+      },
+      "after": "e290e6e58467bbb9",
+      "id": "f80adaee5751ad1e",
+      "date": 1544414737131
+    },
+    {
+      "id": "f80adaee5751ad1e",
+      "type": "remove",
+      "date": 1566344251571
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "202604a7bc859b10"
+      },
+      "id": "202604a7bc859b10",
+      "type": "add",
+      "after": "e290e6e58467bbb9",
+      "date": 1568328048135
+    },
+    {
+      "type": "edit",
+      "id": "202604a7bc859b10",
+      "item": {
+        "type": "roster",
+        "id": "202604a7bc859b10",
+        "text": "ROSTER wiki.dbbs.co/eric-dobbs"
+      },
+      "date": 1568328059038
+    },
+    {
+      "type": "edit",
+      "id": "e290e6e58467bbb9",
+      "item": {
+        "type": "markdown",
+        "id": "e290e6e58467bbb9",
+        "text": "[https://github.com/dobbs github.com/dobbs]\n[https://dobbse.net dobbse.net]\n[https://twitter.com/dobbse @dobbse]\n"
+      },
+      "date": 1568328089716
+    },
+    {
+      "type": "fork",
+      "date": 1585771546244
+    }
+  ]
+}

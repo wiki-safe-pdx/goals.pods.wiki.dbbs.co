@@ -1,0 +1,153 @@
+{
+  "title": "<wiki-graph>",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "eb085daf198e0429",
+      "text": "We imagine a custom element which instruments the SVG in a <graphviz-viewer> with wiki's collaborative links. Update: we found a more simple alternative when adding SVG support to the HTML plugin—we invite authors to add data-title attributes to links and the plugin will instrument them with internal link behavior. See [[About HTML Plugin]]."
+    },
+    {
+      "type": "paragraph",
+      "id": "af5890827a13a9fe",
+      "text": "This custom element knows that the SVG within represents a graph, and not just any collection of interesting visual geometry."
+    },
+    {
+      "type": "paragraph",
+      "id": "f0fa7ccdd91f3327",
+      "text": "Advanced authors could modify the SVG copied from a graphviz plugin, wrap the improved SVG in <wiki-graph>, and reintroduce it to the federation within an HTML item."
+    },
+    {
+      "type": "paragraph",
+      "id": "69b45ceca45aca13",
+      "text": "Not positive about the naming of this element, but pretty sure the behavior is what we want in that it would enable experimentation in the visual form and in the hypermedia."
+    },
+    {
+      "type": "paragraph",
+      "id": "a1fb0d6e19bc4547",
+      "text": "<wiki-graph> might also lend itself to applications in the collaboration between wiki and the frame plugin."
+    },
+    {
+      "type": "paragraph",
+      "id": "f676ea5834c2ce5c",
+      "text": "Because we know the content of the SVG is a graph, we could apply ideas from [[GraphQL Voyager]]."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "<wiki-graph>",
+        "story": []
+      },
+      "date": 1606060636964
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "eb085daf198e0429"
+      },
+      "id": "eb085daf198e0429",
+      "type": "add",
+      "date": 1606060640328
+    },
+    {
+      "type": "edit",
+      "id": "eb085daf198e0429",
+      "item": {
+        "type": "paragraph",
+        "id": "eb085daf198e0429",
+        "text": "We imagine a custom element which instruments the SVG in a <graphviz-viewer> with wiki's collaborative links."
+      },
+      "date": 1606060692998
+    },
+    {
+      "type": "add",
+      "id": "af5890827a13a9fe",
+      "item": {
+        "type": "paragraph",
+        "id": "af5890827a13a9fe",
+        "text": "This custom element knows that the SVG within represents a graph, and not just any collection of interesting visual geometry."
+      },
+      "after": "eb085daf198e0429",
+      "date": 1606080900039
+    },
+    {
+      "type": "add",
+      "id": "f0fa7ccdd91f3327",
+      "item": {
+        "type": "paragraph",
+        "id": "f0fa7ccdd91f3327",
+        "text": "Advanced authors could modify the SVG copied from a graphviz plugin, wrap the improved SVG in <wiki-graph>, and reintroduce it to the federation within an HTML item."
+      },
+      "after": "af5890827a13a9fe",
+      "date": 1606081017987
+    },
+    {
+      "type": "add",
+      "id": "69b45ceca45aca13",
+      "item": {
+        "type": "paragraph",
+        "id": "69b45ceca45aca13",
+        "text": "Not positive about the naming of this element, but pretty sure the behavior is what we want in that it would enable experimentation in the visual form and in the hypermedia."
+      },
+      "after": "f0fa7ccdd91f3327",
+      "date": 1606081102530
+    },
+    {
+      "type": "add",
+      "id": "a1fb0d6e19bc4547",
+      "item": {
+        "type": "paragraph",
+        "id": "a1fb0d6e19bc4547",
+        "text": "<wiki-graph> might also lend itself to applications in the collaboration between wiki and the frame plugin."
+      },
+      "after": "69b45ceca45aca13",
+      "date": 1606081132168
+    },
+    {
+      "type": "fork",
+      "date": 1606081392427
+    },
+    {
+      "type": "add",
+      "id": "f676ea5834c2ce5c",
+      "item": {
+        "type": "paragraph",
+        "id": "f676ea5834c2ce5c",
+        "text": "Because we know the content of the SVG is a graph, we could apply ideas from [[GraphQL Voyager]]."
+      },
+      "after": "a1fb0d6e19bc4547",
+      "date": 1606081838313
+    },
+    {
+      "type": "edit",
+      "id": "eb085daf198e0429",
+      "item": {
+        "type": "paragraph",
+        "id": "eb085daf198e0429",
+        "text": "We imagine a custom element which instruments the SVG in a <graphviz-viewer> with wiki's collaborative links. Update: we found an alternative approach when adding SVG support to the HTML plugin. See [[About HTML Plugin]]."
+      },
+      "date": 1638286026870
+    },
+    {
+      "type": "edit",
+      "id": "eb085daf198e0429",
+      "item": {
+        "type": "paragraph",
+        "id": "eb085daf198e0429",
+        "text": "We imagine a custom element which instruments the SVG in a <graphviz-viewer> with wiki's collaborative links. Update: we found a more simple alternative when adding SVG support to the HTML plugin—we invite authors to add data-title attributes to links and the plugin with instrument them with internal link behavior. See [[About HTML Plugin]]."
+      },
+      "date": 1638286128167
+    },
+    {
+      "type": "edit",
+      "id": "eb085daf198e0429",
+      "item": {
+        "type": "paragraph",
+        "id": "eb085daf198e0429",
+        "text": "We imagine a custom element which instruments the SVG in a <graphviz-viewer> with wiki's collaborative links. Update: we found a more simple alternative when adding SVG support to the HTML plugin—we invite authors to add data-title attributes to links and the plugin will instrument them with internal link behavior. See [[About HTML Plugin]]."
+      },
+      "date": 1638286404471
+    }
+  ]
+}

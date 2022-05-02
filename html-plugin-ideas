@@ -1,0 +1,116 @@
+{
+  "title": "HTML Plugin Ideas",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "30c183e2e83b9b30",
+      "text": "Adding SVG support to the HTML plugin has expanded its utility. Here we anticipate future feature requests surfacing from its increased usage."
+    },
+    {
+      "type": "paragraph",
+      "id": "8436141180c96796",
+      "text": "We have an example HTML script which enriches a specific sort of SVG document with internal links. The navigation has been fun. But the internal links in the diagram are not detected by wiki's backlink mechanism."
+    },
+    {
+      "type": "paragraph",
+      "id": "c480298ba4583152",
+      "text": "Here we sketch a snippet of code which could be incorporated into a beforeSave() hook to find the unique titles in a DOM tree containing internal links. (See beforeSave() hook in [https://github.com/fedwiki/wiki-client/pull/279/files wiki-client PR#279].)"
+    },
+    {
+      "type": "code",
+      "id": "e81b3dd26004ca65",
+      "text": "let links = Array.from(\n  div.querySelectorAll(\"a.internal\"))\n    .reduce(\n      (S, a) => (S.add(a.dataset.title), S),\n      new Set()\n    )"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "HTML Plugin Ideas",
+        "story": []
+      },
+      "date": 1643477013495
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "30c183e2e83b9b30"
+      },
+      "id": "30c183e2e83b9b30",
+      "type": "add",
+      "date": 1643477016812
+    },
+    {
+      "type": "edit",
+      "id": "30c183e2e83b9b30",
+      "item": {
+        "type": "paragraph",
+        "id": "30c183e2e83b9b30",
+        "text": "Adding SVG support to the HTML plugin has expanded its utility. Here we anticipate future feature requests surfacing from its increased usage."
+      },
+      "date": 1643477129488
+    },
+    {
+      "type": "add",
+      "id": "8436141180c96796",
+      "item": {
+        "type": "paragraph",
+        "id": "8436141180c96796",
+        "text": "We have an example HTML script which enriches a specific sort of SVG document with internal links. The navigation has been fun. But the internal links in the diagram are not detected by wiki's backlink mechanism."
+      },
+      "after": "30c183e2e83b9b30",
+      "date": 1643477239693
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "e81b3dd26004ca65"
+      },
+      "id": "e81b3dd26004ca65",
+      "type": "add",
+      "after": "8436141180c96796",
+      "date": 1643477258908
+    },
+    {
+      "type": "edit",
+      "id": "e81b3dd26004ca65",
+      "item": {
+        "type": "code",
+        "id": "e81b3dd26004ca65",
+        "text": "let links = Array.from(\n  div.querySelectorAll(\"a.internal\"))\n    .reduce(\n      (S, a) => (S.add(a.dataset.title), S),\n      new Set()\n    )"
+      },
+      "date": 1643477379606
+    },
+    {
+      "type": "add",
+      "id": "c480298ba4583152",
+      "item": {
+        "type": "paragraph",
+        "id": "c480298ba4583152",
+        "text": "Here we sketch a snippet of code which could be incorporated into a beforeSave() hook to find the unique titles in a DOM tree containing internal links."
+      },
+      "after": "8436141180c96796",
+      "date": 1643477528098
+    },
+    {
+      "type": "edit",
+      "id": "c480298ba4583152",
+      "item": {
+        "type": "paragraph",
+        "id": "c480298ba4583152",
+        "text": "Here we sketch a snippet of code which could be incorporated into a beforeSave() hook to find the unique titles in a DOM tree containing internal links. See beforeSave() hook in [https://github.com/fedwiki/wiki-client/pull/279/files wiki-client PR#279]."
+      },
+      "date": 1643478349653
+    },
+    {
+      "type": "edit",
+      "id": "c480298ba4583152",
+      "item": {
+        "type": "paragraph",
+        "id": "c480298ba4583152",
+        "text": "Here we sketch a snippet of code which could be incorporated into a beforeSave() hook to find the unique titles in a DOM tree containing internal links. (See beforeSave() hook in [https://github.com/fedwiki/wiki-client/pull/279/files wiki-client PR#279].)"
+      },
+      "date": 1643478361634
+    }
+  ]
+}

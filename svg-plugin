@@ -1,0 +1,367 @@
+{
+  "title": "SVG Plugin",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "0e1cab18d06587b0",
+      "text": "The support for SVGs in wiki has been implemented in the HTML Plugin. We no longer see a need for a specialized plugin just for SVG. See [[About HTML Plugin]]."
+    },
+    {
+      "type": "paragraph",
+      "id": "223dc15572de1407",
+      "text": "For a good long while, sanitization had been stopping work on an SVG Plugin. A PR folded DOMPurify into the HTML plugin: [https://github.com/fedwiki/wiki-plugin-html/pull/21/ github]"
+    },
+    {
+      "type": "paragraph",
+      "id": "42b27587e2fce28c",
+      "text": "cure53/DOMPurify can sanitize HTML and SVG. Threat model: [https://github.com/cure53/DOMPurify/wiki/Security-Goals-&-Threat-Model doc] [https://github.com/cure53/DOMPurify github]"
+    },
+    {
+      "type": "paragraph",
+      "id": "75aaa351b3b6d099",
+      "text": "DOMPurify recommends MentalJS for javascript sandboxing: [https://github.com/hackvertor/MentalJS github]"
+    },
+    {
+      "type": "pagefold",
+      "id": "e8ea3edf19031126",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "60c7084a0b6adab5",
+      "text": "Javascript sandboxing thread points to other elements of interest. My preferred SVG example is a javascript animation of vanishing point. So Javascript is both feature and security risk."
+    },
+    {
+      "type": "paragraph",
+      "id": "acd7bc63b23e2e15",
+      "text": "Mozilla email list archive. Thread suggests exposing internal APIs for javascript parser: [https://mail.mozilla.org/pipermail/es-discuss/2019-September/053010.html archive] [https://github.com/Jack-Works/proposal-ecmascript-parser proposal]"
+    },
+    {
+      "type": "paragraph",
+      "id": "9a1263fa19de6dfd",
+      "text": "kai zhu kaizhu256 at gmail.com mentions acorn and istanbul-lite: [https://www.npmjs.com/package/acorn npm acorn] [https://www.npmjs.com/package/istanbul-lite npm istanbul-lite]"
+    },
+    {
+      "type": "paragraph",
+      "id": "8c41efdb87f436bd",
+      "text": "Gareth Heyes gareth.heyes at portswigger.net seems to be the author of mentaljs [https://github.com/hackvertor/MentalJS github] [https://twitter.com/garethheyes/status/775436863213539334 tweet]"
+    },
+    {
+      "type": "paragraph",
+      "id": "6ed8db210fed87b8",
+      "text": "Isiah Meadows isiahmeadows at gmail.com may be author of acorn ([https://github.com/acornjs/acorn github]) and seems to understand the complexity of the proposal to be difficult: [https://mail.mozilla.org/pipermail/es-discuss/2019-September/053016.html reply]"
+    },
+    {
+      "type": "paragraph",
+      "id": "370bc6287a8dcf16",
+      "text": "Robert Best draws our attention to another resource about SVG XSS: [https://digi.ninja/blog/svg_xss.php link]"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "SVG Plugin",
+        "story": []
+      },
+      "date": 1569946704359
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "0e1cab18d06587b0"
+      },
+      "id": "0e1cab18d06587b0",
+      "type": "add",
+      "date": 1569946705896
+    },
+    {
+      "type": "edit",
+      "id": "0e1cab18d06587b0",
+      "item": {
+        "type": "paragraph",
+        "id": "0e1cab18d06587b0",
+        "text": "Sanitization has been stopping work on an SVG Plugin. Today I found some things that might unblock this work."
+      },
+      "date": 1569946737820
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "e8ea3edf19031126"
+      },
+      "id": "e8ea3edf19031126",
+      "type": "add",
+      "after": "0e1cab18d06587b0",
+      "date": 1569946768739
+    },
+    {
+      "type": "edit",
+      "id": "e8ea3edf19031126",
+      "item": {
+        "type": "pagefold",
+        "id": "e8ea3edf19031126",
+        "text": "."
+      },
+      "date": 1569946772300
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "acd7bc63b23e2e15"
+      },
+      "id": "acd7bc63b23e2e15",
+      "type": "add",
+      "after": "e8ea3edf19031126",
+      "date": 1569946774442
+    },
+    {
+      "type": "edit",
+      "id": "acd7bc63b23e2e15",
+      "item": {
+        "type": "paragraph",
+        "id": "acd7bc63b23e2e15",
+        "text": "Mozilla email list archive. Thread suggests exposing internal APIs for javascript parser: [https://mail.mozilla.org/pipermail/es-discuss/2019-September/053010.html archive]"
+      },
+      "date": 1569946834223
+    },
+    {
+      "type": "add",
+      "id": "42b27587e2fce28c",
+      "item": {
+        "type": "paragraph",
+        "id": "42b27587e2fce28c",
+        "text": "cure53/DOMPurify can sanitize HTML and SVG. Threat model: [https://github.com/cure53/DOMPurify/wiki/Security-Goals-&-Threat-Model doc]"
+      },
+      "after": "0e1cab18d06587b0",
+      "date": 1569946924417
+    },
+    {
+      "type": "add",
+      "id": "75aaa351b3b6d099",
+      "item": {
+        "type": "paragraph",
+        "id": "75aaa351b3b6d099",
+        "text": "DOMPurify recommends MentalJS for javascript sandboxing: "
+      },
+      "after": "42b27587e2fce28c",
+      "date": 1569946968661
+    },
+    {
+      "type": "edit",
+      "id": "75aaa351b3b6d099",
+      "item": {
+        "type": "paragraph",
+        "id": "75aaa351b3b6d099",
+        "text": "DOMPurify recommends MentalJS for javascript sandboxing: [https://github.com/hackvertor/MentalJS github]"
+      },
+      "date": 1569947026951
+    },
+    {
+      "type": "edit",
+      "id": "42b27587e2fce28c",
+      "item": {
+        "type": "paragraph",
+        "id": "42b27587e2fce28c",
+        "text": "cure53/DOMPurify can sanitize HTML and SVG. Threat model: [https://github.com/cure53/DOMPurify/wiki/Security-Goals-&-Threat-Model doc] [https://github.com/cure53/DOMPurify github]"
+      },
+      "date": 1569947055064
+    },
+    {
+      "type": "edit",
+      "id": "acd7bc63b23e2e15",
+      "item": {
+        "type": "paragraph",
+        "id": "acd7bc63b23e2e15",
+        "text": "Mozilla email list archive. Thread suggests exposing internal APIs for javascript parser: [https://mail.mozilla.org/pipermail/es-discuss/2019-September/053010.html archive] [https://github.com/Jack-Works/proposal-ecmascript-parser proposal]"
+      },
+      "date": 1569947149174
+    },
+    {
+      "type": "add",
+      "id": "9a1263fa19de6dfd",
+      "item": {
+        "type": "paragraph",
+        "id": "9a1263fa19de6dfd",
+        "text": "Participants: "
+      },
+      "after": "acd7bc63b23e2e15",
+      "date": 1569947192169
+    },
+    {
+      "type": "edit",
+      "id": "9a1263fa19de6dfd",
+      "item": {
+        "type": "paragraph",
+        "id": "9a1263fa19de6dfd",
+        "text": "kai zhu kaizhu256 at gmail.com "
+      },
+      "date": 1569947250885
+    },
+    {
+      "type": "edit",
+      "id": "9a1263fa19de6dfd",
+      "item": {
+        "type": "paragraph",
+        "id": "9a1263fa19de6dfd",
+        "text": "kai zhu kaizhu256 at gmail.com mentions acorn and istanbul-lite"
+      },
+      "date": 1569947275415
+    },
+    {
+      "type": "edit",
+      "id": "9a1263fa19de6dfd",
+      "item": {
+        "type": "paragraph",
+        "id": "9a1263fa19de6dfd",
+        "text": "kai zhu kaizhu256 at gmail.com mentions acorn and istanbul-lite: [https://www.npmjs.com/package/acorn npm acorn] [https://www.npmjs.com/package/istanbul-lite npm istanbul-lite]"
+      },
+      "date": 1569947310034
+    },
+    {
+      "type": "add",
+      "id": "8c41efdb87f436bd",
+      "item": {
+        "type": "paragraph",
+        "id": "8c41efdb87f436bd",
+        "text": "Gareth Heyes gareth.heyes at portswigger.net mentions mentaljs [ link]"
+      },
+      "after": "9a1263fa19de6dfd",
+      "date": 1569947409635
+    },
+    {
+      "type": "edit",
+      "id": "8c41efdb87f436bd",
+      "item": {
+        "type": "paragraph",
+        "id": "8c41efdb87f436bd",
+        "text": "Gareth Heyes gareth.heyes at portswigger.net mentions mentaljs [https://github.com/hackvertor/MentalJS github]"
+      },
+      "date": 1569947454492
+    },
+    {
+      "type": "add",
+      "id": "6ed8db210fed87b8",
+      "item": {
+        "type": "paragraph",
+        "id": "6ed8db210fed87b8",
+        "text": "Isiah Meadows isiahmeadows at gmail.com may be author of acorn []"
+      },
+      "after": "8c41efdb87f436bd",
+      "date": 1569947563534
+    },
+    {
+      "type": "edit",
+      "id": "6ed8db210fed87b8",
+      "item": {
+        "type": "paragraph",
+        "id": "6ed8db210fed87b8",
+        "text": "Isiah Meadows isiahmeadows at gmail.com may be author of acorn [] and seems to understand the complexity of the proposal to be difficult: [https://mail.mozilla.org/pipermail/es-discuss/2019-September/053016.html reply]"
+      },
+      "date": 1569947626296
+    },
+    {
+      "type": "edit",
+      "id": "8c41efdb87f436bd",
+      "item": {
+        "type": "paragraph",
+        "id": "8c41efdb87f436bd",
+        "text": "Gareth Heyes gareth.heyes at portswigger.net seems to be the author of mentaljs [https://github.com/hackvertor/MentalJS github] [https://twitter.com/garethheyes/status/775436863213539334 tweet]"
+      },
+      "date": 1569947827937
+    },
+    {
+      "type": "edit",
+      "id": "6ed8db210fed87b8",
+      "item": {
+        "type": "paragraph",
+        "id": "6ed8db210fed87b8",
+        "text": "Isiah Meadows isiahmeadows at gmail.com may be author of acorn [https://github.com/acornjs/acorn github] and seems to understand the complexity of the proposal to be difficult: [https://mail.mozilla.org/pipermail/es-discuss/2019-September/053016.html reply]"
+      },
+      "date": 1569947993078
+    },
+    {
+      "type": "edit",
+      "id": "6ed8db210fed87b8",
+      "item": {
+        "type": "paragraph",
+        "id": "6ed8db210fed87b8",
+        "text": "Isiah Meadows isiahmeadows at gmail.com may be author of acorn ([https://github.com/acornjs/acorn github]) and seems to understand the complexity of the proposal to be difficult: [https://mail.mozilla.org/pipermail/es-discuss/2019-September/053016.html reply]"
+      },
+      "date": 1569948005605
+    },
+    {
+      "type": "add",
+      "id": "60c7084a0b6adab5",
+      "item": {
+        "type": "paragraph",
+        "id": "60c7084a0b6adab5",
+        "text": "Javascript sandboxing thread points to other elements of interest. My preferred SVG example is a javascript animation of vanishing point. So Javascript is both feature and security risk."
+      },
+      "after": "e8ea3edf19031126",
+      "date": 1569948114647
+    },
+    {
+      "type": "add",
+      "id": "370bc6287a8dcf16",
+      "item": {
+        "type": "paragraph",
+        "id": "370bc6287a8dcf16",
+        "text": "Robert Best draws our attention to another resource about SVG XSS: [https://example.com link]"
+      },
+      "after": "6ed8db210fed87b8",
+      "date": 1584305202427
+    },
+    {
+      "type": "edit",
+      "id": "370bc6287a8dcf16",
+      "item": {
+        "type": "paragraph",
+        "id": "370bc6287a8dcf16",
+        "text": "Robert Best draws our attention to another resource about SVG XSS: [https://digi.ninja/blog/svg_xss.php link]"
+      },
+      "date": 1584305278864
+    },
+    {
+      "type": "edit",
+      "id": "0e1cab18d06587b0",
+      "item": {
+        "type": "paragraph",
+        "id": "0e1cab18d06587b0",
+        "text": "Sanitization has been stopping work on an SVG Plugin. A PR folds DOMPurify into the HTML plugin: [https:// github]"
+      },
+      "date": 1601002012564
+    },
+    {
+      "type": "edit",
+      "id": "0e1cab18d06587b0",
+      "item": {
+        "type": "paragraph",
+        "id": "0e1cab18d06587b0",
+        "text": "Sanitization has been stopping work on an SVG Plugin. A PR folds DOMPurify into the HTML plugin: [https://github.com/fedwiki/wiki-plugin-html/pull/21/ github]"
+      },
+      "date": 1601002052657
+    },
+    {
+      "type": "edit",
+      "id": "0e1cab18d06587b0",
+      "item": {
+        "type": "paragraph",
+        "id": "0e1cab18d06587b0",
+        "text": "The support for SVGs in wiki has been implemented in the HTML Plugin. We no longer see a need for a specialized plugin just for SVG. See [[About HTML Plugin]]."
+      },
+      "date": 1643476884731
+    },
+    {
+      "type": "add",
+      "id": "223dc15572de1407",
+      "item": {
+        "type": "paragraph",
+        "id": "223dc15572de1407",
+        "text": "For a good long while, sanitization had been stopping work on an SVG Plugin. A PR folded DOMPurify into the HTML plugin: [https://github.com/fedwiki/wiki-plugin-html/pull/21/ github]"
+      },
+      "after": "0e1cab18d06587b0",
+      "date": 1643476920556
+    }
+  ]
+}

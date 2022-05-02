@@ -1,0 +1,339 @@
+{
+  "title": "GraphQL Voyager",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "8cbf6d874aff13e6",
+      "text": "Marc has drawn our attention to this project. It provides inspirational UX enhancement for browsing a graphviz-rendered SVG, especially a graph that is larger than the viewport. [https://github.com/APIs-guru/graphql-voyager github] [https://apis.guru/graphql-voyager/ demo]"
+    },
+    {
+      "type": "paragraph",
+      "id": "2e09239797afafa2",
+      "text": "Pinch to zoom."
+    },
+    {
+      "type": "paragraph",
+      "id": "43170a7430392213",
+      "text": "Drag to pan."
+    },
+    {
+      "type": "paragraph",
+      "id": "2bf24c7c6e4a6c7c",
+      "text": "Click edges to highlight the node at the tail of that edge, and all other edges connected to that node."
+    },
+    {
+      "type": "paragraph",
+      "id": "8e82dab7073f8bfd",
+      "text": "Click nodes to highlight all the connected edges."
+    },
+    {
+      "type": "paragraph",
+      "id": "f7cfeb92b4250cd6",
+      "text": "The code in question browses GraphQL APIs. The nodes are a column of API properties. Properties that link to other APIs include linkwords that when clicked pan and zoom the graph to change focus of the viewport to the connected node."
+    },
+    {
+      "type": "paragraph",
+      "id": "8cb992f116de0c3f",
+      "text": "Marc envisions exploration of larger graphs by opening the next FedWiki page with just that subgraph. This interaction resembles [[El Dorado UI]]."
+    },
+    {
+      "type": "pagefold",
+      "id": "485a30fba4781999",
+      "text": " . "
+    },
+    {
+      "type": "paragraph",
+      "id": "1a4e52bc6fb71be6",
+      "text": "The UX of the demo inside a wiki frame is not as compelling as in a full window. But it does offer some hint."
+    },
+    {
+      "type": "frame",
+      "id": "f1ee55ccde1aa38d",
+      "text": "https://apis.guru/graphql-voyager/\nHEIGHT 1200"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "GraphQL Voyager",
+        "story": []
+      },
+      "date": 1605716596194
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "8cbf6d874aff13e6"
+      },
+      "id": "8cbf6d874aff13e6",
+      "type": "add",
+      "date": 1605716597794
+    },
+    {
+      "type": "edit",
+      "id": "8cbf6d874aff13e6",
+      "item": {
+        "type": "paragraph",
+        "id": "8cbf6d874aff13e6",
+        "text": "Marc has drawn our attention to this project. It provides inspirational UX enhancement of a graphviz-rendered SVG. [ github] [ demo]"
+      },
+      "date": 1605716689408
+    },
+    {
+      "type": "edit",
+      "id": "8cbf6d874aff13e6",
+      "item": {
+        "type": "paragraph",
+        "id": "8cbf6d874aff13e6",
+        "text": "Marc has drawn our attention to this project. It provides inspirational UX enhancement of a graphviz-rendered SVG. [ github] [https://apis.guru/graphql-voyager/ demo]"
+      },
+      "date": 1605716704796
+    },
+    {
+      "type": "edit",
+      "id": "8cbf6d874aff13e6",
+      "item": {
+        "type": "paragraph",
+        "id": "8cbf6d874aff13e6",
+        "text": "Marc has drawn our attention to this project. It provides inspirational UX enhancement of a graphviz-rendered SVG. [https://github.com/APIs-guru/graphql-voyager github] [https://apis.guru/graphql-voyager/ demo]"
+      },
+      "date": 1605716735205
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "f1ee55ccde1aa38d"
+      },
+      "id": "f1ee55ccde1aa38d",
+      "type": "add",
+      "after": "8cbf6d874aff13e6",
+      "date": 1605716747336
+    },
+    {
+      "type": "edit",
+      "id": "f1ee55ccde1aa38d",
+      "item": {
+        "type": "frame",
+        "id": "f1ee55ccde1aa38d",
+        "text": "https://apis.guru/graphql-voyager/"
+      },
+      "date": 1605716752267
+    },
+    {
+      "type": "edit",
+      "id": "f1ee55ccde1aa38d",
+      "item": {
+        "type": "frame",
+        "id": "f1ee55ccde1aa38d",
+        "text": "https://apis.guru/graphql-voyager/\nHEIGHT 600"
+      },
+      "date": 1605716771234
+    },
+    {
+      "type": "edit",
+      "id": "f1ee55ccde1aa38d",
+      "item": {
+        "type": "frame",
+        "id": "f1ee55ccde1aa38d",
+        "text": "https://apis.guru/graphql-voyager/\nHEIGHT 1200"
+      },
+      "date": 1605716800475
+    },
+    {
+      "type": "add",
+      "id": "1a4e52bc6fb71be6",
+      "item": {
+        "type": "paragraph",
+        "id": "1a4e52bc6fb71be6",
+        "text": "The UX of the demo inside a wiki frame is not as compelling as in a full window. But it does offer some hint."
+      },
+      "after": "8cbf6d874aff13e6",
+      "date": 1605716936047
+    },
+    {
+      "type": "add",
+      "id": "2bf24c7c6e4a6c7c",
+      "item": {
+        "type": "paragraph",
+        "id": "2bf24c7c6e4a6c7c",
+        "text": "Clicking edges reveals the node at the tail of that edge, and emboldens all edges also connected to that node. Clicking nodes pans and zooms to center the diagram on that node, and reveals the connected edges. In the specific implementation the nodes are GraphQL APIs and are rendered as a column of property names. Some property names have links to or from other APIs. Clicking those links pans and zooms to the node at the other side of that edge.\n\nPinching changes the zoom level. Dragging pans the diagram under the viewport."
+      },
+      "after": "1a4e52bc6fb71be6",
+      "date": 1605716997361
+    },
+    {
+      "type": "edit",
+      "id": "8cbf6d874aff13e6",
+      "item": {
+        "type": "paragraph",
+        "id": "8cbf6d874aff13e6",
+        "text": "Marc has drawn our attention to this project. It provides inspirational UX enhancement for browsing a graphviz-rendered SVG, especially a graph that is larger than the viewport. [https://github.com/APIs-guru/graphql-voyager github] [https://apis.guru/graphql-voyager/ demo]"
+      },
+      "date": 1605717018884
+    },
+    {
+      "id": "1a4e52bc6fb71be6",
+      "type": "move",
+      "order": [
+        "8cbf6d874aff13e6",
+        "2bf24c7c6e4a6c7c",
+        "1a4e52bc6fb71be6",
+        "f1ee55ccde1aa38d"
+      ],
+      "date": 1605717025485
+    },
+    {
+      "type": "edit",
+      "id": "2bf24c7c6e4a6c7c",
+      "item": {
+        "type": "paragraph",
+        "id": "2bf24c7c6e4a6c7c",
+        "text": "Click edges highlight the node at the tail of that edge, and all other edges connected to that node."
+      },
+      "date": 1605717078248
+    },
+    {
+      "type": "add",
+      "id": "8e82dab7073f8bfd",
+      "item": {
+        "type": "paragraph",
+        "id": "8e82dab7073f8bfd",
+        "text": "Click nodes to highlight all the connected edges."
+      },
+      "after": "2bf24c7c6e4a6c7c",
+      "date": 1605717115268
+    },
+    {
+      "type": "add",
+      "id": "2190f923d99268f9",
+      "item": {
+        "type": "paragraph",
+        "id": "2190f923d99268f9",
+        "text": " In the specific implementation the nodes are GraphQL APIs and are rendered as a column of property names. Some property names have links to or from other APIs. Clicking those links pans and zooms to the node at the other side of that edge.\n\nPinching changes the zoom level. Dragging pans the diagram under the viewport."
+      },
+      "after": "8e82dab7073f8bfd",
+      "date": 1605717117318
+    },
+    {
+      "type": "edit",
+      "id": "2bf24c7c6e4a6c7c",
+      "item": {
+        "type": "paragraph",
+        "id": "2bf24c7c6e4a6c7c",
+        "text": "Click edges to highlight the node at the tail of that edge, and all other edges connected to that node."
+      },
+      "date": 1605717120928
+    },
+    {
+      "type": "add",
+      "id": "2e09239797afafa2",
+      "item": {
+        "type": "paragraph",
+        "id": "2e09239797afafa2",
+        "text": "Pinch to zoom."
+      },
+      "after": "8e82dab7073f8bfd",
+      "date": 1605717138310
+    },
+    {
+      "type": "add",
+      "id": "43170a7430392213",
+      "item": {
+        "type": "paragraph",
+        "id": "43170a7430392213",
+        "text": "Drag to pan."
+      },
+      "after": "2e09239797afafa2",
+      "date": 1605717143117
+    },
+    {
+      "id": "2e09239797afafa2",
+      "type": "move",
+      "order": [
+        "8cbf6d874aff13e6",
+        "2e09239797afafa2",
+        "2bf24c7c6e4a6c7c",
+        "8e82dab7073f8bfd",
+        "43170a7430392213",
+        "2190f923d99268f9",
+        "1a4e52bc6fb71be6",
+        "f1ee55ccde1aa38d"
+      ],
+      "date": 1605717147823
+    },
+    {
+      "id": "43170a7430392213",
+      "type": "move",
+      "order": [
+        "8cbf6d874aff13e6",
+        "2e09239797afafa2",
+        "43170a7430392213",
+        "2bf24c7c6e4a6c7c",
+        "8e82dab7073f8bfd",
+        "2190f923d99268f9",
+        "1a4e52bc6fb71be6",
+        "f1ee55ccde1aa38d"
+      ],
+      "date": 1605717149945
+    },
+    {
+      "type": "remove",
+      "id": "2190f923d99268f9",
+      "date": 1605717158295
+    },
+    {
+      "type": "add",
+      "id": "f7cfeb92b4250cd6",
+      "item": {
+        "type": "paragraph",
+        "id": "f7cfeb92b4250cd6",
+        "text": "The code in question browses GraphQL APIs. The nodes are a column of API properties. Properties that link to other APIs include linkwords that when clicked pan and zoom the graph to change focus of the viewport to the connected node."
+      },
+      "after": "8e82dab7073f8bfd",
+      "date": 1605717256326
+    },
+    {
+      "type": "add",
+      "id": "485a30fba4781999",
+      "item": {
+        "type": "factory",
+        "id": "485a30fba4781999",
+        "text": ". "
+      },
+      "after": "f7cfeb92b4250cd6",
+      "date": 1605720471656
+    },
+    {
+      "type": "edit",
+      "id": "485a30fba4781999",
+      "item": {
+        "type": "pagefold",
+        "id": "485a30fba4781999",
+        "text": " . "
+      },
+      "date": 1605720475435
+    },
+    {
+      "type": "add",
+      "id": "8cb992f116de0c3f",
+      "item": {
+        "type": "paragraph",
+        "id": "8cb992f116de0c3f",
+        "text": "Marc envisions exploration of larger graphs by opening the next FedWiki page with just that subgraph. This interaction resembles [[El Dorado]]."
+      },
+      "after": "f7cfeb92b4250cd6",
+      "date": 1605720564110
+    },
+    {
+      "type": "edit",
+      "id": "8cb992f116de0c3f",
+      "item": {
+        "type": "paragraph",
+        "id": "8cb992f116de0c3f",
+        "text": "Marc envisions exploration of larger graphs by opening the next FedWiki page with just that subgraph. This interaction resembles [[El Dorado UI]]."
+      },
+      "date": 1605723745570
+    }
+  ]
+}

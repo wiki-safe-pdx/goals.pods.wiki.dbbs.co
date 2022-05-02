@@ -1,0 +1,231 @@
+{
+  "title": "Clean Fast Install",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "91a9551eab848599",
+      "text": "We've gotten a lot of benefit from install scripts for digital ocean but haven't always used best practices or followed them up with maintenance and upgrade practices."
+    },
+    {
+      "type": "paragraph",
+      "id": "15c1596b460a9b5f",
+      "text": "We should avoid running as root on any machine used for more than wiki. Configuring nginx is one solution. A quick hack with ssh is another. [http://stackoverflow.com/a/18034716 stack overflow]"
+    },
+    {
+      "type": "code",
+      "id": "e70009322c7eb38a",
+      "text": "sudo ssh $USERNAME@localhost -L 80:localhost:3000 -N"
+    },
+    {
+      "type": "pagefold",
+      "id": "73ed63f7b292f816",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "4efa2f15dbb84e8e",
+      "text": "See [[Clean Fast Install Locally]] using docker on a laptop for controlled experiments."
+    },
+    {
+      "type": "paragraph",
+      "id": "2dd502aa36cffbd8",
+      "text": "See [[Clean Fast Install in Docker]] for (hopefully) lower admin overhead when hosting a public wiki."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Clean Fast Install",
+        "story": []
+      },
+      "date": 1481555688802
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "91a9551eab848599"
+      },
+      "id": "91a9551eab848599",
+      "type": "add",
+      "date": 1481555690992
+    },
+    {
+      "type": "edit",
+      "id": "91a9551eab848599",
+      "item": {
+        "type": "paragraph",
+        "id": "91a9551eab848599",
+        "text": "We've gotten a lot of benefit from install scripts for digital ocean but haven't always used best practices or followed them up with maintenance and upgrade practices."
+      },
+      "date": 1481555823229
+    },
+    {
+      "type": "add",
+      "id": "15c1596b460a9b5f",
+      "item": {
+        "type": "paragraph",
+        "id": "15c1596b460a9b5f",
+        "text": "We should avoid running as root on any machine used for more than wiki. Configuring nginx is one solution. A quick hack with ssh is another. [http://stackoverflow.com/a/18034716 stack overflow]"
+      },
+      "after": "91a9551eab848599",
+      "date": 1481555980523
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "e70009322c7eb38a"
+      },
+      "id": "e70009322c7eb38a",
+      "type": "add",
+      "after": "15c1596b460a9b5f",
+      "date": 1481556019052
+    },
+    {
+      "type": "edit",
+      "id": "e70009322c7eb38a",
+      "item": {
+        "type": "code",
+        "id": "e70009322c7eb38a",
+        "text": "sudo ssh $USERNAME@localhost -L 80:localhost:3000 -N"
+      },
+      "date": 1481556024099
+    },
+    {
+      "type": "fork",
+      "site": "ward.asia.wiki.org"
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "73ed63f7b292f816"
+      },
+      "id": "73ed63f7b292f816",
+      "type": "add",
+      "after": "e70009322c7eb38a",
+      "date": 1511763732855
+    },
+    {
+      "type": "edit",
+      "id": "73ed63f7b292f816",
+      "item": {
+        "type": "pagefold",
+        "id": "73ed63f7b292f816",
+        "text": "."
+      },
+      "date": 1511763738291
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "4efa2f15dbb84e8e"
+      },
+      "id": "4efa2f15dbb84e8e",
+      "type": "add",
+      "after": "73ed63f7b292f816",
+      "date": 1511763740344
+    },
+    {
+      "type": "edit",
+      "id": "4efa2f15dbb84e8e",
+      "item": {
+        "type": "paragraph",
+        "id": "4efa2f15dbb84e8e",
+        "text": "In [https://local-farm.wiki.dbbs.co] we have a docker composition which includes [[Caddy]] as a reverse proxy in front of a wiki farm."
+      },
+      "date": 1511763952336
+    },
+    {
+      "type": "edit",
+      "id": "4efa2f15dbb84e8e",
+      "item": {
+        "type": "paragraph",
+        "id": "4efa2f15dbb84e8e",
+        "text": "In [https://local-farm.wiki.dbbs.co local-farm.wiki.dbbs.co] we have a docker composition which includes [[Caddy]] as a reverse proxy in front of a wiki farm."
+      },
+      "date": 1511763967754
+    },
+    {
+      "type": "edit",
+      "id": "4efa2f15dbb84e8e",
+      "item": {
+        "type": "paragraph",
+        "id": "4efa2f15dbb84e8e",
+        "text": "In [https://local-farm.wiki.dbbs.co/start-your-own-local-wiki-farm.html local-farm.wiki.dbbs.co] we have a docker composition which includes [[Caddy]] as a reverse proxy in front of a wiki farm."
+      },
+      "date": 1511764023304
+    },
+    {
+      "type": "edit",
+      "id": "4efa2f15dbb84e8e",
+      "item": {
+        "type": "paragraph",
+        "id": "4efa2f15dbb84e8e",
+        "text": "See [[Clean Fast Install Locally]] using docker on a laptop for controlled experiments."
+      },
+      "date": 1511846147132
+    },
+    {
+      "type": "add",
+      "id": "2dd502aa36cffbd8",
+      "item": {
+        "type": "paragraph",
+        "id": "2dd502aa36cffbd8",
+        "text": "See [[Clean Fast Install in Docker]] for (hopefully) lower admin overhead when hosting a public wiki."
+      },
+      "after": "4efa2f15dbb84e8e",
+      "date": 1511846267084
+    },
+    {
+      "type": "add",
+      "id": "1ab711c159bc2205",
+      "item": {
+        "type": "paragraph",
+        "id": "1ab711c159bc2205",
+        "text": "In [https://local-farm.wiki.dbbs.co/start-your-own-local-wiki-farm.html local-farm.wiki.dbbs.co] we have a docker composition which includes [[Caddy]] as a reverse proxy in front of a wiki farm."
+      },
+      "after": "2dd502aa36cffbd8",
+      "date": 1511846271088
+    },
+    {
+      "type": "remove",
+      "id": "1ab711c159bc2205",
+      "date": 1511846455875
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "f4e9e8849afae592"
+      },
+      "id": "f4e9e8849afae592",
+      "type": "add",
+      "after": "2dd502aa36cffbd8",
+      "date": 1512824228090
+    },
+    {
+      "type": "edit",
+      "id": "f4e9e8849afae592",
+      "item": {
+        "type": "paragraph",
+        "id": "f4e9e8849afae592",
+        "text": "Ward asked: \"can we write a \"clean, fast install\" that would bring up a new server from an existing one? Maybe it uses a Transporter: Create an account on Digital Ocean and drag that page to the install transporter. Repeat the same process for an upgrade. There are tons of cross-site issues here for sure. But what is the most wiki thing we could do assuming one had a whole wiki site to explain it and do it with tractable automation?\" [https:// matrix]"
+      },
+      "date": 1512824258765
+    },
+    {
+      "type": "edit",
+      "id": "f4e9e8849afae592",
+      "item": {
+        "type": "paragraph",
+        "id": "f4e9e8849afae592",
+        "text": "Ward asked: \"can we write a \"clean, fast install\" that would bring up a new server from an existing one? Maybe it uses a Transporter: Create an account on Digital Ocean and drag that page to the install transporter. Repeat the same process for an upgrade. There are tons of cross-site issues here for sure. But what is the most wiki thing we could do assuming one had a whole wiki site to explain it and do it with tractable automation?\" [https://matrix.to/#/!ORfrUEFeWFcHAMLFLr:matrix.org/$1511799189119945TiWbn:matrix.org matrix]"
+      },
+      "date": 1512824281484
+    },
+    {
+      "type": "remove",
+      "id": "f4e9e8849afae592",
+      "date": 1512826602837
+    }
+  ]
+}

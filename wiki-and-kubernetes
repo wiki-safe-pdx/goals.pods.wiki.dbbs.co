@@ -1,0 +1,925 @@
+{
+  "title": "Wiki and Kubernetes",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "d01238b509ba018d",
+      "text": "Exploring how to run wiki in kubernetes. Most recent success—as of this writing—captured in github: [https://github.com/dobbs/farm/commit/fb2aa0f67c6cc2be55f9bd12e653fb8391e0c405#diff-ce7276807d304851694b5fb0341b4a23 commit] Initial success running on a laptop [https://github.com/dobbs/wiki-k8s dobbs/wiki-k8s]. Below we also have visualized some of the experiments."
+    },
+    {
+      "type": "paragraph",
+      "id": "fbe349fb60546d99",
+      "text": "The following image reflects previous usage. Kubernetes ran on my laptop with traefik configured to use a wildcard subdomain name and a let's encrypt wildcard TLS certificate. The domain name configs and servers lived in digital ocean."
+    },
+    {
+      "type": "graphviz",
+      "id": "627502c47091f809",
+      "text": "strict digraph {\n\nnode [shape=box style=filled colorscheme=set312]\n\n{\n  edge [style=invis]\n  secret [fillcolor=1]\n  tmpl [fillcolor=7]\n  yaml [fillcolor=2]\n  script [fillcolor=8 shape=cds]\n  namespace [fillcolor=3 label=\"k8s\\nnamespace\"]\n  cloud [fillcolor=4]\n  laptop [fillcolor=5]\n  secret -> tmpl -> script -> yaml -> namespace -> laptop -> cloud\n}\n\n{\n  node [fillcolor=2]\n  wiki_yaml [label=\"wiki.yaml\"]\n  traefik_yaml [label=\"traefik.yaml\"]\n}\n\n{\n  node [fillcolor=1]\n  FQDN\n  DO_TOKEN\n  LE_EMAIL\n}\n\n{\n  node [fillcolor=7]\n  wiki_tmpl [label=\"wiki.tmpl\"]\n  traefik_tmpl [label=\"traefik-values.tmpl\"]  \n}\n\n{\n  node [fillcolor=8 shape=cds]\n  merge [label=\"merge-dot-tmpl.sh\"]\n  helm [label=\"helm install ...\"]\n  do_dns [label=\"local-dns-digital-ocean.sh\"]\n  kubectl [label=\"kubectl apply ...\"]\n}\n\nsubgraph cluster_do {\n  label=\"Digital Ocean\"\n  style=filled\n  colorscheme=set312\n  fillcolor=4\n  nameserver [fillcolor=5]\n}\n\nsubgraph cluster_laptop {\n  label=laptop\n  style=filled\n  colorscheme=set312\n  fillcolor=5\n  \"kube-system\" [fillcolor=3]\n  default [fillcolor=3]  \n}\n\ntraefik_tmpl -> merge:nw\n{FQDN DO_TOKEN LE_EMAIL} -> merge:ne\nmerge:sw -> traefik_yaml\n\nwiki_tmpl -> merge:nw\nFQDN -> merge:ne\nmerge:se -> wiki_yaml\n\n{FQDN DO_TOKEN} -> do_dns -> nameserver\ntraefik_yaml -> helm -> \"kube-system\"\nwiki_yaml -> kubectl -> default\n\n}"
+    },
+    {
+      "type": "paragraph",
+      "id": "a8b149573f013ff6",
+      "text": "Docker Desktop for Mac now resets the local kubernetes cluster with new releases. After one recent reset and redeploying this configuration, traefik began using its fallback to self-signed certificates instead of obtaining trusted TLS certificates from Let's Encrypt."
+    },
+    {
+      "type": "paragraph",
+      "id": "a7eedc49964cd2b2",
+      "text": "We aspire to develop a configuration where wiki can run within Digital Ocean's hosted kubernetes service. At least one vital secret is missing from the picture: kubectl requires a certificate to enable communication with Digital Ocean's kubernetes cluster."
+    },
+    {
+      "type": "graphviz",
+      "id": "d1662086996ca57e",
+      "text": "strict digraph {\n\nnode [shape=box style=filled colorscheme=set312]\n\n{\n  edge [style=invis]\n  secret [fillcolor=1]\n  tmpl [fillcolor=7]\n  yaml [fillcolor=2]\n  script [fillcolor=8 shape=cds]\n  namespace [fillcolor=3 label=\"k8s\\nnamespace\"]\n  cloud [fillcolor=4]\n  secret -> tmpl -> script -> yaml -> namespace -> cloud\n}\n\n{\n  node [fillcolor=2]\n  wiki_yaml [label=\"wiki.yaml\"]\n  traefik_yaml [label=\"traefik.yaml\"]\n}\n\n{\n  node [fillcolor=1]\n  FQDN\n  DO_TOKEN\n  LE_EMAIL\n}\n\n{\n  node [fillcolor=7]\n  wiki_tmpl [label=\"wiki.tmpl\"]\n  traefik_tmpl [label=\"traefik-values.tmpl\"]  \n}\n\n{\n  node [fillcolor=8 shape=cds]\n  merge [label=\"merge-dot-tmpl.sh\"]\n  helm [label=\"helm install ...\"]\n  do_dns [label=\"local-dns-digital-ocean.sh\"]\n  kubectl [label=\"kubectl apply ...\"]\n}\n\nsubgraph cluster_do {\n  label=\"Digital Ocean\"\n  style=filled\n  colorscheme=set312\n  fillcolor=4\n  \"kube-system\" [fillcolor=3]\n  default [fillcolor=3]\n  nameserver [fillcolor=5]\n}\n\ntraefik_tmpl -> merge:nw\n{FQDN DO_TOKEN LE_EMAIL} -> merge:ne\nmerge:sw -> traefik_yaml\n\nwiki_tmpl -> merge:nw\nFQDN -> merge:ne\nmerge:se -> wiki_yaml\n\n{FQDN DO_TOKEN} -> do_dns -> nameserver\ntraefik_yaml -> helm -> \"kube-system\"\nwiki_yaml -> kubectl -> default\n\n}"
+    },
+    {
+      "type": "pagefold",
+      "id": "7debcd20f8fa38a8",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "40327e97a9ee1081",
+      "text": "I have switched away from using Docker Desktop's kubernetes. I am now using kind (kubernetes in docker) instead. That has recently become available in homebrew."
+    },
+    {
+      "type": "code",
+      "id": "5eaed9a83fb8f3e8",
+      "text": "# install & create a cluster\nbrew install kind\nkind create cluster --name wiki\n\n# Choose homebrew instead of Docker Desktop.\n# I don't remember why I make this choice.\n# Offered here for completeness.\nbrew install kubernetes-cli\nbrew link --overwrite kubernetes-cli\n\n# point local kubernetes commands at the cluster\nkind export kubeconfig --name=wiki\n\n# start interacting with kubernetes\nkubectl get all"
+    },
+    {
+      "type": "paragraph",
+      "id": "d3773cbb8ca32fa7",
+      "text": "Once the cluster is created, I can run a wiki farm in this local cluster like so:"
+    },
+    {
+      "type": "code",
+      "id": "b6f8c654727e22c0",
+      "text": "# apply a specific kubernetes manifest\nSHA=fb2aa0f67c6cc2be55f9bd12e653fb8391e0c405\nBASE=https://raw.githubusercontent.com/dobbs/farm\nkubectl apply -f $BASE/$SHA/examples/k8s/wiki.yaml\n\n# port forwarding\nkubectl port-forward service/wiki-service 3000:80 \\\n  > /dev/null &"
+    },
+    {
+      "type": "paragraph",
+      "id": "247379ab8538b74f",
+      "text": "Then these URLs will spawn wikis"
+    },
+    {
+      "type": "paragraph",
+      "id": "16f8c8845c89402a",
+      "text": "[http://wiki.localtest.me:3000 wiki.localtest.me:3000]"
+    },
+    {
+      "type": "paragraph",
+      "id": "8ca8053fee6d97ab",
+      "text": "[http://thing.localtest.me:3000 thing.localtest.me:3000]"
+    },
+    {
+      "type": "code",
+      "id": "85fe561398f34538",
+      "text": "# copy the admin secret to login to the wikis\nkubectl exec -it svc/wiki-service \\\n  -- jq -r .admin .wiki/config.json"
+    },
+    {
+      "type": "paragraph",
+      "id": "64e86ec92e8d0891",
+      "text": "Some changes to the kubernetes manifest are needed to run this wiki in other contexts. We have at least one example with minor changes to this configuration which successfully deploys a wiki within a kubernetes cluster at work."
+    },
+    {
+      "type": "pagefold",
+      "id": "4e7ff316c997b74d",
+      "text": "todo"
+    },
+    {
+      "type": "paragraph",
+      "id": "ab401e38303650ce",
+      "text": "Try running kind inside a digital ocean VM"
+    },
+    {
+      "type": "pagefold",
+      "id": "6f32e01f5dfbeb8e",
+      "text": "done"
+    },
+    {
+      "type": "paragraph",
+      "id": "c02bc895775eba75",
+      "text": "Add CNAMEs to point to the same wiki"
+    },
+    {
+      "type": "paragraph",
+      "id": "3c0b1f8e442d0a37",
+      "text": "New config for * in allowed domains—worked from a rebased branch [https://github.com/dobbs/wiki/tree/5027a96c372e6a8ead50797dcd597357e0959846 github]"
+    },
+    {
+      "type": "paragraph",
+      "id": "d3fc5d83f6ab5426",
+      "text": "Change config.json, restart wiki without loosing data—saved some notes in a Q&A format [https://stackoverflow.com/a/59113592/1074208 stackoverflow]"
+    },
+    {
+      "type": "paragraph",
+      "id": "c60fdfc98784d9cc",
+      "text": "Find something better than kubectl port-forward—this is currently the most convenient option given the choice to use kind as my local kubernetes cluster."
+    },
+    {
+      "type": "paragraph",
+      "id": "d7a5466fa3fb8bde",
+      "text": "Try slackmatic plugin in context—must remember to grunt browserify before npm publish"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Wiki and Kubernetes",
+        "story": []
+      },
+      "date": 1566344328187
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "d01238b509ba018d"
+      },
+      "id": "d01238b509ba018d",
+      "type": "add",
+      "date": 1566344330483
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "627502c47091f809"
+      },
+      "id": "627502c47091f809",
+      "type": "add",
+      "after": "d01238b509ba018d",
+      "date": 1566344336386
+    },
+    {
+      "type": "fork",
+      "date": 1566398370103
+    },
+    {
+      "type": "edit",
+      "id": "627502c47091f809",
+      "item": {
+        "type": "graphviz",
+        "id": "627502c47091f809",
+        "text": "strict digraph {\n\nnode [shape=box style=filled colorscheme=set312]\n\n{\n  edge [style=invis]\n  secret [fillcolor=1]\n  tmpl [fillcolor=7]\n  yaml [fillcolor=2]\n  script [fillcolor=8 shape=cds]\n  namespace [fillcolor=3 label=\"k8s\\nnamespace\"]\n  cloud [fillcolor=4]\n  secret -> tmpl -> script -> yaml -> namespace -> cloud\n}\n\n{\n  node [fillcolor=2]\n  wiki_yaml [label=\"wiki.yaml\"]\n  traefik_yaml [label=\"traefik.yaml\"]\n}\n\n{\n  node [fillcolor=1]\n  FQDN\n  DO_TOKEN\n  LE_EMAIL\n}\n\n{\n  node [fillcolor=7]\n  wiki_tmpl [label=\"wiki.tmpl\"]\n  traefik_tmpl [label=\"traefik-values.tmpl\"]  \n}\n\n{\n  node [fillcolor=8 shape=cds]\n  merge [label=\"merge-dot-tmpl.sh\"]\n  helm [label=\"helm install ...\"]\n  do_dns [label=\"local-dns-digital-ocean.sh\"]\n  kubectl [label=\"kubectl apply ...\"]\n}\n\nsubgraph cluster_do {\n  label=\"Digital Ocean\"\n  style=filled\n  colorscheme=set312\n  fillcolor=4\n  \"kube-system\" [fillcolor=3]\n  default [fillcolor=3]\n  nameserver [fillcolor=5]\n}\n\ntraefik_tmpl -> merge:nw\n{FQDN DO_TOKEN LE_EMAIL} -> merge:ne\nmerge:sw -> traefik_yaml\n\nwiki_tmpl -> merge:nw\nFQDN -> merge:ne\nmerge:se -> wiki_yaml\n\n{FQDN DO_TOKEN} -> do_dns -> nameserver\ntraefik_yaml -> helm -> \"kube-system\"\nwiki_yaml -> kubectl -> default\n\n}"
+      },
+      "date": 1566398375149
+    },
+    {
+      "type": "edit",
+      "id": "d01238b509ba018d",
+      "item": {
+        "type": "paragraph",
+        "id": "d01238b509ba018d",
+        "text": "Visualize the flow of dependencies in [https://github.com/dobbs/wiki-k8s dobbs/wiki-k8s] in hopes of discovering the essential complexity"
+      },
+      "date": 1566398385317
+    },
+    {
+      "type": "edit",
+      "id": "627502c47091f809",
+      "item": {
+        "type": "graphviz",
+        "id": "627502c47091f809",
+        "text": "strict digraph {\n\nnode [shape=box style=filled colorscheme=set312]\n\n{\n  edge [style=invis]\n  secret [fillcolor=1]\n  tmpl [fillcolor=7]\n  yaml [fillcolor=2]\n  script [fillcolor=8 shape=cds]\n  namespace [fillcolor=3 label=\"k8s\\nnamespace\"]\n  cloud [fillcolor=4]\n  secret -> tmpl -> script -> yaml -> namespace -> cloud\n}\n\n{\n  node [fillcolor=2]\n  wiki_yaml [label=\"wiki.yaml\"]\n  traefik_yaml [label=\"traefik.yaml\"]\n}\n\n{\n  node [fillcolor=1]\n  FQDN\n  DO_TOKEN\n  LE_EMAIL\n}\n\n{\n  node [fillcolor=7]\n  wiki_tmpl [label=\"wiki.tmpl\"]\n  traefik_tmpl [label=\"traefik-values.tmpl\"]  \n}\n\n{\n  node [fillcolor=8 shape=cds]\n  merge [label=\"merge-dot-tmpl.sh\"]\n  helm [label=\"helm install ...\"]\n  do_dns [label=\"local-dns-digital-ocean.sh\"]\n  kubectl [label=\"kubectl apply ...\"]\n}\n\nsubgraph cluster_do {\n  label=\"Digital Ocean\"\n  style=filled\n  colorscheme=set312\n  fillcolor=4\n  nameserver [fillcolor=5]\n}\n\nsubgraph cluster_laptop {\n  label=laptop\n  style=filled\n  colorscheme=set312\n  fillcolor=5\n  \"kube-system\" [fillcolor=3]\n  default [fillcolor=3]  \n}\n\ntraefik_tmpl -> merge:nw\n{FQDN DO_TOKEN LE_EMAIL} -> merge:ne\nmerge:sw -> traefik_yaml\n\nwiki_tmpl -> merge:nw\nFQDN -> merge:ne\nmerge:se -> wiki_yaml\n\n{FQDN DO_TOKEN} -> do_dns -> nameserver\ntraefik_yaml -> helm -> \"kube-system\"\nwiki_yaml -> kubectl -> default\n\n}"
+      },
+      "date": 1566523424471
+    },
+    {
+      "type": "edit",
+      "id": "627502c47091f809",
+      "item": {
+        "type": "graphviz",
+        "id": "627502c47091f809",
+        "text": "strict digraph {\n\nnode [shape=box style=filled colorscheme=set312]\n\n{\n  edge [style=invis]\n  secret [fillcolor=1]\n  tmpl [fillcolor=7]\n  yaml [fillcolor=2]\n  script [fillcolor=8 shape=cds]\n  namespace [fillcolor=3 label=\"k8s\\nnamespace\"]\n  cloud [fillcolor=4]\n  laptop [fillcolor=5]\n  secret -> tmpl -> script -> yaml -> namespace -> laptop -> cloud\n}\n\n{\n  node [fillcolor=2]\n  wiki_yaml [label=\"wiki.yaml\"]\n  traefik_yaml [label=\"traefik.yaml\"]\n}\n\n{\n  node [fillcolor=1]\n  FQDN\n  DO_TOKEN\n  LE_EMAIL\n}\n\n{\n  node [fillcolor=7]\n  wiki_tmpl [label=\"wiki.tmpl\"]\n  traefik_tmpl [label=\"traefik-values.tmpl\"]  \n}\n\n{\n  node [fillcolor=8 shape=cds]\n  merge [label=\"merge-dot-tmpl.sh\"]\n  helm [label=\"helm install ...\"]\n  do_dns [label=\"local-dns-digital-ocean.sh\"]\n  kubectl [label=\"kubectl apply ...\"]\n}\n\nsubgraph cluster_do {\n  label=\"Digital Ocean\"\n  style=filled\n  colorscheme=set312\n  fillcolor=4\n  nameserver [fillcolor=5]\n}\n\nsubgraph cluster_laptop {\n  label=laptop\n  style=filled\n  colorscheme=set312\n  fillcolor=5\n  \"kube-system\" [fillcolor=3]\n  default [fillcolor=3]  \n}\n\ntraefik_tmpl -> merge:nw\n{FQDN DO_TOKEN LE_EMAIL} -> merge:ne\nmerge:sw -> traefik_yaml\n\nwiki_tmpl -> merge:nw\nFQDN -> merge:ne\nmerge:se -> wiki_yaml\n\n{FQDN DO_TOKEN} -> do_dns -> nameserver\ntraefik_yaml -> helm -> \"kube-system\"\nwiki_yaml -> kubectl -> default\n\n}"
+      },
+      "date": 1566523474871
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "fbe349fb60546d99"
+      },
+      "id": "fbe349fb60546d99",
+      "type": "add",
+      "after": "627502c47091f809",
+      "date": 1566523559539
+    },
+    {
+      "type": "edit",
+      "id": "fbe349fb60546d99",
+      "item": {
+        "type": "paragraph",
+        "id": "fbe349fb60546d99",
+        "text": "This image reflects current usage. Kubernetes runs on my laptop with traefik configured to use a wildcard subdomain name and a let's encrypt wildcard TLS certificate. The domain name configs and servers live in digital ocean."
+      },
+      "date": 1566523741168
+    },
+    {
+      "type": "edit",
+      "id": "fbe349fb60546d99",
+      "item": {
+        "type": "paragraph",
+        "id": "fbe349fb60546d99",
+        "text": "The following image reflects current usage. Kubernetes runs on my laptop with traefik configured to use a wildcard subdomain name and a let's encrypt wildcard TLS certificate. The domain name configs and servers live in digital ocean."
+      },
+      "date": 1566523752239
+    },
+    {
+      "id": "fbe349fb60546d99",
+      "type": "move",
+      "order": [
+        "d01238b509ba018d",
+        "fbe349fb60546d99",
+        "627502c47091f809"
+      ],
+      "date": 1566523755162
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "a7eedc49964cd2b2"
+      },
+      "id": "a7eedc49964cd2b2",
+      "type": "add",
+      "after": "627502c47091f809",
+      "date": 1566523757958
+    },
+    {
+      "type": "edit",
+      "id": "a7eedc49964cd2b2",
+      "item": {
+        "type": "paragraph",
+        "id": "a7eedc49964cd2b2",
+        "text": "We aspire to develop a configuration where wiki can run within Digital Ocean's hosted kubernetes service. At least one vital secret is missing from the picture: kubectl requires a certificate to enable communication with Digital Ocean's kubernetes cluster."
+      },
+      "date": 1566523950968
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "d1662086996ca57e"
+      },
+      "id": "d1662086996ca57e",
+      "type": "add",
+      "after": "a7eedc49964cd2b2",
+      "date": 1566523959252
+    },
+    {
+      "type": "edit",
+      "id": "d1662086996ca57e",
+      "item": {
+        "type": "graphviz",
+        "id": "d1662086996ca57e",
+        "text": "strict digraph {\n\nnode [shape=box style=filled colorscheme=set312]\n\n{\n  edge [style=invis]\n  secret [fillcolor=1]\n  tmpl [fillcolor=7]\n  yaml [fillcolor=2]\n  script [fillcolor=8 shape=cds]\n  namespace [fillcolor=3 label=\"k8s\\nnamespace\"]\n  cloud [fillcolor=4]\n  secret -> tmpl -> script -> yaml -> namespace -> cloud\n}\n\n{\n  node [fillcolor=2]\n  wiki_yaml [label=\"wiki.yaml\"]\n  traefik_yaml [label=\"traefik.yaml\"]\n}\n\n{\n  node [fillcolor=1]\n  FQDN\n  DO_TOKEN\n  LE_EMAIL\n}\n\n{\n  node [fillcolor=7]\n  wiki_tmpl [label=\"wiki.tmpl\"]\n  traefik_tmpl [label=\"traefik-values.tmpl\"]  \n}\n\n{\n  node [fillcolor=8 shape=cds]\n  merge [label=\"merge-dot-tmpl.sh\"]\n  helm [label=\"helm install ...\"]\n  do_dns [label=\"local-dns-digital-ocean.sh\"]\n  kubectl [label=\"kubectl apply ...\"]\n}\n\nsubgraph cluster_do {\n  label=\"Digital Ocean\"\n  style=filled\n  colorscheme=set312\n  fillcolor=4\n  \"kube-system\" [fillcolor=3]\n  default [fillcolor=3]\n  nameserver [fillcolor=5]\n}\n\ntraefik_tmpl -> merge:nw\n{FQDN DO_TOKEN LE_EMAIL} -> merge:ne\nmerge:sw -> traefik_yaml\n\nwiki_tmpl -> merge:nw\nFQDN -> merge:ne\nmerge:se -> wiki_yaml\n\n{FQDN DO_TOKEN} -> do_dns -> nameserver\ntraefik_yaml -> helm -> \"kube-system\"\nwiki_yaml -> kubectl -> default\n\n}"
+      },
+      "date": 1566523965763
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "7debcd20f8fa38a8"
+      },
+      "id": "7debcd20f8fa38a8",
+      "type": "add",
+      "after": "d1662086996ca57e",
+      "date": 1566523975230
+    },
+    {
+      "type": "edit",
+      "id": "7debcd20f8fa38a8",
+      "item": {
+        "type": "pagefold",
+        "id": "7debcd20f8fa38a8",
+        "text": "."
+      },
+      "date": 1566523983622
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "509c81e597bd511a"
+      },
+      "id": "509c81e597bd511a",
+      "type": "add",
+      "after": "7debcd20f8fa38a8",
+      "date": 1566523985165
+    },
+    {
+      "type": "edit",
+      "id": "509c81e597bd511a",
+      "item": {
+        "type": "paragraph",
+        "id": "509c81e597bd511a",
+        "text": "The latest Docker Desktop upgrade forced a hard reset to factory defaults. It happens that containers make that kind of reset easier to tolerate. However, the experience suggests that we cannot yet trust kubernetes in Docker Desktop in our recommendations for less technical wiki authors."
+      },
+      "date": 1566524134575
+    },
+    {
+      "type": "edit",
+      "id": "fbe349fb60546d99",
+      "item": {
+        "type": "paragraph",
+        "id": "fbe349fb60546d99",
+        "text": "The following image reflects previous usage. Kubernetes ran on my laptop with traefik configured to use a wildcard subdomain name and a let's encrypt wildcard TLS certificate. The domain name configs and servers lived in digital ocean."
+      },
+      "date": 1574620025237
+    },
+    {
+      "type": "edit",
+      "id": "d01238b509ba018d",
+      "item": {
+        "type": "paragraph",
+        "id": "d01238b509ba018d",
+        "text": "Exploring how to run wiki in kubernetes. Most recent success—as of this writing—captured in github: [https://github.com/dobbs/farm/commit/fb2aa0f67c6cc2be55f9bd12e653fb8391e0c405#diff-ce7276807d304851694b5fb0341b4a23 commit] Initial success running on a laptop [https://github.com/dobbs/wiki-k8s dobbs/wiki-k8s]. Below we also have visualized some of the experiments."
+      },
+      "date": 1574620424714
+    },
+    {
+      "type": "add",
+      "id": "a8b149573f013ff6",
+      "item": {
+        "type": "paragraph",
+        "id": "a8b149573f013ff6",
+        "text": "Docker Desktop for Mac has taken to resetting the local kubernetes cluster with new releases. After one such reset and redeploying this configuration, traefic began using its fallback to self-signed certificates instead of obtaining trusted TLS certificates from Let's Encrypt."
+      },
+      "after": "627502c47091f809",
+      "date": 1574620674775
+    },
+    {
+      "type": "edit",
+      "id": "a8b149573f013ff6",
+      "item": {
+        "type": "paragraph",
+        "id": "a8b149573f013ff6",
+        "text": "Docker Desktop for Mac now resets the local kubernetes cluster with new releases. After one recent reset and redeploying this configuration, traefik began using its fallback to self-signed certificates instead of obtaining trusted TLS certificates from Let's Encrypt."
+      },
+      "date": 1574620722591
+    },
+    {
+      "type": "remove",
+      "id": "509c81e597bd511a",
+      "date": 1574620745051
+    },
+    {
+      "type": "fork",
+      "date": 1574621966411
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "40327e97a9ee1081"
+      },
+      "id": "40327e97a9ee1081",
+      "type": "add",
+      "after": "7debcd20f8fa38a8",
+      "date": 1574621974687
+    },
+    {
+      "type": "edit",
+      "id": "40327e97a9ee1081",
+      "item": {
+        "type": "paragraph",
+        "id": "40327e97a9ee1081",
+        "text": "I have switched away from using Docker Desktop's kubernetes. I am now using kind (kubernetes in docker) instead. That has recently become available in homebrew."
+      },
+      "date": 1574622069770
+    },
+    {
+      "type": "fork",
+      "date": 1574622644040
+    },
+    {
+      "item": {
+        "type": "code",
+        "id": "5eaed9a83fb8f3e8",
+        "text": "# install & create a cluster\nbrew install kind\nkind create cluster --name wiki\n\n# Choose homebrew instead of Docker Desktop.\n# I don't remember why I make this choice.\n# Offered here for completeness.\nbrew install kubernetes-cli\nbrew link --overwrite kubernetes-cli\n\n# point local kubernetes commands at the cluster\nexport KUBECONFIG=\"$(\\\n  kind get kubeconfig-path --name=wiki)\"\n\n# start interacting with kubernetes\nkubectl get all"
+      },
+      "id": "5eaed9a83fb8f3e8",
+      "type": "add",
+      "after": "40327e97a9ee1081",
+      "date": 1574622656178
+    },
+    {
+      "type": "edit",
+      "id": "5eaed9a83fb8f3e8",
+      "item": {
+        "type": "code",
+        "id": "5eaed9a83fb8f3e8",
+        "text": "# install & create a cluster\nbrew install kind\nkind create cluster --name wiki\n\n# Choose homebrew instead of Docker Desktop.\n# I don't remember why I make this choice.\n# Offered here for completeness.\nbrew install kubernetes-cli\nbrew link --overwrite kubernetes-cli\n\n# point local kubernetes commands at the cluster\nexport KUBECONFIG=\"$(\\\n  kind get kubeconfig-path --name=wiki)\"\n\n# start interacting with kubernetes\nkubectl get all"
+      },
+      "date": 1574622659795,
+      "error": {
+        "type": "error",
+        "msg": "Bad Gateway",
+        "response": "502 Bad Gateway\n"
+      }
+    },
+    {
+      "type": "fork",
+      "date": 1574622671778
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "d3773cbb8ca32fa7"
+      },
+      "id": "d3773cbb8ca32fa7",
+      "type": "add",
+      "after": "5eaed9a83fb8f3e8",
+      "date": 1574624856865
+    },
+    {
+      "type": "edit",
+      "id": "d3773cbb8ca32fa7",
+      "item": {
+        "type": "paragraph",
+        "id": "d3773cbb8ca32fa7",
+        "text": "Once the cluster is created, I can run a wiki farm in this local cluster like so:"
+      },
+      "date": 1574624940438
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "b6f8c654727e22c0"
+      },
+      "id": "b6f8c654727e22c0",
+      "type": "add",
+      "after": "d3773cbb8ca32fa7",
+      "date": 1574624941920
+    },
+    {
+      "type": "edit",
+      "id": "b6f8c654727e22c0",
+      "item": {
+        "type": "code",
+        "id": "b6f8c654727e22c0",
+        "text": "SHA=fb2aa0f67c6cc2be55f9bd12e653fb8391e0c405\nBASE=https://raw.githubusercontent.com/dobbs/farm\nkubectl apply -f $BASE/$SHA/examples/k8s/wiki.yaml"
+      },
+      "date": 1574625095873
+    },
+    {
+      "type": "edit",
+      "id": "b6f8c654727e22c0",
+      "item": {
+        "type": "code",
+        "id": "b6f8c654727e22c0",
+        "text": "# apply a specific kubernetes manifest\nSHA=fb2aa0f67c6cc2be55f9bd12e653fb8391e0c405\nBASE=https://raw.githubusercontent.com/dobbs/farm\nkubectl apply -f $BASE/$SHA/examples/k8s/wiki.yaml\n\n# port forwarding\nkubectl port-forward service/wiki-service 3000:80 \\\n  > /dev/null &"
+      },
+      "date": 1574625190148
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "16f8c8845c89402a"
+      },
+      "id": "16f8c8845c89402a",
+      "type": "add",
+      "after": "b6f8c654727e22c0",
+      "date": 1574625193719
+    },
+    {
+      "type": "edit",
+      "id": "16f8c8845c89402a",
+      "item": {
+        "type": "paragraph",
+        "id": "16f8c8845c89402a",
+        "text": "[http://wiki.localtest.me:3000 wiki.localtest.me:3000]"
+      },
+      "date": 1574625225944
+    },
+    {
+      "type": "add",
+      "id": "8ca8053fee6d97ab",
+      "item": {
+        "type": "paragraph",
+        "id": "8ca8053fee6d97ab",
+        "text": "[http://thing.localtest.me:3000 thing.localtest.me:3000]"
+      },
+      "after": "16f8c8845c89402a",
+      "date": 1574625238794
+    },
+    {
+      "type": "add",
+      "id": "247379ab8538b74f",
+      "item": {
+        "type": "paragraph",
+        "id": "247379ab8538b74f",
+        "text": "Then these URLs will spawn wikis"
+      },
+      "after": "b6f8c654727e22c0",
+      "date": 1574625258880
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "85fe561398f34538"
+      },
+      "id": "85fe561398f34538",
+      "type": "add",
+      "after": "8ca8053fee6d97ab",
+      "date": 1574625288199
+    },
+    {
+      "type": "edit",
+      "id": "85fe561398f34538",
+      "item": {
+        "type": "code",
+        "id": "85fe561398f34538",
+        "text": "# copy the generated admin secret to login to the wikis\nkubectl exec -it svc/wiki-service \\\n  -- jq -r .admin .wiki/config.json"
+      },
+      "date": 1574625318152
+    },
+    {
+      "type": "edit",
+      "id": "85fe561398f34538",
+      "item": {
+        "type": "code",
+        "id": "85fe561398f34538",
+        "text": "# copy the admin secret to login to the wikis\nkubectl exec -it svc/wiki-service \\\n  -- jq -r .admin .wiki/config.json"
+      },
+      "date": 1574625327411
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "64e86ec92e8d0891"
+      },
+      "id": "64e86ec92e8d0891",
+      "type": "add",
+      "after": "85fe561398f34538",
+      "date": 1574625372203
+    },
+    {
+      "type": "edit",
+      "id": "64e86ec92e8d0891",
+      "item": {
+        "type": "paragraph",
+        "id": "64e86ec92e8d0891",
+        "text": "Some changes to the kubernetes manifest are needed to run this wiki in other contexts. We have at least one example with minor changes to this configuration which successfully deploys a wiki within a kubernetes cluster at work."
+      },
+      "date": 1574625442120
+    },
+    {
+      "type": "add",
+      "id": "4e7ff316c997b74d",
+      "item": {
+        "type": "factory",
+        "id": "4e7ff316c997b74d",
+        "text": "Next things to explore"
+      },
+      "after": "64e86ec92e8d0891",
+      "date": 1574625459821
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "3c0b1f8e442d0a37"
+      },
+      "id": "3c0b1f8e442d0a37",
+      "type": "add",
+      "after": "4e7ff316c997b74d",
+      "date": 1574625466512
+    },
+    {
+      "type": "edit",
+      "id": "3c0b1f8e442d0a37",
+      "item": {
+        "type": "paragraph",
+        "id": "3c0b1f8e442d0a37",
+        "text": "New config for * in allowed domains"
+      },
+      "date": 1574625509093
+    },
+    {
+      "type": "add",
+      "id": "d3fc5d83f6ab5426",
+      "item": {
+        "type": "paragraph",
+        "id": "d3fc5d83f6ab5426",
+        "text": "Change config.json, restart wiki without loosing data"
+      },
+      "after": "3c0b1f8e442d0a37",
+      "date": 1574625566285
+    },
+    {
+      "type": "add",
+      "id": "c02bc895775eba75",
+      "item": {
+        "type": "paragraph",
+        "id": "c02bc895775eba75",
+        "text": "Add CNAMEs to point to the same wiki"
+      },
+      "after": "d3fc5d83f6ab5426",
+      "date": 1574625580041
+    },
+    {
+      "type": "add",
+      "id": "ab401e38303650ce",
+      "item": {
+        "type": "paragraph",
+        "id": "ab401e38303650ce",
+        "text": "Try running kind inside a digital ocean VM"
+      },
+      "after": "c02bc895775eba75",
+      "date": 1574625597084
+    },
+    {
+      "type": "add",
+      "id": "d7a5466fa3fb8bde",
+      "item": {
+        "type": "paragraph",
+        "id": "d7a5466fa3fb8bde",
+        "text": "Try slackmatic plugin in context"
+      },
+      "after": "ab401e38303650ce",
+      "date": 1574625631723
+    },
+    {
+      "type": "edit",
+      "id": "4e7ff316c997b74d",
+      "item": {
+        "type": "paragraph",
+        "id": "4e7ff316c997b74d",
+        "text": "Explore"
+      },
+      "date": 1574640487385
+    },
+    {
+      "type": "edit",
+      "id": "4e7ff316c997b74d",
+      "item": {
+        "type": "pagefold",
+        "id": "4e7ff316c997b74d",
+        "text": "To Explore"
+      },
+      "date": 1574640503133
+    },
+    {
+      "type": "edit",
+      "id": "4e7ff316c997b74d",
+      "item": {
+        "type": "pagefold",
+        "id": "4e7ff316c997b74d",
+        "text": "Explore"
+      },
+      "date": 1574640509739
+    },
+    {
+      "type": "edit",
+      "id": "5eaed9a83fb8f3e8",
+      "item": {
+        "type": "code",
+        "id": "5eaed9a83fb8f3e8",
+        "text": "# install & create a cluster\nbrew install kind\nkind create cluster --name wiki\n\n# Choose homebrew instead of Docker Desktop.\n# I don't remember why I make this choice.\n# Offered here for completeness.\nbrew install kubernetes-cli\nbrew link --overwrite kubernetes-cli\n\n# point local kubernetes commands at the cluster\nkind export kubeconfig --name=wiki\n\n# start interacting with kubernetes\nkubectl get all"
+      },
+      "date": 1574641616271
+    },
+    {
+      "type": "add",
+      "id": "c60fdfc98784d9cc",
+      "item": {
+        "type": "paragraph",
+        "id": "c60fdfc98784d9cc",
+        "text": "Find something better than kubectl port-forward"
+      },
+      "after": "3c0b1f8e442d0a37",
+      "date": 1574641677883
+    },
+    {
+      "type": "edit",
+      "id": "4e7ff316c997b74d",
+      "item": {
+        "type": "pagefold",
+        "id": "4e7ff316c997b74d",
+        "text": "todo"
+      },
+      "date": 1575227635943
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "6f32e01f5dfbeb8e"
+      },
+      "id": "6f32e01f5dfbeb8e",
+      "type": "add",
+      "after": "d7a5466fa3fb8bde",
+      "date": 1575227637872
+    },
+    {
+      "type": "edit",
+      "id": "6f32e01f5dfbeb8e",
+      "item": {
+        "type": "pagefold",
+        "id": "6f32e01f5dfbeb8e",
+        "text": "done"
+      },
+      "date": 1575227641638
+    },
+    {
+      "id": "d3fc5d83f6ab5426",
+      "type": "move",
+      "order": [
+        "d01238b509ba018d",
+        "fbe349fb60546d99",
+        "627502c47091f809",
+        "a8b149573f013ff6",
+        "a7eedc49964cd2b2",
+        "d1662086996ca57e",
+        "7debcd20f8fa38a8",
+        "40327e97a9ee1081",
+        "5eaed9a83fb8f3e8",
+        "d3773cbb8ca32fa7",
+        "b6f8c654727e22c0",
+        "247379ab8538b74f",
+        "16f8c8845c89402a",
+        "8ca8053fee6d97ab",
+        "85fe561398f34538",
+        "64e86ec92e8d0891",
+        "4e7ff316c997b74d",
+        "3c0b1f8e442d0a37",
+        "c60fdfc98784d9cc",
+        "c02bc895775eba75",
+        "ab401e38303650ce",
+        "d7a5466fa3fb8bde",
+        "6f32e01f5dfbeb8e",
+        "d3fc5d83f6ab5426"
+      ],
+      "date": 1575227649444
+    },
+    {
+      "type": "edit",
+      "id": "d3fc5d83f6ab5426",
+      "item": {
+        "type": "paragraph",
+        "id": "d3fc5d83f6ab5426",
+        "text": "Change config.json, restart wiki without loosing data: [https://stackoverflow.com/a/59113592/1074208 stackoverflow]"
+      },
+      "date": 1575228044257
+    },
+    {
+      "id": "3c0b1f8e442d0a37",
+      "type": "move",
+      "order": [
+        "d01238b509ba018d",
+        "fbe349fb60546d99",
+        "627502c47091f809",
+        "a8b149573f013ff6",
+        "a7eedc49964cd2b2",
+        "d1662086996ca57e",
+        "7debcd20f8fa38a8",
+        "40327e97a9ee1081",
+        "5eaed9a83fb8f3e8",
+        "d3773cbb8ca32fa7",
+        "b6f8c654727e22c0",
+        "247379ab8538b74f",
+        "16f8c8845c89402a",
+        "8ca8053fee6d97ab",
+        "85fe561398f34538",
+        "64e86ec92e8d0891",
+        "4e7ff316c997b74d",
+        "c60fdfc98784d9cc",
+        "c02bc895775eba75",
+        "ab401e38303650ce",
+        "d7a5466fa3fb8bde",
+        "6f32e01f5dfbeb8e",
+        "3c0b1f8e442d0a37",
+        "d3fc5d83f6ab5426"
+      ],
+      "date": 1575228074032
+    },
+    {
+      "type": "edit",
+      "id": "3c0b1f8e442d0a37",
+      "item": {
+        "type": "paragraph",
+        "id": "3c0b1f8e442d0a37",
+        "text": "New config for * in allowed domains—worked from a rebased branch [https://github.com/dobbs/wiki/tree/5027a96c372e6a8ead50797dcd597357e0959846 github]"
+      },
+      "date": 1575228380985
+    },
+    {
+      "type": "edit",
+      "id": "d3fc5d83f6ab5426",
+      "item": {
+        "type": "paragraph",
+        "id": "d3fc5d83f6ab5426",
+        "text": "Change config.json, restart wiki without loosing data—saved some notes in a Q&A format [https://stackoverflow.com/a/59113592/1074208 stackoverflow]"
+      },
+      "date": 1575228426783
+    },
+    {
+      "id": "c60fdfc98784d9cc",
+      "type": "move",
+      "order": [
+        "d01238b509ba018d",
+        "fbe349fb60546d99",
+        "627502c47091f809",
+        "a8b149573f013ff6",
+        "a7eedc49964cd2b2",
+        "d1662086996ca57e",
+        "7debcd20f8fa38a8",
+        "40327e97a9ee1081",
+        "5eaed9a83fb8f3e8",
+        "d3773cbb8ca32fa7",
+        "b6f8c654727e22c0",
+        "247379ab8538b74f",
+        "16f8c8845c89402a",
+        "8ca8053fee6d97ab",
+        "85fe561398f34538",
+        "64e86ec92e8d0891",
+        "4e7ff316c997b74d",
+        "c02bc895775eba75",
+        "ab401e38303650ce",
+        "d7a5466fa3fb8bde",
+        "6f32e01f5dfbeb8e",
+        "3c0b1f8e442d0a37",
+        "d3fc5d83f6ab5426",
+        "c60fdfc98784d9cc"
+      ],
+      "date": 1575228492220
+    },
+    {
+      "type": "edit",
+      "id": "c60fdfc98784d9cc",
+      "item": {
+        "type": "paragraph",
+        "id": "c60fdfc98784d9cc",
+        "text": "Find something better than kubectl port-forward—this is currently the most convenient option given the choice to use kind as my local kubernetes cluster."
+      },
+      "date": 1575228552277
+    },
+    {
+      "id": "d7a5466fa3fb8bde",
+      "type": "move",
+      "order": [
+        "d01238b509ba018d",
+        "fbe349fb60546d99",
+        "627502c47091f809",
+        "a8b149573f013ff6",
+        "a7eedc49964cd2b2",
+        "d1662086996ca57e",
+        "7debcd20f8fa38a8",
+        "40327e97a9ee1081",
+        "5eaed9a83fb8f3e8",
+        "d3773cbb8ca32fa7",
+        "b6f8c654727e22c0",
+        "247379ab8538b74f",
+        "16f8c8845c89402a",
+        "8ca8053fee6d97ab",
+        "85fe561398f34538",
+        "64e86ec92e8d0891",
+        "4e7ff316c997b74d",
+        "c02bc895775eba75",
+        "ab401e38303650ce",
+        "6f32e01f5dfbeb8e",
+        "3c0b1f8e442d0a37",
+        "d3fc5d83f6ab5426",
+        "c60fdfc98784d9cc",
+        "d7a5466fa3fb8bde"
+      ],
+      "date": 1575260579912
+    },
+    {
+      "type": "edit",
+      "id": "d7a5466fa3fb8bde",
+      "item": {
+        "type": "paragraph",
+        "id": "d7a5466fa3fb8bde",
+        "text": "Try slackmatic plugin in context—must remember to grunt browserify before npm publish"
+      },
+      "date": 1575260598495
+    },
+    {
+      "id": "c02bc895775eba75",
+      "type": "move",
+      "order": [
+        "d01238b509ba018d",
+        "fbe349fb60546d99",
+        "627502c47091f809",
+        "a8b149573f013ff6",
+        "a7eedc49964cd2b2",
+        "d1662086996ca57e",
+        "7debcd20f8fa38a8",
+        "40327e97a9ee1081",
+        "5eaed9a83fb8f3e8",
+        "d3773cbb8ca32fa7",
+        "b6f8c654727e22c0",
+        "247379ab8538b74f",
+        "16f8c8845c89402a",
+        "8ca8053fee6d97ab",
+        "85fe561398f34538",
+        "64e86ec92e8d0891",
+        "4e7ff316c997b74d",
+        "ab401e38303650ce",
+        "6f32e01f5dfbeb8e",
+        "c02bc895775eba75",
+        "3c0b1f8e442d0a37",
+        "d3fc5d83f6ab5426",
+        "c60fdfc98784d9cc",
+        "d7a5466fa3fb8bde"
+      ],
+      "date": 1578197292855
+    }
+  ]
+}

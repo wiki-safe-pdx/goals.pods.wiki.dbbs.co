@@ -1,0 +1,78 @@
+{
+  "title": "What does FedWiki know about Docker?",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "efc6259ffedcc873",
+      "text": "What does the federation already know about Docker? [http://home.c2.com:3030/#/find=words&within=pages&match=and&query=docker search]"
+    },
+    {
+      "type": "paragraph",
+      "id": "8d4ed8d68dac04e0",
+      "text": "Surveying those search results it looks like there's a lot of general knowledge without much applied knowledge or practice."
+    },
+    {
+      "type": "paragraph",
+      "id": "de48972f6475f6da",
+      "text": "Consistency and Separation of (administrative) Concerns are [[Why Containers Work]]."
+    },
+    {
+      "type": "paragraph",
+      "id": "44ff2e53ad526e8f",
+      "text": "Our hope for the federation is to apply containers to empower federation members to more easily share working systems, example configurations, and innovative improvements."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "What does FedWiki know about Docker?",
+        "story": []
+      },
+      "date": 1512881846316
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "efc6259ffedcc873",
+        "text": "What does the federation already know about Docker? [http://home.c2.com:3030/#/find=words&within=pages&match=and&query=docker search]"
+      },
+      "id": "efc6259ffedcc873",
+      "date": 1512881854971
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "8d4ed8d68dac04e0",
+        "text": "Surveying those search results it looks like there's a lot of general knowledge without much applied knowledge or practice."
+      },
+      "after": "efc6259ffedcc873",
+      "id": "8d4ed8d68dac04e0",
+      "date": 1512881859459
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "de48972f6475f6da",
+        "text": "Consistency and Separation of (administrative) Concerns are [[Why Containers Work]]."
+      },
+      "after": "8d4ed8d68dac04e0",
+      "id": "de48972f6475f6da",
+      "date": 1512881863069
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "44ff2e53ad526e8f",
+        "text": "Our hope for the federation is to apply containers to empower federation members to more easily share working systems, example configurations, and innovative improvements."
+      },
+      "after": "de48972f6475f6da",
+      "id": "44ff2e53ad526e8f",
+      "date": 1512881866433
+    }
+  ]
+}

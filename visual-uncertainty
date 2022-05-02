@@ -1,0 +1,404 @@
+{
+  "title": "Visual Uncertainty",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "f2120333c6357715",
+      "text": "A sketch searching for a pattern where state of javascript objects display as DOM objects. What does a promise look like before it has been invoked? Before it has resolved or rejected? Once resolved? Once rejected?\n"
+    },
+    {
+      "type": "frame",
+      "id": "d327e79efe939e88",
+      "text": "https://goals.pods.wiki.dbbs.co/assets/visual-uncertainty/visual-uncertainty.html\nHEIGHT 400\nscroll around in the frame or view in a different window: [https://goals.pods.wiki.dbbs.co/assets/visual-uncertainty/visual-uncertainty.html link]"
+    },
+    {
+      "type": "paragraph",
+      "id": "2010390dc1327ad3",
+      "text": "Is window.location.hash a promise for a lineup or one serialization of the lineup data model? Is the rendered DOM a view of the same data model?"
+    },
+    {
+      "type": "paragraph",
+      "id": "769434e45fa7f163",
+      "text": "We know we're awaiting something from the network. We can show the reader that we are responding to their request by inserting a placeholder... the promise, a progress indicator on an otherwise empty page... or an as-yet-unloaded plugin."
+    },
+    {
+      "type": "paragraph",
+      "id": "c11ce04071a7188a",
+      "text": "Uncertainty admits that the result might fail. The failure might offer the reader a chance to retry."
+    },
+    {
+      "type": "paragraph",
+      "id": "562b715dff93c966",
+      "text": "Another existing example is how the flags behave in the neighborhood: spinning slowly when sitemap request enters a queue; spinning quickly when the loading; tilted when failed; still and colorful when complete."
+    },
+    {
+      "type": "assets",
+      "id": "edf15d7b20f4c9f2",
+      "text": "visual-uncertainty"
+    },
+    {
+      "type": "pagefold",
+      "id": "5e5174adc65d297d",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "ecc8553f131b56bc",
+      "text": "While constructing these examples we learned some new-to-us CSS tricks."
+    },
+    {
+      "type": "paragraph",
+      "id": "942f100b0bba4e08",
+      "text": "The tranform: scale() property scales the contents of an element without changing its width and height relative to the DOM outside the element. What I usually want is to also scale those width and heights accordingly."
+    },
+    {
+      "type": "paragraph",
+      "id": "76f720dbbbddc0b6",
+      "text": "Here we apply a custom property with the var() and calc() functions to achieve the desired scaling both inside and outside the target elements."
+    },
+    {
+      "type": "code",
+      "id": "8dc67b65a2a68aa2",
+      "text": ":root { --scale: 0.5; }\nmodel {\n  transform-origin: top left;\n  transform: scale(var(--scale));\n}\n.model.lineup {\n  width: calc(800px * var(--scale));\n  height: calc(600px * var(--scale));\n}\n.model.panel {\n  width: calc(400px * var(--scale));\n  height: calc(600px * var(--scale));\n}\n"
+    },
+    {
+      "type": "paragraph",
+      "id": "0c082392d5612dac",
+      "text": "transform-origin is worth remembering for use with scale(), rotate() and skew()."
+    },
+    {
+      "type": "paragraph",
+      "id": "62db1c872a415519",
+      "text": ":root pseudo-selector looks interesting. I believe we could set a default --scale at the root, and introduce an override under a more specific selector if a special case required a different ratio."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Visual Uncertainty",
+        "story": []
+      },
+      "date": 1609529495015
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "f2120333c6357715"
+      },
+      "id": "f2120333c6357715",
+      "type": "add",
+      "date": 1609529496842
+    },
+    {
+      "type": "edit",
+      "id": "f2120333c6357715",
+      "item": {
+        "type": "paragraph",
+        "id": "f2120333c6357715",
+        "text": "We sketch some examples of "
+      },
+      "date": 1609529509767
+    },
+    {
+      "type": "edit",
+      "id": "f2120333c6357715",
+      "item": {
+        "type": "paragraph",
+        "id": "f2120333c6357715",
+        "text": "A sketch searching for a pattern where state of javascript objects display as DOM objects. What does a promise look like before it has been invoked? Before it has resolved or rejected? Once resolved? Once rejected?\n"
+      },
+      "date": 1609529688413
+    },
+    {
+      "type": "add",
+      "id": "2010390dc1327ad3",
+      "item": {
+        "type": "paragraph",
+        "id": "2010390dc1327ad3",
+        "text": "Is window.location.hash a promise for a lineup or one serialization of the lineup data model? Is the rendered DOM a view of the same data model?"
+      },
+      "after": "f2120333c6357715",
+      "date": 1609529755640
+    },
+    {
+      "type": "add",
+      "id": "769434e45fa7f163",
+      "item": {
+        "type": "paragraph",
+        "id": "769434e45fa7f163",
+        "text": "We know we're awaiting something from the network. We can show the reader that we are responding to their request by inserting a placeholder... the promise, a progress indicator on an otherwise empty page... or an as-yet-unloaded plugin."
+      },
+      "after": "2010390dc1327ad3",
+      "date": 1609529851573
+    },
+    {
+      "type": "add",
+      "id": "c11ce04071a7188a",
+      "item": {
+        "type": "paragraph",
+        "id": "c11ce04071a7188a",
+        "text": "Uncertainty admits that the result might fail. The failure might offer the reader a chance to retry."
+      },
+      "after": "769434e45fa7f163",
+      "date": 1609529896120
+    },
+    {
+      "type": "add",
+      "id": "562b715dff93c966",
+      "item": {
+        "type": "paragraph",
+        "id": "562b715dff93c966",
+        "text": "Another existing example is how the flags behave in the neighborhood: spinning slowly when sitemap request enters a queue; spinning quickly when the loading; tilted when failed; still and colorful when complete."
+      },
+      "after": "c11ce04071a7188a",
+      "date": 1609530000248
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "edf15d7b20f4c9f2"
+      },
+      "id": "edf15d7b20f4c9f2",
+      "type": "add",
+      "after": "562b715dff93c966",
+      "date": 1609531185628
+    },
+    {
+      "type": "edit",
+      "id": "edf15d7b20f4c9f2",
+      "item": {
+        "type": "assets",
+        "id": "edf15d7b20f4c9f2",
+        "text": "visual-uncertainty"
+      },
+      "date": 1609531196281
+    },
+    {
+      "id": "edf15d7b20f4c9f2",
+      "type": "move",
+      "order": [
+        "f2120333c6357715",
+        "edf15d7b20f4c9f2",
+        "2010390dc1327ad3",
+        "769434e45fa7f163",
+        "c11ce04071a7188a",
+        "562b715dff93c966"
+      ],
+      "date": 1609531227616
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "d327e79efe939e88"
+      },
+      "id": "d327e79efe939e88",
+      "type": "add",
+      "after": "562b715dff93c966",
+      "date": 1609531234412
+    },
+    {
+      "type": "edit",
+      "id": "d327e79efe939e88",
+      "item": {
+        "type": "frame",
+        "id": "d327e79efe939e88",
+        "text": "https://goals.pods.wiki.dbbs.co/assets/visual-uncertainty/visual-uncertainty.html\nHEIGHT 400\n[https://goals.pods.wiki.dbbs.co/assets/visual-uncertainty/visual-uncertainty.html source]"
+      },
+      "date": 1609531267778
+    },
+    {
+      "type": "edit",
+      "id": "d327e79efe939e88",
+      "item": {
+        "type": "frame",
+        "id": "d327e79efe939e88",
+        "text": "https://goals.pods.wiki.dbbs.co/assets/visual-uncertainty/visual-uncertainty.html\nHEIGHT 400\nscroll around. [https://goals.pods.wiki.dbbs.co/assets/visual-uncertainty/visual-uncertainty.html source]"
+      },
+      "date": 1609531325396
+    },
+    {
+      "type": "edit",
+      "id": "d327e79efe939e88",
+      "item": {
+        "type": "frame",
+        "id": "d327e79efe939e88",
+        "text": "https://goals.pods.wiki.dbbs.co/assets/visual-uncertainty/visual-uncertainty.html\nHEIGHT 400\nscroll around in the frame or view in a different window: [https://goals.pods.wiki.dbbs.co/assets/visual-uncertainty/visual-uncertainty.html link]"
+      },
+      "date": 1609531368866
+    },
+    {
+      "id": "edf15d7b20f4c9f2",
+      "type": "move",
+      "order": [
+        "f2120333c6357715",
+        "2010390dc1327ad3",
+        "769434e45fa7f163",
+        "c11ce04071a7188a",
+        "562b715dff93c966",
+        "d327e79efe939e88",
+        "edf15d7b20f4c9f2"
+      ],
+      "date": 1609531378874
+    },
+    {
+      "id": "d327e79efe939e88",
+      "type": "move",
+      "order": [
+        "f2120333c6357715",
+        "d327e79efe939e88",
+        "2010390dc1327ad3",
+        "769434e45fa7f163",
+        "c11ce04071a7188a",
+        "562b715dff93c966",
+        "edf15d7b20f4c9f2"
+      ],
+      "date": 1609531386228
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "5e5174adc65d297d"
+      },
+      "id": "5e5174adc65d297d",
+      "type": "add",
+      "after": "edf15d7b20f4c9f2",
+      "date": 1609531673017
+    },
+    {
+      "type": "edit",
+      "id": "5e5174adc65d297d",
+      "item": {
+        "type": "pagefold",
+        "id": "5e5174adc65d297d",
+        "text": "."
+      },
+      "date": 1609531677183
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "ecc8553f131b56bc"
+      },
+      "id": "ecc8553f131b56bc",
+      "type": "add",
+      "after": "5e5174adc65d297d",
+      "date": 1609531678846
+    },
+    {
+      "type": "edit",
+      "id": "ecc8553f131b56bc",
+      "item": {
+        "type": "paragraph",
+        "id": "ecc8553f131b56bc",
+        "text": "While constructing these examples we learned some new-to-us CSS tricks."
+      },
+      "date": 1609531710952
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "8dc67b65a2a68aa2"
+      },
+      "id": "8dc67b65a2a68aa2",
+      "type": "add",
+      "after": "ecc8553f131b56bc",
+      "date": 1609531765674
+    },
+    {
+      "type": "edit",
+      "id": "8dc67b65a2a68aa2",
+      "item": {
+        "type": "code",
+        "id": "8dc67b65a2a68aa2",
+        "text": ":root { --scale: 0.5; }\nmodel {\n  transform-origin: top left;\n  transform: scale(var(--scale));\n}\n.model.lineup {\n  width: calc(800px * var(--scale));\n  height: calc(600px * var(--scale));\n}\n.model.panel {\n  width: calc(400px * var(--scale));\n  height: calc(600px * var(--scale));\n}\n"
+      },
+      "date": 1609531903530
+    },
+    {
+      "type": "edit",
+      "id": "ecc8553f131b56bc",
+      "item": {
+        "type": "paragraph",
+        "id": "ecc8553f131b56bc",
+        "text": "While constructing these examples we learned some new-to-us CSS tricks. The tranform: scale() property scales the contents of an element without changing its width and height relative to the DOM outside the element. What I usually want it to also scale those width and heights accordingly. Here is an application of custom properties with the var() and calc() functions to achieve the desired scaling. Also notable is the transform-origin."
+      },
+      "date": 1609532087343
+    },
+    {
+      "type": "edit",
+      "id": "ecc8553f131b56bc",
+      "item": {
+        "type": "paragraph",
+        "id": "ecc8553f131b56bc",
+        "text": "While constructing these examples we learned some new-to-us CSS tricks."
+      },
+      "date": 1609532148902
+    },
+    {
+      "type": "add",
+      "id": "942f100b0bba4e08",
+      "item": {
+        "type": "paragraph",
+        "id": "942f100b0bba4e08",
+        "text": "The tranform: scale() property scales the contents of an element without changing its width and height relative to the DOM outside the element. What I usually want is to also scale those width and heights accordingly."
+      },
+      "after": "ecc8553f131b56bc",
+      "date": 1609532163952
+    },
+    {
+      "type": "add",
+      "id": "76f720dbbbddc0b6",
+      "item": {
+        "type": "paragraph",
+        "id": "76f720dbbbddc0b6",
+        "text": "Here we apply a custom property with the var() and calc() functions to achieve the desired scaling both inside and outside the target elements."
+      },
+      "after": "942f100b0bba4e08",
+      "date": 1609532213977
+    },
+    {
+      "type": "add",
+      "id": "0c082392d5612dac",
+      "item": {
+        "type": "paragraph",
+        "id": "0c082392d5612dac",
+        "text": "transform-origin is worth remembering for use with scale(), rotate() and skew()."
+      },
+      "after": "76f720dbbbddc0b6",
+      "date": 1609532277920
+    },
+    {
+      "type": "add",
+      "id": "62db1c872a415519",
+      "item": {
+        "type": "paragraph",
+        "id": "62db1c872a415519",
+        "text": ":root pseudo-selector looks interesting. I believe we could set a default --scale at the root, and introduce an override under a more specific selector if a special case required a different ratio."
+      },
+      "after": "0c082392d5612dac",
+      "date": 1609532361928
+    },
+    {
+      "id": "8dc67b65a2a68aa2",
+      "type": "move",
+      "order": [
+        "f2120333c6357715",
+        "d327e79efe939e88",
+        "2010390dc1327ad3",
+        "769434e45fa7f163",
+        "c11ce04071a7188a",
+        "562b715dff93c966",
+        "edf15d7b20f4c9f2",
+        "5e5174adc65d297d",
+        "ecc8553f131b56bc",
+        "942f100b0bba4e08",
+        "76f720dbbbddc0b6",
+        "8dc67b65a2a68aa2",
+        "0c082392d5612dac",
+        "62db1c872a415519"
+      ],
+      "date": 1609532370339
+    }
+  ]
+}

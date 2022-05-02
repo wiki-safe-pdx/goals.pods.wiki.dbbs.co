@@ -1,0 +1,267 @@
+{
+  "title": "HTML Template Literal",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "4c11ed8375c526ee",
+      "text": "Hypertext Literal is a tagged template literal for HTML which interpolates values based on context, allowing automatic escaping and the interpolation of non-serializable values, such as event listeners, style objects, and other DOM nodes. [https://github.com/observablehq/htl#hypertext-literal github]"
+    },
+    {
+      "type": "paragraph",
+      "id": "1291c2d960937391",
+      "text": "Why not concatenate?"
+    },
+    {
+      "type": "paragraph",
+      "id": "e4fdc531b1a9444f",
+      "text": "Surely the simplest way to generate web content is to write HTML. Modern JavaScript makes it easier than ever to interpolate values into literal HTML thanks to template literals."
+    },
+    {
+      "type": "paragraph",
+      "id": "f88992f18515cd0c",
+      "text": "Yet simple concatentation has two significant drawbacks."
+    },
+    {
+      "type": "paragraph",
+      "id": "50f548fe3e241fd1",
+      "text": "First, it confounds markup with text and other content. If an interpolated value happens to include characters that are meaningful markup, the result may render unexpectedly. An ampersand (&) can be interpreted as a character entity reference, for instance."
+    },
+    {
+      "type": "paragraph",
+      "id": "92e2a7a5d16447c6",
+      "text": "Second, concatentation impedes composition: interpolated content must be serialized as markup. You cannot combine literal HTML with content created by the DOM API, or a library such as React or D3. And some content, such as event listeners implemented as closures, can’t be serialized!\n"
+    },
+    {
+      "type": "pagefold",
+      "id": "23eb44044d2d797d",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "3a49f18e38ded038",
+      "text": "We have been aware of HTML5 template literals for some years now. We have also wondered if they would serve wiki well for markup plugins. [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals mdn]"
+    },
+    {
+      "type": "paragraph",
+      "id": "9e3a20143526a8ed",
+      "text": "The complexity of template literals has seemed not worth the effort in previous evaluations. This section answering \"Why not concatenate?\" is the first we've seen of an argument to justify the extra work."
+    },
+    {
+      "type": "paragraph",
+      "id": "953feab150aab61c",
+      "text": "Here we sketch a plugin that might serve as an adapter from wiki html item to use Observable's library. It would need to be improved to also address collaborative links."
+    },
+    {
+      "type": "code",
+      "id": "592c241f4a9cb8f6",
+      "text": "import {html} from \"@observablehq/htl\"\nclass HTMLPlugin {\n  emit(element, item) {\n    element.innerHTML = html`${item.text}`\n  }\n}"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "HTML Template Literal",
+        "story": []
+      },
+      "date": 1611412485108
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "4c11ed8375c526ee"
+      },
+      "id": "4c11ed8375c526ee",
+      "type": "add",
+      "date": 1611412582221
+    },
+    {
+      "type": "edit",
+      "id": "4c11ed8375c526ee",
+      "item": {
+        "type": "paragraph",
+        "id": "4c11ed8375c526ee",
+        "text": "Hypertext Literal is a tagged template literal for HTML which interpolates values based on context, allowing automatic escaping and the interpolation of non-serializable values, such as event listeners, style objects, and other DOM nodes. [ github]"
+      },
+      "date": 1611412587778
+    },
+    {
+      "type": "edit",
+      "id": "4c11ed8375c526ee",
+      "item": {
+        "type": "paragraph",
+        "id": "4c11ed8375c526ee",
+        "text": "Hypertext Literal is a tagged template literal for HTML which interpolates values based on context, allowing automatic escaping and the interpolation of non-serializable values, such as event listeners, style objects, and other DOM nodes. [https://github.com/observablehq/htl#hypertext-literal github]"
+      },
+      "date": 1611412616791
+    },
+    {
+      "type": "add",
+      "id": "1291c2d960937391",
+      "item": {
+        "type": "paragraph",
+        "id": "1291c2d960937391",
+        "text": "Why not concatenate?"
+      },
+      "after": "4c11ed8375c526ee",
+      "date": 1611412648795
+    },
+    {
+      "type": "add",
+      "id": "e4fdc531b1a9444f",
+      "item": {
+        "type": "paragraph",
+        "id": "e4fdc531b1a9444f",
+        "text": "Surely the simplest way to generate web content is to write HTML. Modern JavaScript makes it easier than ever to interpolate values into literal HTML thanks to template literals."
+      },
+      "after": "1291c2d960937391",
+      "date": 1611412653600
+    },
+    {
+      "type": "add",
+      "id": "f88992f18515cd0c",
+      "item": {
+        "type": "paragraph",
+        "id": "f88992f18515cd0c",
+        "text": "Yet simple concatentation has two significant drawbacks."
+      },
+      "after": "e4fdc531b1a9444f",
+      "date": 1611412674554
+    },
+    {
+      "type": "add",
+      "id": "50f548fe3e241fd1",
+      "item": {
+        "type": "paragraph",
+        "id": "50f548fe3e241fd1",
+        "text": "First, it confounds markup with text and other content. If an interpolated value happens to include characters that are meaningful markup, the result may render unexpectedly. An ampersand (&) can be interpreted as a character entity reference, for instance. [ section]"
+      },
+      "after": "f88992f18515cd0c",
+      "date": 1611412682391
+    },
+    {
+      "type": "edit",
+      "id": "50f548fe3e241fd1",
+      "item": {
+        "type": "paragraph",
+        "id": "50f548fe3e241fd1",
+        "text": "First, it confounds markup with text and other content. If an interpolated value happens to include characters that are meaningful markup, the result may render unexpectedly. An ampersand (&) can be interpreted as a character entity reference, for instance."
+      },
+      "date": 1611412699306
+    },
+    {
+      "type": "add",
+      "id": "92e2a7a5d16447c6",
+      "item": {
+        "type": "paragraph",
+        "id": "92e2a7a5d16447c6",
+        "text": "Second, concatentation impedes composition: interpolated content must be serialized as markup. You cannot combine literal HTML with content created by the DOM API, or a library such as React or D3. And some content, such as event listeners implemented as closures, can’t be serialized!\n"
+      },
+      "after": "50f548fe3e241fd1",
+      "date": 1611412714713
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "23eb44044d2d797d"
+      },
+      "id": "23eb44044d2d797d",
+      "type": "add",
+      "after": "92e2a7a5d16447c6",
+      "date": 1611412719943
+    },
+    {
+      "type": "edit",
+      "id": "23eb44044d2d797d",
+      "item": {
+        "type": "pagefold",
+        "id": "23eb44044d2d797d",
+        "text": "."
+      },
+      "date": 1611412723726
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "3a49f18e38ded038"
+      },
+      "id": "3a49f18e38ded038",
+      "type": "add",
+      "after": "23eb44044d2d797d",
+      "date": 1611412725038
+    },
+    {
+      "type": "edit",
+      "id": "3a49f18e38ded038",
+      "item": {
+        "type": "paragraph",
+        "id": "3a49f18e38ded038",
+        "text": "We have been aware of HTML5 template literals for some years now. We have also wondered if they would serve wiki well for markup plugins.[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals mdn]"
+      },
+      "date": 1611412820787
+    },
+    {
+      "type": "add",
+      "id": "9e3a20143526a8ed",
+      "item": {
+        "type": "paragraph",
+        "id": "9e3a20143526a8ed",
+        "text": "This section answering \"Why not concatenate?\" "
+      },
+      "after": "3a49f18e38ded038",
+      "date": 1611412884975
+    },
+    {
+      "type": "edit",
+      "id": "9e3a20143526a8ed",
+      "item": {
+        "type": "paragraph",
+        "id": "9e3a20143526a8ed",
+        "text": "The complexity of template literals has seemed not worth the effort in previous evaluations. This section answering \"Why not concatenate?\" is the first we've seen of an argument to justify the extra work."
+      },
+      "date": 1611413062944
+    },
+    {
+      "type": "add",
+      "id": "592c241f4a9cb8f6",
+      "item": {
+        "type": "factory",
+        "id": "592c241f4a9cb8f6",
+        "text": "class HTMLPlugin {"
+      },
+      "after": "9e3a20143526a8ed",
+      "date": 1611413105606
+    },
+    {
+      "type": "edit",
+      "id": "592c241f4a9cb8f6",
+      "item": {
+        "type": "code",
+        "id": "592c241f4a9cb8f6",
+        "text": "import {html} from \"@observablehq/htl\"\nclass HTMLPlugin {\n  emit(element, item) {\n    element.innerHTML = html`${item.text}`\n  }\n}"
+      },
+      "date": 1611413269364
+    },
+    {
+      "type": "add",
+      "id": "953feab150aab61c",
+      "item": {
+        "type": "paragraph",
+        "id": "953feab150aab61c",
+        "text": "Here we sketch a plugin that might serve as an adapter from wiki html item to use Observable's library. It would need to be improved to also address collaborative links."
+      },
+      "after": "9e3a20143526a8ed",
+      "date": 1611413414400
+    },
+    {
+      "type": "edit",
+      "id": "3a49f18e38ded038",
+      "item": {
+        "type": "paragraph",
+        "id": "3a49f18e38ded038",
+        "text": "We have been aware of HTML5 template literals for some years now. We have also wondered if they would serve wiki well for markup plugins. [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals mdn]"
+      },
+      "date": 1611413431841
+    }
+  ]
+}

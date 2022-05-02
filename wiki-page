@@ -1,0 +1,225 @@
+{
+  "title": "<wiki-page>",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "9678d006f6fcf387",
+      "text": "We imagine a custom element which offers a way for federation pages to be embedded outside of a lineup."
+    },
+    {
+      "type": "paragraph",
+      "id": "1b930a24a7583c10",
+      "text": "Related to [[Illusion of Liveness]]"
+    },
+    {
+      "type": "paragraph",
+      "id": "545aff7ee08b6b40",
+      "text": "An empty <wiki-page> could render like a ghost."
+    },
+    {
+      "type": "paragraph",
+      "id": "1959392cfb0bd4ce",
+      "text": "A well-known domain name could hold an html page hosting an empty <wiki-page>. Edits saved to localstorage under that domain name. This would enable a common link to that well-known domain name to serve as a sort of \"saved folder\" for pages that authors have not yet saved to their own origin in the federation."
+    },
+    {
+      "type": "paragraph",
+      "id": "f2d1ec3df56b22cb",
+      "text": "A non-empty <wiki-page> wants to work well on mobile, responsive to changes in orientation. I think, without a lineup, the collaborative links in a <wiki-page> would act more like html links... replace the current page with the resolved target page."
+    },
+    {
+      "type": "paragraph",
+      "id": "5b07d0f6d08c572c",
+      "text": "Thinking of a small multi-cell organism that can survive, even thrive outside the normal ecosystem of lineup. (our cells are items, not pages, so a page would be multi-cellular)"
+    },
+    {
+      "type": "paragraph",
+      "id": "b8f8165a2d60e194",
+      "text": "We serve content with generous CORS headers, so <wiki-page> could be embedded in other html pages."
+    },
+    {
+      "type": "paragraph",
+      "id": "6371afe5eab39d66",
+      "text": "This thinking invites a later experiment with a new <wiki-lineup> custom element. When <wiki-page> discovers itself inside of a <wiki-lineup> it would notice the hospitable ecosystem and open itself to collaborative behaviors we expect in wiki... new pages stack up to the right, advertising methods() of collaboration to items to the right, accepting and responding to drag events of various kinds."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "<wiki-page>",
+        "story": []
+      },
+      "date": 1606060696813
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "9678d006f6fcf387"
+      },
+      "id": "9678d006f6fcf387",
+      "type": "add",
+      "date": 1606060698617
+    },
+    {
+      "type": "edit",
+      "id": "9678d006f6fcf387",
+      "item": {
+        "type": "paragraph",
+        "id": "9678d006f6fcf387",
+        "text": "We imagine a custom element which offers a way for federation pages to be embedded outside of a lineup. "
+      },
+      "date": 1606060857901
+    },
+    {
+      "type": "add",
+      "id": "545aff7ee08b6b40",
+      "item": {
+        "type": "paragraph",
+        "id": "545aff7ee08b6b40",
+        "text": "And empty <wiki-page> could render like a ghost."
+      },
+      "after": "9678d006f6fcf387",
+      "date": 1606060859883
+    },
+    {
+      "type": "edit",
+      "id": "545aff7ee08b6b40",
+      "item": {
+        "type": "paragraph",
+        "id": "545aff7ee08b6b40",
+        "text": "An"
+      },
+      "date": 1606060867097
+    },
+    {
+      "type": "edit",
+      "id": "545aff7ee08b6b40",
+      "item": {
+        "type": "paragraph",
+        "id": "545aff7ee08b6b40",
+        "text": "An empty <wiki-page> could render like a ghost."
+      },
+      "date": 1606060868270
+    },
+    {
+      "type": "add",
+      "id": "1959392cfb0bd4ce",
+      "item": {
+        "type": "paragraph",
+        "id": "1959392cfb0bd4ce",
+        "text": "An html page hosting an empty <wiki-page> could live at a well known domain name and save edits to localstorage under that domain name."
+      },
+      "after": "545aff7ee08b6b40",
+      "date": 1606061006484
+    },
+    {
+      "type": "edit",
+      "id": "1959392cfb0bd4ce",
+      "item": {
+        "type": "paragraph",
+        "id": "1959392cfb0bd4ce",
+        "text": "A well-known domain name could hold an html page hosting an empty <wiki-page>. Edits saved to localstorage under that domain name. This would enable a common link to that well-known domain name to serve as a sort of \"saved folder\" for pages that authors have not yet saved to their own origin in the federation."
+      },
+      "date": 1606080214002
+    },
+    {
+      "type": "add",
+      "id": "f2d1ec3df56b22cb",
+      "item": {
+        "type": "paragraph",
+        "id": "f2d1ec3df56b22cb",
+        "text": "A non-empty <wiki-page> wants to work well on mobile, responsive to changes in orientation. I think, without a lineup, the collaborative links in a <wiki-page> would act more like html links... replace the current page with the resolved target page."
+      },
+      "after": "1959392cfb0bd4ce",
+      "date": 1606080378851
+    },
+    {
+      "type": "add",
+      "id": "5b07d0f6d08c572c",
+      "item": {
+        "type": "paragraph",
+        "id": "5b07d0f6d08c572c",
+        "text": "Thinking of a single-cell organism that can survive, even thrive outside the normal ecosystem of lineup."
+      },
+      "after": "f2d1ec3df56b22cb",
+      "date": 1606080435479
+    },
+    {
+      "type": "add",
+      "id": "b8f8165a2d60e194",
+      "item": {
+        "type": "paragraph",
+        "id": "b8f8165a2d60e194",
+        "text": "We serve content with generous CORS headers, so <wiki-page> could be embedded in other html pages."
+      },
+      "after": "5b07d0f6d08c572c",
+      "date": 1606080546758
+    },
+    {
+      "type": "add",
+      "id": "6371afe5eab39d66",
+      "item": {
+        "type": "paragraph",
+        "id": "6371afe5eab39d66",
+        "text": "This thinking invites a later experiment with a new <wiki-lineup> custom element. When <wiki-page> discovers itself inside of a <wiki-lineup> it would notice the hospitable ecosystem and open itselve to collaborative behaviors we expect in wiki... new pages stack up to the right, advertising methods() of collaboration to items to the right."
+      },
+      "after": "b8f8165a2d60e194",
+      "date": 1606080729442
+    },
+    {
+      "type": "edit",
+      "id": "6371afe5eab39d66",
+      "item": {
+        "type": "paragraph",
+        "id": "6371afe5eab39d66",
+        "text": "This thinking invites a later experiment with a new <wiki-lineup> custom element. When <wiki-page> discovers itself inside of a <wiki-lineup> it would notice the hospitable ecosystem and open itself to collaborative behaviors we expect in wiki... new pages stack up to the right, advertising methods() of collaboration to items to the right."
+      },
+      "date": 1606080746083
+    },
+    {
+      "type": "edit",
+      "id": "6371afe5eab39d66",
+      "item": {
+        "type": "paragraph",
+        "id": "6371afe5eab39d66",
+        "text": "This thinking invites a later experiment with a new <wiki-lineup> custom element. When <wiki-page> discovers itself inside of a <wiki-lineup> it would notice the hospitable ecosystem and open itself to collaborative behaviors we expect in wiki... new pages stack up to the right, advertising methods() of collaboration to items to the right, accepting and responding to drag events of various kinds."
+      },
+      "date": 1606080790759
+    },
+    {
+      "type": "fork",
+      "date": 1606081395248
+    },
+    {
+      "type": "edit",
+      "id": "9678d006f6fcf387",
+      "item": {
+        "type": "paragraph",
+        "id": "9678d006f6fcf387",
+        "text": "We imagine a custom element which offers a way for federation pages to be embedded outside of a lineup."
+      },
+      "date": 1606081708535
+    },
+    {
+      "type": "add",
+      "id": "1b930a24a7583c10",
+      "item": {
+        "type": "paragraph",
+        "id": "1b930a24a7583c10",
+        "text": "Related to [[Illusion of Liveness]]"
+      },
+      "after": "9678d006f6fcf387",
+      "date": 1606081722482
+    },
+    {
+      "type": "edit",
+      "id": "5b07d0f6d08c572c",
+      "item": {
+        "type": "paragraph",
+        "id": "5b07d0f6d08c572c",
+        "text": "Thinking of a small multi-cell organism that can survive, even thrive outside the normal ecosystem of lineup. (our cells are items, not pages, so a page would be multi-cellular)"
+      },
+      "date": 1606245864128
+    }
+  ]
+}

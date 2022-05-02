@@ -1,0 +1,748 @@
+{
+  "title": "Clean Fast Install Locally",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "1ab711c159bc2205",
+      "text": "Docker-based wiki is not quite as fast as npm install wiki.  We hope in exchange to make fewer steps from local experiments to publicly hosted services."
+    },
+    {
+      "type": "reference",
+      "id": "47046a7caa755d7d",
+      "site": "local-farm.wiki.dbbs.co",
+      "slug": "start-your-own-local-wiki-farm",
+      "title": "start your own local wiki farm",
+      "text": "Step-by-step instructions for starting a local farm.  We assume you are connected to the Net and already have some developer tools installed: git, docker, and docker-compose."
+    },
+    {
+      "type": "pagefold",
+      "id": "b2a14d77616f8c4c",
+      "text": "."
+    },
+    {
+      "type": "markdown",
+      "id": "ebef5f0bef0a06ac",
+      "text": "I still have too many steps in process for my liking.  Every time I look again, I ask myself some questions.  Writing down that dialog (maybe save my future self some time puzzling):\n"
+    },
+    {
+      "type": "markdown",
+      "id": "f4bfea9a77b21dfa",
+      "text": "- Why do I manually create a volume in step 2?  Could use a simple named volume in `docker-compose.yml` and save myself that step.\n    I think I started this before I added the `.env` file which is also when the repo had a very long name.  Those together would create an especially ugly volume name that made all the docs for backups and other things ugly\n- Self-signed certs?  Every time I restart the `proxy` I get new certs.  What if I used hashicorp vault to run my own Certificate Authority and install the root cert in my browser or OS?\n    lot of work to avoid occasional nuisance.\n    just as difficult (or more) to document.\n    some vague security fear that teaching browsers to trust localtest.me is inviting abuse for speerphishing or similar.\n"
+    },
+    {
+      "type": "markdown",
+      "id": "d695e09d58937736",
+      "text": "# An imaginary alternative"
+    },
+    {
+      "type": "code",
+      "id": "aa1f80dc288d83a9",
+      "text": "# 1. install docker\n\n# 2. install and launch a local-farm\ncurl https://raw.githubusercontent.com/fedwiki/local-farm/master/install.sh \\\n  | bash\n\n# 3. point your browser at https://localtest.me"
+    },
+    {
+      "type": "markdown",
+      "id": "40c8d8d63dcb80b3",
+      "text": "The `install.sh` script in step 2 might do something like this:\n"
+    },
+    {
+      "type": "code",
+      "id": "cd26a4f905a0bdee",
+      "text": "curl -sS \\\n  https://url-to-current-version/wiki-tls.tar.gz \\\n  | tar zx\ncd wiki-tls\ndocker-compose up -d\ncat <<EOF\nopen https://localtest.me\nuse the following password to unlock the wiki\nEOF\ndocker-compose logs farm \\\n  | awk -F\\' '/admin:/ {print $2; exit;}'\n"
+    },
+    {
+      "type": "paragraph",
+      "id": "3d51fabd2979ab83",
+      "text": "Sadly the first thing you would see is the browser security warning for the self-signed cert.  I think there are advantages to having a reverse proxy included in the default install.  Browsers are clearly getting more aggressive about requiring https.  Hoping we can learn remedies for the pains of security.  We can use locally the same tools used publicly.  That consistency will ease moving content from local to public wiki."
+    },
+    {
+      "type": "markdown",
+      "id": "f10590211a3304cc",
+      "text": "* [ ] TODO: customize [[Tips for Administrators]] for Docker specifics"
+    },
+    {
+      "type": "pagefold",
+      "id": "1e589fde4ec008f8",
+      "text": "."
+    },
+    {
+      "type": "markdown",
+      "id": "bc48a76e3ea28b1b",
+      "text": "Contrast [[Clean Fast Install in Docker]]"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Clean Fast Install Locally",
+        "story": []
+      },
+      "date": 1511846314090
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "34b3bf609a3fc196"
+      },
+      "id": "34b3bf609a3fc196",
+      "type": "add",
+      "date": 1511846316179
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "1ab711c159bc2205",
+        "text": "In [https://local-farm.wiki.dbbs.co/start-your-own-local-wiki-farm.html local-farm.wiki.dbbs.co] we have a docker composition which includes [[Caddy]] as a reverse proxy in front of a wiki farm."
+      },
+      "id": "1ab711c159bc2205",
+      "date": 1511846455878
+    },
+    {
+      "type": "edit",
+      "id": "34b3bf609a3fc196",
+      "item": {
+        "type": "reference",
+        "id": "34b3bf609a3fc196",
+        "site": "local-farm.wiki.dbbs.co",
+        "slug": "start-your-own-local-wiki-farm",
+        "title": "start your own local wiki farm",
+        "text": "We assume you are connected to the Net and already have some developer tools installed: git, docker, and docker-compose."
+      },
+      "date": 1511846462416
+    },
+    {
+      "type": "edit",
+      "id": "1ab711c159bc2205",
+      "item": {
+        "type": "paragraph",
+        "id": "1ab711c159bc2205",
+        "text": "Docker-based wiki is not quite as fast as npm install wiki.  We hope in exchange to make fewer steps from local experiments to publicly hosted services."
+      },
+      "date": 1511846756724
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "89644cc2c270856a"
+      },
+      "id": "89644cc2c270856a",
+      "type": "add",
+      "after": "34b3bf609a3fc196",
+      "date": 1511846782389
+    },
+    {
+      "type": "edit",
+      "id": "89644cc2c270856a",
+      "item": {
+        "type": "code",
+        "id": "89644cc2c270856a",
+        "text": "# Overview for the impatient\n\ngit clone ...\ncd ..\ndocker volume create ...\ndocker-compose up -d\n# find your admin password\ndocker-compose logs | grep admin:\n\n# open you browser to https://localtest.me and start wiki-ing"
+      },
+      "date": 1511846947168
+    },
+    {
+      "type": "move",
+      "order": [
+        "1ab711c159bc2205",
+        "89644cc2c270856a",
+        "34b3bf609a3fc196"
+      ],
+      "id": "89644cc2c270856a",
+      "date": 1511846950423
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "777d8c41f8fc8694"
+      },
+      "id": "777d8c41f8fc8694",
+      "type": "add",
+      "after": "34b3bf609a3fc196",
+      "date": 1511846970187
+    },
+    {
+      "type": "remove",
+      "id": "777d8c41f8fc8694",
+      "date": 1511846978177
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "e02197684ed783ad"
+      },
+      "id": "e02197684ed783ad",
+      "type": "add",
+      "after": "34b3bf609a3fc196",
+      "date": 1511846979587
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "[ ] something"
+      },
+      "date": 1511847000053
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [ ] TODO: put all of the TL;DR into one script\n"
+      },
+      "date": 1511847700157
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [x] TODO: put all of the TL;DR into one script\n"
+      },
+      "date": 1511847705140
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [ ] TODO: put all of the TL;DR into one script\n"
+      },
+      "date": 1511847706149
+    },
+    {
+      "type": "move",
+      "order": [
+        "1ab711c159bc2205",
+        "89644cc2c270856a",
+        "e02197684ed783ad",
+        "34b3bf609a3fc196"
+      ],
+      "id": "e02197684ed783ad",
+      "date": 1511847715231
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "a0233af802f16269"
+      },
+      "id": "a0233af802f16269",
+      "type": "add",
+      "after": "34b3bf609a3fc196",
+      "date": 1511847753731
+    },
+    {
+      "type": "edit",
+      "id": "34b3bf609a3fc196",
+      "item": {
+        "type": "reference",
+        "id": "34b3bf609a3fc196",
+        "site": "local-farm.wiki.dbbs.co",
+        "slug": "start-your-own-local-wiki-farm",
+        "title": "start your own local wiki farm",
+        "text": "Here we have the more detailed instructions than the overview"
+      },
+      "date": 1511847988336
+    },
+    {
+      "type": "edit",
+      "id": "a0233af802f16269",
+      "item": {
+        "type": "markdown",
+        "id": "a0233af802f16269",
+        "text": "* [ ] TODO: customize Tips for Administrators for Docker specifics"
+      },
+      "date": 1511848063737
+    },
+    {
+      "type": "edit",
+      "id": "a0233af802f16269",
+      "item": {
+        "type": "markdown",
+        "id": "a0233af802f16269",
+        "text": "* [ ] TODO: customize [[Tips for Administrators]] for Docker specifics"
+      },
+      "date": 1511848074965
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [ ] TODO: put all of the TL;DR into one script\n\nbecause we're competing with\n```\nnpm install -g wiki\nwiki -f -p 3000\n```\n"
+      },
+      "date": 1511848149361
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [ ] TODO: put all of the TL;DR into one script\n\nbecause we're competing with\n\n```\nnpm install -g wiki\nwiki -f -p 3000\n```\n"
+      },
+      "date": 1511848164406
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [ ] TODO: put all of the TL;DR into one script\n\n    because we're competing with\n\n    ```\n    npm install -g wiki\n    wiki -f -p 3000\n    ```\n"
+      },
+      "date": 1511848186567
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [ ] TODO: put all of the TL;DR into one script to compete with\n\n    ```\n    npm install -g wiki\n    wiki -f -p 3000\n    ```\n"
+      },
+      "date": 1511848213773
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [ ] TODO: put all of the TL;DR into one script to compete with\n\n    npm install -g wiki\n    wiki -f -p 3000\n"
+      },
+      "date": 1511848224128
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [ ] TODO: put all of the TL;DR into one script to compete with\n\n```\nnpm install -g wiki\nwiki -f -p 3000\n```"
+      },
+      "date": 1511848238305
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [ ] TODO: make that one script to compete with\n\n```\nnpm install -g wiki\nwiki -f -p 3000\n```\n"
+      },
+      "date": 1511848258703
+    },
+    {
+      "type": "move",
+      "order": [
+        "1ab711c159bc2205",
+        "89644cc2c270856a",
+        "34b3bf609a3fc196",
+        "e02197684ed783ad",
+        "a0233af802f16269"
+      ],
+      "id": "34b3bf609a3fc196",
+      "date": 1511848278536
+    },
+    {
+      "type": "remove",
+      "id": "a0233af802f16269",
+      "date": 1511848283822
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [ ] TODO: make that one script to compete with\n\n```\nnpm install -g wiki\nwiki -f -p 3000\n```\n\n* [ ] TODO: customize [[Tips for Administrators]] for Docker specifics"
+      },
+      "date": 1511848289658
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "2b545b95de3f1657",
+        "text": "What I have here is too many steps:"
+      },
+      "after": "1ab711c159bc2205",
+      "id": "2b545b95de3f1657",
+      "date": 1512831745414
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "code",
+        "id": "aa1f80dc288d83a9",
+        "text": "# 1. install docker\n\n# 2. download the local-farm docker composition\ncurl https://raw.githubusercontent.com/fedwiki/local-farm/master/install.sh \\\n  | bash\n\n# 3. point your browser at https://localtest.me"
+      },
+      "after": "e02197684ed783ad",
+      "id": "aa1f80dc288d83a9",
+      "date": 1512831774968
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "ebef5f0bef0a06ac",
+        "text": "I think this is more like what I want:"
+      },
+      "after": "e02197684ed783ad",
+      "id": "ebef5f0bef0a06ac",
+      "date": 1512831779038
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "markdown",
+        "id": "40c8d8d63dcb80b3",
+        "text": "The `install.sh` script in step 2 might do something like this:\n"
+      },
+      "after": "e02197684ed783ad",
+      "id": "40c8d8d63dcb80b3",
+      "date": 1512831792085
+    },
+    {
+      "type": "move",
+      "order": [
+        "1ab711c159bc2205",
+        "2b545b95de3f1657",
+        "89644cc2c270856a",
+        "34b3bf609a3fc196",
+        "e02197684ed783ad",
+        "ebef5f0bef0a06ac",
+        "aa1f80dc288d83a9",
+        "40c8d8d63dcb80b3"
+      ],
+      "id": "40c8d8d63dcb80b3",
+      "date": 1512831801555
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "code",
+        "id": "cd26a4f905a0bdee",
+        "text": "docker-compose up -d\ncat <<EOF\nopen https://localtest.me\nuse the following password to unlock the wiki\nEOF\ndocker-compose logs farm \\\n  | awk -F\\' '/admin:/ {print $2; exit;}'\n"
+      },
+      "after": "40c8d8d63dcb80b3",
+      "id": "cd26a4f905a0bdee",
+      "date": 1512831807441
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "3d51fabd2979ab83",
+        "text": "Sadly the first thing you would see is the browser security warning for the self-signed cert.  I think there are advantages to having a reverse proxy included in the default install.  Browsers are clearly getting more aggressive about requiring https.  Hoping we can learn remedies for the pains of security.  We can use locally the same tools used publicly.  That consistency will ease moving content from local to public wiki."
+      },
+      "after": "cd26a4f905a0bdee",
+      "id": "3d51fabd2979ab83",
+      "date": 1512831811047
+    },
+    {
+      "type": "edit",
+      "id": "e02197684ed783ad",
+      "item": {
+        "type": "markdown",
+        "id": "e02197684ed783ad",
+        "text": "* [ ] TODO: make that one script to compete with\n\n```\nnpm install -g wiki\nwiki -f -p 3000\n```"
+      },
+      "date": 1512831842663
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "f10590211a3304cc"
+      },
+      "id": "f10590211a3304cc",
+      "type": "add",
+      "after": "3d51fabd2979ab83",
+      "date": 1512831858076
+    },
+    {
+      "type": "edit",
+      "id": "f10590211a3304cc",
+      "item": {
+        "type": "markdown",
+        "id": "f10590211a3304cc",
+        "text": "* [ ] TODO: customize [[Tips for Administrators]] for Docker specifics"
+      },
+      "date": 1512831866398
+    },
+    {
+      "type": "edit",
+      "id": "aa1f80dc288d83a9",
+      "item": {
+        "type": "code",
+        "id": "aa1f80dc288d83a9",
+        "text": "# 1. install docker\n\n# 2. install and launch a local-farm\ncurl https://raw.githubusercontent.com/fedwiki/local-farm/master/install.sh \\\n  | bash\n\n# 3. point your browser at https://localtest.me"
+      },
+      "date": 1512881730362
+    },
+    {
+      "type": "add",
+      "item": {
+        "type": "paragraph",
+        "id": "a25540c18efa1d8a",
+        "text": "[[What does FedWiki know about Docker?]]"
+      },
+      "after": "1ab711c159bc2205",
+      "id": "a25540c18efa1d8a",
+      "date": 1512881892932
+    },
+    {
+      "type": "fork",
+      "date": 1512881966689
+    },
+    {
+      "type": "remove",
+      "id": "2b545b95de3f1657",
+      "date": 1525564835306
+    },
+    {
+      "type": "remove",
+      "id": "a25540c18efa1d8a",
+      "date": 1525564838952
+    },
+    {
+      "type": "remove",
+      "id": "89644cc2c270856a",
+      "date": 1525564843230
+    },
+    {
+      "type": "remove",
+      "id": "34b3bf609a3fc196",
+      "date": 1525564846994
+    },
+    {
+      "type": "remove",
+      "id": "e02197684ed783ad",
+      "date": 1525564854948
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "47046a7caa755d7d"
+      },
+      "id": "47046a7caa755d7d",
+      "type": "add",
+      "after": "f10590211a3304cc",
+      "date": 1525565181234
+    },
+    {
+      "type": "edit",
+      "id": "47046a7caa755d7d",
+      "item": {
+        "type": "reference",
+        "id": "47046a7caa755d7d",
+        "site": "local-farm.wiki.dbbs.co",
+        "slug": "start-your-own-local-wiki-farm",
+        "title": "start your own local wiki farm",
+        "text": "Step-by-step instructions for starting a local farm.  We assume you are connected to the Net and already have some developer tools installed: git, docker, and docker-compose."
+      },
+      "date": 1525565398644
+    },
+    {
+      "type": "move",
+      "order": [
+        "1ab711c159bc2205",
+        "47046a7caa755d7d",
+        "ebef5f0bef0a06ac",
+        "aa1f80dc288d83a9",
+        "40c8d8d63dcb80b3",
+        "cd26a4f905a0bdee",
+        "3d51fabd2979ab83",
+        "f10590211a3304cc"
+      ],
+      "id": "47046a7caa755d7d",
+      "date": 1525565409508
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "b2a14d77616f8c4c"
+      },
+      "id": "b2a14d77616f8c4c",
+      "type": "add",
+      "after": "f10590211a3304cc",
+      "date": 1525611415802
+    },
+    {
+      "type": "edit",
+      "id": "b2a14d77616f8c4c",
+      "item": {
+        "type": "pagefold",
+        "id": "b2a14d77616f8c4c",
+        "text": "."
+      },
+      "date": 1525611420406
+    },
+    {
+      "type": "move",
+      "order": [
+        "1ab711c159bc2205",
+        "47046a7caa755d7d",
+        "b2a14d77616f8c4c",
+        "ebef5f0bef0a06ac",
+        "aa1f80dc288d83a9",
+        "40c8d8d63dcb80b3",
+        "cd26a4f905a0bdee",
+        "3d51fabd2979ab83",
+        "f10590211a3304cc"
+      ],
+      "id": "b2a14d77616f8c4c",
+      "date": 1525611429972
+    },
+    {
+      "type": "edit",
+      "id": "ebef5f0bef0a06ac",
+      "item": {
+        "type": "markdown",
+        "id": "ebef5f0bef0a06ac",
+        "text": "I still have to many steps in process for my liking.  Every time I look again, I ask myself some questions.  Writing down that dialog (maybe save my future self some time puzzling):\n"
+      },
+      "date": 1525611626808
+    },
+    {
+      "type": "add",
+      "id": "f4bfea9a77b21dfa",
+      "item": {
+        "type": "markdown",
+        "id": "f4bfea9a77b21dfa",
+        "text": "- Why do I manually create a volume in step 2?  Could use a simple named volume in `docker-compose.yml` and save myself that step.\n    I think I started this before I added the `.env` file which is also when the repo had a very long name.  Those together would create an especially ugly volume name that made all the docs for backups and other things ugly"
+      },
+      "after": "ebef5f0bef0a06ac",
+      "date": 1525611849402
+    },
+    {
+      "type": "edit",
+      "id": "f4bfea9a77b21dfa",
+      "item": {
+        "type": "markdown",
+        "id": "f4bfea9a77b21dfa",
+        "text": "- Why do I manually create a volume in step 2?  Could use a simple named volume in `docker-compose.yml` and save myself that step.\n    I think I started this before I added the `.env` file which is also when the repo had a very long name.  Those together would create an especially ugly volume name that made all the docs for backups and other things ugly\n- Self-signed certs?  Every time I restart the `proxy` I get new certs.  What if I used hashicorp vault to run my own Certificate Authority and install the root cert in my browser or OS?\n    lot of work to avoid occasional nuisance.\n    just as difficult (or more) to document.\n    some vague security fear that teaching browsers to trust localtest.me is inviting abuse for speerphishing or similar."
+      },
+      "date": 1525612328386
+    },
+    {
+      "type": "edit",
+      "id": "ebef5f0bef0a06ac",
+      "item": {
+        "type": "markdown",
+        "id": "ebef5f0bef0a06ac",
+        "text": "I still have to0 many steps in process for my liking.  Every time I look again, I ask myself some questions.  Writing down that dialog (maybe save my future self some time puzzling):\n"
+      },
+      "date": 1525613770600
+    },
+    {
+      "type": "edit",
+      "id": "ebef5f0bef0a06ac",
+      "item": {
+        "type": "markdown",
+        "id": "ebef5f0bef0a06ac",
+        "text": "I still have too many steps in process for my liking.  Every time I look again, I ask myself some questions.  Writing down that dialog (maybe save my future self some time puzzling):\n"
+      },
+      "date": 1525613774718
+    },
+    {
+      "type": "edit",
+      "id": "f4bfea9a77b21dfa",
+      "item": {
+        "type": "markdown",
+        "id": "f4bfea9a77b21dfa",
+        "text": "- Why do I manually create a volume in step 2?  Could use a simple named volume in `docker-compose.yml` and save myself that step.\n    I think I started this before I added the `.env` file which is also when the repo had a very long name.  Those together would create an especially ugly volume name that made all the docs for backups and other things ugly\n- Self-signed certs?  Every time I restart the `proxy` I get new certs.  What if I used hashicorp vault to run my own Certificate Authority and install the root cert in my browser or OS?\n    lot of work to avoid occasional nuisance.\n    just as difficult (or more) to document.\n    some vague security fear that teaching browsers to trust localtest.me is inviting abuse for speerphishing or similar.\n"
+      },
+      "date": 1525613797386
+    },
+    {
+      "type": "add",
+      "id": "d695e09d58937736",
+      "item": {
+        "type": "markdown",
+        "id": "d695e09d58937736",
+        "text": "# An imaginary alternative"
+      },
+      "after": "f4bfea9a77b21dfa",
+      "date": 1525613807362
+    },
+    {
+      "type": "edit",
+      "id": "cd26a4f905a0bdee",
+      "item": {
+        "type": "code",
+        "id": "cd26a4f905a0bdee",
+        "text": "curl -sS https://url-to-current-version/wiki-tls.tar.gz \\\n  | tar zx\ncd wiki-tls\ndocker-compose up -d\ncat <<EOF\nopen https://localtest.me\nuse the following password to unlock the wiki\nEOF\ndocker-compose logs farm \\\n  | awk -F\\' '/admin:/ {print $2; exit;}'\n"
+      },
+      "date": 1525613982042
+    },
+    {
+      "type": "edit",
+      "id": "cd26a4f905a0bdee",
+      "item": {
+        "type": "code",
+        "id": "cd26a4f905a0bdee",
+        "text": "curl -sS \\\n  https://url-to-current-version/wiki-tls.tar.gz \\\n  | tar zx\ncd wiki-tls\ndocker-compose up -d\ncat <<EOF\nopen https://localtest.me\nuse the following password to unlock the wiki\nEOF\ndocker-compose logs farm \\\n  | awk -F\\' '/admin:/ {print $2; exit;}'\n"
+      },
+      "date": 1525613992992
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "1e589fde4ec008f8"
+      },
+      "id": "1e589fde4ec008f8",
+      "type": "add",
+      "after": "f10590211a3304cc",
+      "date": 1525636104088
+    },
+    {
+      "type": "edit",
+      "id": "1e589fde4ec008f8",
+      "item": {
+        "type": "pagefold",
+        "id": "1e589fde4ec008f8",
+        "text": "."
+      },
+      "date": 1525636107806
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "bc48a76e3ea28b1b"
+      },
+      "id": "bc48a76e3ea28b1b",
+      "type": "add",
+      "after": "1e589fde4ec008f8",
+      "date": 1525636109898
+    },
+    {
+      "type": "edit",
+      "id": "bc48a76e3ea28b1b",
+      "item": {
+        "type": "markdown",
+        "id": "bc48a76e3ea28b1b",
+        "text": "Contrast [[Clean Fast Install Docker]]"
+      },
+      "date": 1525636123410
+    },
+    {
+      "type": "edit",
+      "id": "bc48a76e3ea28b1b",
+      "item": {
+        "type": "markdown",
+        "id": "bc48a76e3ea28b1b",
+        "text": "Contrast [[Clean Fast Install in Docker]]"
+      },
+      "date": 1525636146870
+    }
+  ]
+}

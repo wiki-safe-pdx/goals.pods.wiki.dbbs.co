@@ -1,0 +1,115 @@
+{
+  "title": "humans.txt",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "9f6b6ae1c69b9b98",
+      "text": "It's an initiative for knowing the people behind a website. It's a TXT file that contains information about the different people who have contributed to building the website. [http://humanstxt.org/ site]"
+    },
+    {
+      "type": "paragraph",
+      "id": "fd561602f00d77f7",
+      "text": "Because it's something simple and fast to create. Because it's not intrusive with the code. More often than not, the owners of the site don't like the authors signing it; they claim that doing so may make the site less efficient. By adding a txt file, you can prove your authorship (not your property) in an external, fast, easy and accessible way."
+    },
+    {
+      "type": "pagefold",
+      "id": "6e657b77f7649276",
+      "text": "."
+    },
+    {
+      "type": "paragraph",
+      "id": "f747e27f9f00f44a",
+      "text": "This notion has a similar spirit to wiki's Welcome Visitors, and especially the link following \"Pages about us.\""
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "humans.txt",
+        "story": []
+      },
+      "date": 1606499813031
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "9f6b6ae1c69b9b98"
+      },
+      "id": "9f6b6ae1c69b9b98",
+      "type": "add",
+      "date": 1606499844938
+    },
+    {
+      "type": "edit",
+      "id": "9f6b6ae1c69b9b98",
+      "item": {
+        "type": "paragraph",
+        "id": "9f6b6ae1c69b9b98",
+        "text": "It's an initiative for knowing the people behind a website. It's a TXT file that contains information about the different people who have contributed to building the website."
+      },
+      "date": 1606499858257
+    },
+    {
+      "type": "add",
+      "id": "fd561602f00d77f7",
+      "item": {
+        "type": "paragraph",
+        "id": "fd561602f00d77f7",
+        "text": "Because it's something simple and fast to create. Because it's not intrusive with the code. More often than not, the owners of the site don't like the authors signing it; they claim that doing so may make the site less efficient. By adding a txt file, you can prove your authorship (not your property) in an external, fast, easy and accessible way."
+      },
+      "after": "9f6b6ae1c69b9b98",
+      "date": 1606499876996
+    },
+    {
+      "type": "edit",
+      "id": "9f6b6ae1c69b9b98",
+      "item": {
+        "type": "paragraph",
+        "id": "9f6b6ae1c69b9b98",
+        "text": "It's an initiative for knowing the people behind a website. It's a TXT file that contains information about the different people who have contributed to building the website. [http://humanstxt.org/ site]"
+      },
+      "date": 1606499893792
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "6e657b77f7649276"
+      },
+      "id": "6e657b77f7649276",
+      "type": "add",
+      "after": "fd561602f00d77f7",
+      "date": 1606499898401
+    },
+    {
+      "type": "edit",
+      "id": "6e657b77f7649276",
+      "item": {
+        "type": "pagefold",
+        "id": "6e657b77f7649276",
+        "text": "."
+      },
+      "date": 1606499902420
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "f747e27f9f00f44a"
+      },
+      "id": "f747e27f9f00f44a",
+      "type": "add",
+      "after": "6e657b77f7649276",
+      "date": 1606499904157
+    },
+    {
+      "type": "edit",
+      "id": "f747e27f9f00f44a",
+      "item": {
+        "type": "paragraph",
+        "id": "f747e27f9f00f44a",
+        "text": "This notion has a similar spirit to wiki's Welcome Visitors, and especially the link following \"Pages about us.\""
+      },
+      "date": 1606499962836
+    }
+  ]
+}

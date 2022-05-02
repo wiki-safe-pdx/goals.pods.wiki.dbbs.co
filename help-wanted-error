@@ -1,0 +1,374 @@
+{
+  "title": "Help Wanted Error",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "72971740a77ca916",
+      "text": "The original wiki replaced 404 Not Found with an invitation to the Reader to contribute to the conversation. Federated wiki's help dialog hints an an invitation to the Reader to learn about writing wiki plugins. What if the dialog included a glitch remix button for a plugin development environment?"
+    },
+    {
+      "type": "markdown",
+      "id": "833faf08732ea523",
+      "text": "Ward:\n> Aside: As I reread the help dialog in Eric's screenshot I have to conclude that it is the best error message I have ever composed. Really, has this software been tested?\n"
+    },
+    {
+      "type": "html",
+      "id": "ce568c7484abeeb2",
+      "text": "<img src=\"https://goals.pods.wiki.dbbs.co/assets/help-wanted-error/offer-to-load-plugin.png\" width=\"100%\" alt=\"screen shot of experimental load button in help dialog\">\n<p><em>screen shot of experimental load button in help dialog</em></p>"
+    },
+    {
+      "type": "paragraph",
+      "id": "533ddafbd2273f3f",
+      "text": "Backstory: We used glitch to experiment with an addition to wiki's help dialog. We added a button which emits a message to the browser console to prove we have all the information necessary to load a plugin from a Federation Outpost."
+    },
+    {
+      "type": "paragraph",
+      "id": "b1be3417116940d1",
+      "text": "In this screen shot, the url offers some hint that we're looking at a glitch remix of [http://wiki-wiki.glitch.me wiki-wiki.glitch.me]. The Wander page is served from a federation outpost at wander.localtest.me:8000 and rendered with a blue halo. The help dialog shows the experimental load button. And on the right, at the bottom of the console, you can see the message including the domain for the outpost."
+    },
+    {
+      "type": "paragraph",
+      "id": "e6b37af1b865d929",
+      "text": "The current wiki build process requires meticulous care and attention, especially in contrast to development in deno."
+    },
+    {
+      "type": "paragraph",
+      "id": "9dd4c5b5a0104938",
+      "text": "Convert all the coffeescript to javascript."
+    },
+    {
+      "type": "paragraph",
+      "id": "cfd599d23c1158c2",
+      "text": "Add import statements to connect the modules."
+    },
+    {
+      "type": "paragraph",
+      "id": "4ab2239263705b22",
+      "text": "At this point we might be able to remove grunt from the build process."
+    },
+    {
+      "type": "paragraph",
+      "id": "b1d074ee96421224",
+      "text": "Create scripts to package the changes into npm tarballs."
+    },
+    {
+      "type": "paragraph",
+      "id": "d694b9615ddd804b",
+      "text": "Create glitch development environment to use those packages."
+    },
+    {
+      "type": "paragraph",
+      "id": "a1a50f33a99db40f",
+      "text": "Create a glitch-hosted wiki to install from the packages."
+    },
+    {
+      "type": "paragraph",
+      "id": "93bf63043f02c4cb",
+      "text": "Something hand-wavy about also learning how to cryptographicly sign the packages, and have the installers validate signatures."
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Help Wanted Error",
+        "story": []
+      },
+      "date": 1586961363496
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "72971740a77ca916"
+      },
+      "id": "72971740a77ca916",
+      "type": "add",
+      "date": 1586961397134
+    },
+    {
+      "type": "edit",
+      "id": "72971740a77ca916",
+      "item": {
+        "type": "paragraph",
+        "id": "72971740a77ca916",
+        "text": "We used glitch to experiment with an addition to wiki's help dialog. We added a button which emits a message to the browser console to prove we have all the information necessary to load a plugin from a Federation Outpost."
+      },
+      "date": 1586961679940
+    },
+    {
+      "type": "add",
+      "id": "b1be3417116940d1",
+      "item": {
+        "type": "paragraph",
+        "id": "b1be3417116940d1",
+        "text": "In this screen shot, the url offers some hint that we're looking at a glitch remix of [http://wiki-wiki.glitch.me wiki-wiki.glitch.me]. The Wander page is served from a federation outpost at wander.localtest.me:8000 and rendered with a blue halo. The help dialog shows the experimental load button. And on the right, at the bottom of the console, you can see the message including the domain for the outpost."
+      },
+      "after": "72971740a77ca916",
+      "date": 1586961864205
+    },
+    {
+      "type": "add",
+      "id": "833faf08732ea523",
+      "item": {
+        "type": "paragraph",
+        "id": "833faf08732ea523",
+        "text": "quote"
+      },
+      "after": "72971740a77ca916",
+      "date": 1586961905886
+    },
+    {
+      "type": "edit",
+      "id": "833faf08732ea523",
+      "item": {
+        "type": "markdown",
+        "id": "833faf08732ea523",
+        "text": "Ward:\n> Aside: As I reread the help dialog in Eric's screenshot I have to conclude that it is the best error message I have ever composed. Really, has this software been tested?\n"
+      },
+      "date": 1586961944876
+    },
+    {
+      "id": "b1be3417116940d1",
+      "type": "move",
+      "order": [
+        "72971740a77ca916",
+        "b1be3417116940d1",
+        "833faf08732ea523"
+      ],
+      "date": 1586961969394
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "75709d09e12f1b83"
+      },
+      "id": "75709d09e12f1b83",
+      "type": "add",
+      "after": "833faf08732ea523",
+      "date": 1586962118770
+    },
+    {
+      "type": "edit",
+      "id": "75709d09e12f1b83",
+      "item": {
+        "type": "assets",
+        "id": "75709d09e12f1b83",
+        "text": "help-wanted-error"
+      },
+      "date": 1586962128974
+    },
+    {
+      "type": "fork",
+      "date": 1586962209546
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "ce568c7484abeeb2"
+      },
+      "id": "ce568c7484abeeb2",
+      "type": "add",
+      "after": "75709d09e12f1b83",
+      "date": 1586962223224
+    },
+    {
+      "type": "edit",
+      "id": "ce568c7484abeeb2",
+      "item": {
+        "type": "html",
+        "id": "ce568c7484abeeb2",
+        "text": "<img src=\"\" width=\"100%\" alt=\"screen shot of experimental load button in help dialog\">\n<p><em>screen shot of experimental load button in help dialog</em></p>"
+      },
+      "date": 1586962303422
+    },
+    {
+      "type": "edit",
+      "id": "ce568c7484abeeb2",
+      "item": {
+        "type": "html",
+        "id": "ce568c7484abeeb2",
+        "text": "<img src=\"//goals.pods.wiki.dbbs.co/assets/help-wanted-error/offer-to-load-plugin.png\" width=\"100%\" alt=\"screen shot of experimental load button in help dialog\">\n<p><em>screen shot of experimental load button in help dialog</em></p>"
+      },
+      "date": 1586962322014
+    },
+    {
+      "type": "edit",
+      "id": "ce568c7484abeeb2",
+      "item": {
+        "type": "html",
+        "id": "ce568c7484abeeb2",
+        "text": "<img src=\"https://goals.pods.wiki.dbbs.co/assets/help-wanted-error/offer-to-load-plugin.png\" width=\"100%\" alt=\"screen shot of experimental load button in help dialog\">\n<p><em>screen shot of experimental load button in help dialog</em></p>"
+      },
+      "date": 1586962333367
+    },
+    {
+      "id": "ce568c7484abeeb2",
+      "type": "move",
+      "order": [
+        "72971740a77ca916",
+        "b1be3417116940d1",
+        "ce568c7484abeeb2",
+        "833faf08732ea523",
+        "75709d09e12f1b83"
+      ],
+      "date": 1586962351963
+    },
+    {
+      "type": "remove",
+      "id": "75709d09e12f1b83",
+      "date": 1586962391261
+    },
+    {
+      "type": "edit",
+      "id": "72971740a77ca916",
+      "item": {
+        "type": "paragraph",
+        "id": "72971740a77ca916",
+        "text": "The original wiki replaced 404 Not Found with an invitation to the Reader to contribute to the conversation. Federated wiki's help dialog hints an an invitation to the Reader to learn about writing wiki plugins. What if the dialog included a glitch remix button for a plugin development environment?"
+      },
+      "date": 1586962711017
+    },
+    {
+      "type": "add",
+      "id": "533ddafbd2273f3f",
+      "item": {
+        "type": "paragraph",
+        "id": "533ddafbd2273f3f",
+        "text": "Backstory: We used glitch to experiment with an addition to wiki's help dialog. We added a button which emits a message to the browser console to prove we have all the information necessary to load a plugin from a Federation Outpost."
+      },
+      "after": "72971740a77ca916",
+      "date": 1586962731572
+    },
+    {
+      "id": "833faf08732ea523",
+      "type": "move",
+      "order": [
+        "72971740a77ca916",
+        "833faf08732ea523",
+        "533ddafbd2273f3f",
+        "b1be3417116940d1",
+        "ce568c7484abeeb2"
+      ],
+      "date": 1586962748478
+    },
+    {
+      "id": "ce568c7484abeeb2",
+      "type": "move",
+      "order": [
+        "72971740a77ca916",
+        "833faf08732ea523",
+        "ce568c7484abeeb2",
+        "533ddafbd2273f3f",
+        "b1be3417116940d1"
+      ],
+      "date": 1586962758203
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "e6b37af1b865d929"
+      },
+      "id": "e6b37af1b865d929",
+      "type": "add",
+      "after": "b1be3417116940d1",
+      "date": 1586962790417
+    },
+    {
+      "type": "edit",
+      "id": "e6b37af1b865d929",
+      "item": {
+        "type": "paragraph",
+        "id": "e6b37af1b865d929",
+        "text": "The current wiki build process requires meticulous care and attention, especially in contrast to development in deno."
+      },
+      "date": 1586962907522
+    },
+    {
+      "type": "add",
+      "id": "9dd4c5b5a0104938",
+      "item": {
+        "type": "paragraph",
+        "id": "9dd4c5b5a0104938",
+        "text": "Convert all the coffeescript to javascript."
+      },
+      "after": "e6b37af1b865d929",
+      "date": 1586963079411
+    },
+    {
+      "type": "add",
+      "id": "cfd599d23c1158c2",
+      "item": {
+        "type": "paragraph",
+        "id": "cfd599d23c1158c2",
+        "text": "Add import statements to connect the modules."
+      },
+      "after": "9dd4c5b5a0104938",
+      "date": 1586963094610
+    },
+    {
+      "type": "add",
+      "id": "4ab2239263705b22",
+      "item": {
+        "type": "paragraph",
+        "id": "4ab2239263705b22",
+        "text": "At this point we might be able to remove grunt from the build process."
+      },
+      "after": "cfd599d23c1158c2",
+      "date": 1586963125297
+    },
+    {
+      "type": "add",
+      "id": "b1d074ee96421224",
+      "item": {
+        "type": "paragraph",
+        "id": "b1d074ee96421224",
+        "text": "Create github actions to build and publish npm packages."
+      },
+      "after": "4ab2239263705b22",
+      "date": 1586963272875
+    },
+    {
+      "type": "edit",
+      "id": "b1d074ee96421224",
+      "item": {
+        "type": "paragraph",
+        "id": "b1d074ee96421224",
+        "text": "Create scripts to package the changes into npm tarballs."
+      },
+      "date": 1586963900227
+    },
+    {
+      "type": "add",
+      "id": "d694b9615ddd804b",
+      "item": {
+        "type": "paragraph",
+        "id": "d694b9615ddd804b",
+        "text": "Create glitch development environment to use those packages."
+      },
+      "after": "b1d074ee96421224",
+      "date": 1586963935629
+    },
+    {
+      "type": "add",
+      "id": "a1a50f33a99db40f",
+      "item": {
+        "type": "paragraph",
+        "id": "a1a50f33a99db40f",
+        "text": "Create a glitch-hosted wiki to install from the packages."
+      },
+      "after": "d694b9615ddd804b",
+      "date": 1586963957462
+    },
+    {
+      "type": "add",
+      "id": "93bf63043f02c4cb",
+      "item": {
+        "type": "paragraph",
+        "id": "93bf63043f02c4cb",
+        "text": "Something hand-wavy about also learning how to cryptographicly sign the packages, and have the installers validate signatures."
+      },
+      "after": "a1a50f33a99db40f",
+      "date": 1586964062865
+    }
+  ]
+}

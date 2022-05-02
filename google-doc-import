@@ -1,0 +1,192 @@
+{
+  "title": "Google Doc Import",
+  "story": [
+    {
+      "type": "paragraph",
+      "id": "c130eed537d76564",
+      "text": "Found myself importing a small collection of google docs into a wiki. This process sorta worked and might make a seed for something better."
+    },
+    {
+      "type": "paragraph",
+      "id": "809ce91a9fb03bdd",
+      "text": "In Google Docs, I selected File > Downloads > Web Page (.html, zipped)."
+    },
+    {
+      "type": "paragraph",
+      "id": "405d8e946b9f5b8f",
+      "text": "I post-processed the document with this little script which copied the body of the document to my clipboard, with extra styling to crop the display of long links."
+    },
+    {
+      "type": "code",
+      "id": "11b15470eb63e962",
+      "text": "(printf \"%s\\n\" \\\n  \"<style>.item.html a {\" \\\n  \"  display: inline-block;\" \\\n  \"  width: 400px;\" \\\n  \"  overflow: hidden;\" \\\n  \"  text-overflow: ellipsis;\" \\\n  \"  white-space: nowrap;\" \\\n  \"}</style>\"; \\\n perl -pe 's{<html.*?<body[^>]*>}{};s{</body.*}{};'\\\n  ~/Downloads/google-export.html\n) | pbcopy"
+    },
+    {
+      "type": "paragraph",
+      "id": "abcaa6627cba6cb5",
+      "text": "This I pasted into a new html item on the page."
+    },
+    {
+      "type": "paragraph",
+      "id": "9ee6704dc3727027",
+      "text": "The perl one-liner above grew into a short perl script to clean other noise from the google export."
+    },
+    {
+      "type": "code",
+      "id": "2c037314f110e984",
+      "text": "#!/usr/bin/env perl -p\n\n# strip header and footer\ns{<html.*?<body.*?>}{};\ns{</body.*}{};\n\n# remove ids and classes\ns{ (class|id)=\".*?\"}{}g;\n\n# replace google tracking prefix from hrefs\ns{href=\"https://.*?http}{href=\"http}g;\n\n# remove span tags\ns{</?span.*?>}{}g;\n\n# remove empty paragraphs\ns{<p></p>}{}g;\n\n# add linefeeds for readability\ns{>}{>\\n}g;\n"
+    }
+  ],
+  "journal": [
+    {
+      "type": "create",
+      "item": {
+        "title": "Google Doc Import",
+        "story": []
+      },
+      "date": 1586372960098
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "c130eed537d76564"
+      },
+      "id": "c130eed537d76564",
+      "type": "add",
+      "date": 1586372961572
+    },
+    {
+      "type": "edit",
+      "id": "c130eed537d76564",
+      "item": {
+        "type": "paragraph",
+        "id": "c130eed537d76564",
+        "text": "Found myself importing a small collection of google docs into a wiki. This process sorta worked and might make a seed for something better."
+      },
+      "date": 1586373003740
+    },
+    {
+      "type": "add",
+      "id": "809ce91a9fb03bdd",
+      "item": {
+        "type": "paragraph",
+        "id": "809ce91a9fb03bdd",
+        "text": "In Google Docs, I selected "
+      },
+      "after": "c130eed537d76564",
+      "date": 1586373024809
+    },
+    {
+      "type": "edit",
+      "id": "809ce91a9fb03bdd",
+      "item": {
+        "type": "paragraph",
+        "id": "809ce91a9fb03bdd",
+        "text": "In Google Docs, I selected File > Downloads > Web Page (.html, zipped)."
+      },
+      "date": 1586373138016
+    },
+    {
+      "type": "add",
+      "id": "405d8e946b9f5b8f",
+      "item": {
+        "type": "paragraph",
+        "id": "405d8e946b9f5b8f",
+        "text": "I post-processed the document with this little script which copied the body of the document to my clipboard."
+      },
+      "after": "809ce91a9fb03bdd",
+      "date": 1586373184875
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "11b15470eb63e962"
+      },
+      "id": "11b15470eb63e962",
+      "type": "add",
+      "after": "405d8e946b9f5b8f",
+      "date": 1586373196634
+    },
+    {
+      "type": "edit",
+      "id": "11b15470eb63e962",
+      "item": {
+        "type": "code",
+        "id": "11b15470eb63e962",
+        "text": "(printf \"%s\\n\" \\\n  \"<style>.item.html a {\" \\\n  \"  display: inline-block;\" \\\n  \"  width: 400px;\" \\\n  \"  overflow: hidden;\" \\\n  \"  text-overflow: ellipsis;\" \\\n  \"  white-space: nowrap;\" \\\n  \"}</style>\"; \\\n perl -lpe 's{<html.*?<body[^>]*>}{};s{</body.*}{};' \\\n  ~/Downloads/google-export.html\n) | pbcopy"
+      },
+      "date": 1586373368956
+    },
+    {
+      "type": "edit",
+      "id": "11b15470eb63e962",
+      "item": {
+        "type": "code",
+        "id": "11b15470eb63e962",
+        "text": "(printf \"%s\\n\" \\\n  \"<style>.item.html a {\" \\\n  \"  display: inline-block;\" \\\n  \"  width: 400px;\" \\\n  \"  overflow: hidden;\" \\\n  \"  text-overflow: ellipsis;\" \\\n  \"  white-space: nowrap;\" \\\n  \"}</style>\"; \\\n perl -pe 's{<html.*?<body[^>]*>}{};s{</body.*}{};'\\\n  ~/Downloads/google-export.html\n) | pbcopy"
+      },
+      "date": 1586373400612
+    },
+    {
+      "type": "edit",
+      "id": "405d8e946b9f5b8f",
+      "item": {
+        "type": "paragraph",
+        "id": "405d8e946b9f5b8f",
+        "text": "I post-processed the document with this little script which copied the body of the document to my clipboard, with extra styling to crop the display of long links."
+      },
+      "date": 1586373454060
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "abcaa6627cba6cb5"
+      },
+      "id": "abcaa6627cba6cb5",
+      "type": "add",
+      "after": "11b15470eb63e962",
+      "date": 1586373457888
+    },
+    {
+      "type": "edit",
+      "id": "abcaa6627cba6cb5",
+      "item": {
+        "type": "paragraph",
+        "id": "abcaa6627cba6cb5",
+        "text": "This I pasted into a new html item on the page."
+      },
+      "date": 1586373494824
+    },
+    {
+      "item": {
+        "type": "factory",
+        "id": "2c037314f110e984"
+      },
+      "id": "2c037314f110e984",
+      "type": "add",
+      "after": "abcaa6627cba6cb5",
+      "date": 1587927141573
+    },
+    {
+      "type": "edit",
+      "id": "2c037314f110e984",
+      "item": {
+        "type": "code",
+        "id": "2c037314f110e984",
+        "text": "#!/usr/bin/env perl -p\n\n# strip header and footer\ns{<html.*?<body.*?>}{};\ns{</body.*}{};\n\n# remove ids and classes\ns{ (class|id)=\".*?\"}{}g;\n\n# replace google tracking prefix from hrefs\ns{href=\"https://.*?http}{href=\"http}g;\n\n# remove span tags\ns{</?span.*?>}{}g;\n\n# remove empty paragraphs\ns{<p></p>}{}g;\n\n# add linefeeds for readability\ns{>}{>\\n}g;\n"
+      },
+      "date": 1587927146940
+    },
+    {
+      "type": "add",
+      "id": "9ee6704dc3727027",
+      "item": {
+        "type": "paragraph",
+        "id": "9ee6704dc3727027",
+        "text": "The perl one-liner above grew into a short perl script to clean other noise from the google export."
+      },
+      "after": "abcaa6627cba6cb5",
+      "date": 1587927207867
+    }
+  ]
+}
